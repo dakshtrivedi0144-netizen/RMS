@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UI/UX Design Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC AI SAAS DASHBOARD - REFINED v2
+    ============================================ */
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-light: #A78BFA;
+      --color-accent: #06B6D4;
+      --color-accent-light: #22D3EE;
+      --color-bg-darker: #0A0E27;
+      --color-bg-glass: rgba(15, 23, 42, 0.85);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.15);
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --radius-lg: 1.25rem;
+      --shadow-glow: 0 0 25px rgba(124, 58, 237, 0.3);
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* TERMINAL STYLE HEADER */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-accent);
+      border-radius: var(--radius-lg);
+      margin: 40px auto;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+      position: relative;
+    }
+
+    .terminal-title {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(90deg, #FFF, var(--color-accent-light), var(--color-primary-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      color: var(--color-accent-light);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .glass-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      padding: 20px 25px;
+      border-radius: 12px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(6, 182, 212, 0.08);
+      border-color: var(--color-accent);
+      transform: translateY(-5px);
+    }
+
+    .item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .item-desc {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+    }
+
+    .tag {
+      font-size: 0.75rem;
+      padding: 2px 10px;
+      border-radius: 20px;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--color-primary-light);
+      border: 1px solid var(--color-primary);
+      width: fit-content;
+    }
+
+    /* PROJECT CARDS */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 25px;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+    }
+
+    .project-title {
+      font-size: 1.4rem;
+      color: #FFF;
+      margin-bottom: 12px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .project-list {
+      list-style: none;
+      margin-top: 15px;
+    }
+
+    .project-list li {
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-list li i {
+      color: var(--color-accent-light);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 28px;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-primary));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: all var(--transition-base);
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(6, 182, 212, 0.4);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 30px 0;
+      font-weight: 600;
+    }
+
+    footer {
+      text-align: center;
+      padding: 5rem 0;
+      border-top: 1px solid var(--color-border);
+      background: #070B1D;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="networkCanvas"></canvas>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.Design</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="web-development.html"><i class="fas fa-layer-group"></i> All Roadmaps</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="web-development.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO DASHBOARD</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">UI/UX Design Engineering</h1>
+      <p class="terminal-subtitle">Master the art and science of designing digital products that are intuitive,
+        accessible, and breathtakingly beautiful.</p>
+    </header>
+
+    <!-- DESIGN FOUNDATIONS -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-palette"></i> The Visual Core</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-vector-square"></i> Figma Pro</div>
+          <p class="item-desc">Advanced auto-layout, component properties, and variable manipulation for design systems.
+          </p>
+          <span class="tag">Digital Tool</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-font"></i> Typography & Color</div>
+          <p class="item-desc">Mastering scale, readability, and emotional resonance through curated palettes and fonts.
+          </p>
+          <span class="tag">Visual Theory</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-universal-access"></i> Accessibility</div>
+          <p class="item-desc">Implementing WCAG standards, high-contrast modes, and screen-readable hierarchical flow.
+          </p>
+          <span class="tag">Standard</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-brain"></i> UX Psychology</div>
+          <p class="item-desc">Gestalt principles, Fitts's Law, and Hicks's Law to reduce cognitive load.</p>
+          <span class="tag">Human Logic</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP STAGES -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-vial"></i> The Creative Roadmap</h2>
+
+      <div class="project-grid">
+        <!-- Stage 1 -->
+        <div class="project-card">
+          <h3 class="project-title">Stage 1: Wireframing & Flow</h3>
+          <p class="item-desc">Architecting the skeletal structure of software.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-check"></i> User Journey Mapping</li>
+            <li><i class="fas fa-check"></i> Low-Fi Paper & Digital Sketches</li>
+            <li><i class="fas fa-check"></i> Information Architecture (IA)</li>
+            <li><i class="fas fa-check"></i> Click-through Proto-flows</li>
+          </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="project-card" style="border-color: var(--color-accent);">
+          <h3 class="project-title">Stage 2: Hi-Fi Prototyping</h3>
+          <p class="item-desc">Visual excellence and interactive detail.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-check"></i> Design Systems (Global Styles)</li>
+            <li><i class="fas fa-check"></i> Micro-interactions & Lottie</li>
+            <li><i class="fas fa-check"></i> Advanced Figma Prototyping</li>
+            <li><i class="fas fa-check"></i> 3D Integration with Spline</li>
+          </ul>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="project-card">
+          <h3 class="project-title">Stage 3: Research & Audit</h3>
+          <p class="item-desc">Validating designs through real-world data.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-check"></i> A/B Testing & Heatmaps</li>
+            <li><i class="fas fa-check"></i> User Interview Methodologies</li>
+            <li><i class="fas fa-check"></i> Usability Audit Reports</li>
+            <li><i class="fas fa-check"></i> Design Handoff Mastery (Dev Ops)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN LABS -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-magic"></i> Creative Challenges</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">AI SaaS Interface</div>
+          <p class="item-desc">Design a complex AI dashboard with glassmorphism and dynamic data visualization.</p>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">FinTech Mobile UX</div>
+          <p class="item-desc">Create a secure, simple wallet experience with one-hand navigation patterns.</p>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">3D Marketing Site</div>
+          <p class="item-desc">Prototype a landing page using 3D assets and scroll-triggered animations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE COURSES -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-gift"></i> Free Courses</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">Figma Tutorials</div>
+          <p class="item-desc">Official YouTube channel tutorials for mastering Figma tools.</p>
+          <a href="https://www.youtube.com/c/Figmadesign" target="_blank" class="btn-glow">Watch Video <i
+              class="fas fa-play"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">HackDesign</div>
+          <p class="item-desc">An easy to follow design course for people who do amazing things.</p>
+          <a href="https://hackdesign.org/" target="_blank" class="btn-glow">Learn Free <i
+              class="fas fa-book-reader"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Interaction Design Foundation (Free)</div>
+          <p class="item-desc">Open-source, academic literature on UX principles.</p>
+          <a href="https://www.interaction-design.org/literature" target="_blank" class="btn-glow">Read Literature <i
+              class="fas fa-university"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAID COURSES -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-certificate"></i> Paid Courses</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">Google UX Design Certificate</div>
+          <p class="item-desc">Comprehensive professional certificate on Coursera by Google.</p>
+          <a href="https://www.coursera.org/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Shift Nudge</div>
+          <p class="item-desc">The ultimate UI design course by MDS to perfect visual skills.</p>
+          <a href="https://shiftnudge.com/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Memorisely Bootcamp</div>
+          <p class="item-desc">Live bootcamps for UX/UI design and design systems.</p>
+          <a href="https://www.memorisely.com/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- E-BOOKS -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-book"></i> E-Books & Literature</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">Don't Make Me Think</div>
+          <p class="item-desc">Common sense approach to Web Usability by Steve Krug.</p>
+          <span class="tag">Usability</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">The Design of Everyday Things</div>
+          <p class="item-desc">Cognitive science behind design by Don Norman.</p>
+          <span class="tag">Theory</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Laws of UX</div>
+          <p class="item-desc">Design principles for user interfaces by Jon Yablonski.</p>
+          <span class="tag">Psychology</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Design Ecosystem. Architected for Delight.</p>
+      <div style="margin-top: 15px;">
+        <a href="../index.html">Main Portal</a> &middot;
+        <a href="web-development.html">All Roadmaps</a> &middot;
+        <a href="../login.html">Designer Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#06B6D4'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 70; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 150) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(124, 58, 237, ${0.4 * (1 - d / 150)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

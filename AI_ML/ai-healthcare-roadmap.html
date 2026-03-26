@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in Healthcare Roadmap & Resources</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ==== begin modern-theme.css ==== */
+    /* ============================================
+   FUTURISTIC AI SAAS DASHBOARD - UNIFIED CSS
+   File: modern-theme.css
+   Replaces: style.css, dashboard.css, auth.css, roadmap.css, responsive.css
+   ============================================ */
+
+    /* ROOT VARIABLES */
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-light: #A78BFA;
+      --color-primary-dark: #5B21B6;
+      --color-accent: #06B6D4;
+      --color-accent-light: #22D3EE;
+      --color-accent-dark: #0891B2;
+      --color-bg-dark: #0F172A;
+      --color-bg-darker: #0A0E27;
+      --color-bg-glass: rgba(15, 23, 42, 0.8);
+      --color-text-primary: #F1F5F9;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #94A3B8;
+      --color-border: rgba(148, 163, 184, 0.2);
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 1rem;
+      --transition-base: 0.3s ease-in-out;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+
+    /* GLOBAL STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      animation: gradientShift 15s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -30px);
+      }
+    }
+
+    /* CUSTOM SCROLLBAR & AUTOFILL RESTORE */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+      border-radius: 4px;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px var(--color-bg-dark) inset !important;
+      -webkit-text-fill-color: white !important;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* UTILITY CLASSES FOR COMPATIBILITY */
+    .mb-3 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mt-3 {
+      margin-top: 1rem;
+    }
+
+    .mt-4 {
+      margin-top: 1.5rem;
+    }
+
+    .w-100 {
+      width: 100%;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-muted {
+      color: var(--color-text-muted) !important;
+    }
+
+    .text-decoration-none {
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-lg);
+      align-items: stretch;
+    }
+
+    /* ensure boxes inside container stretch nicely */
+    .container .box {
+      margin: 0;
+    }
+
+    /* box component styling for standalone card elements */
+    .box {
+      background: var(--color-bg-glass);
+      border: 2px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) auto;
+      max-width: 1200px;
+      color: var(--color-text-primary);
+      backdrop-filter: blur(10px);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: var(--spacing-md);
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      transition: all var(--transition-base);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), var(--shadow-glow);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    /* ==== end modern-theme.css ==== */
+
+    /* Adapted from 2.html but keeping purple/cyan colors */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 2px solid var(--color-primary);
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 1200px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+
+    .terminal-header::before {
+      content: '>';
+      color: var(--color-primary);
+      font-size: 24px;
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      50% {
+        opacity: 1;
+      }
+
+      51%,
+      100% {
+        opacity: 0;
+      }
+    }
+
+    @keyframes scrollGlow {
+
+      0%,
+      100% {
+        box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 0 30px rgba(124, 58, 237, 0.3);
+      }
+    }
+
+    .terminal-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      text-align: center;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent), var(--color-primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(124, 58, 237, 0.5);
+      margin-bottom: 10px;
+    }
+
+    .terminal-subtitle {
+      text-align: center;
+      color: var(--color-accent);
+      font-size: 1.1rem;
+      opacity: 0.8;
+    }
+
+    .matrix-section {
+      max-width: 1200px;
+      margin: 50px auto;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--color-accent);
+      border-radius: 15px;
+      padding: 30px;
+      position: relative;
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
+      animation: scrollGlow 3s ease-in-out infinite;
+    }
+
+    .matrix-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-primary-light));
+      border-radius: 15px 15px 0 0;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--color-accent);
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '>>> ';
+      color: var(--color-primary);
+      animation: typeWriter 2s steps(4) infinite;
+    }
+
+    @keyframes typeWriter {
+
+      0%,
+      100% {
+        content: '>>> ';
+      }
+
+      25% {
+        content: '>>>_';
+      }
+
+      50% {
+        content: '>>_ ';
+      }
+
+      75% {
+        content: '>_ _';
+      }
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent), var(--color-primary-light));
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(124, 58, 237, 0.5);
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+      border-color: var(--color-primary);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -35px;
+      top: 20px;
+      width: 15px;
+      height: 15px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(124, 58, 237, 0.8);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.2);
+      }
+    }
+
+    .timeline-step {
+      font-size: 1.3rem;
+      color: var(--color-primary-light);
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .timeline-content {
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .grid-item {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--color-accent);
+      border-radius: 12px;
+      padding: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
+    .grid-item:hover::before {
+      left: 100%;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(6, 182, 212, 0.3);
+      border-color: var(--color-primary);
+    }
+
+    .grid-title {
+      font-size: 1.2rem;
+      color: var(--color-accent);
+      margin-bottom: 15px;
+      font-weight: bold;
+      text-shadow: 0 0 5px rgba(6, 182, 212, 0.5);
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .meta-item {
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--color-primary-light);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      border: 1px solid rgba(124, 58, 237, 0.5);
+    }
+
+    .grid-content {
+      color: var(--color-text-primary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .grid-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .grid-features li {
+      color: var(--color-text-secondary);
+      margin-bottom: 5px;
+      position: relative;
+      padding-left: 15px;
+    }
+
+    .grid-features li::before {
+      content: '>';
+      color: var(--color-primary);
+      position: absolute;
+      left: 0;
+    }
+
+    /* Styling for the enrollment buttons, replacing .btn-glow with the cyber-btn style but keeping class name for HTML */
+    .btn-glow {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #fff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+      background: linear-gradient(45deg, var(--color-accent), var(--color-primary));
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .terminal-title {
+        font-size: 2rem;
+      }
+
+      .matrix-section {
+        margin: 20px;
+        padding: 20px;
+      }
+
+      .timeline {
+        padding-left: 30px;
+      }
+
+      .timeline-item::before {
+        left: -25px;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    /* Enhanced Section Structure - Smooth Scrolling & Animations */
+    [id]:target {
+      scroll-margin-top: 100px;
+    }
+
+    .matrix-section {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Section Visual Separators */
+    .matrix-section[id] {
+      border-top: 2px solid rgba(124, 58, 237, 0.3);
+      padding-top: 40px;
+      margin-top: 30px;
+    }
+
+    .matrix-section[id]:first-of-type {
+      border-top: none;
+      margin-top: 10px;
+      padding-top: 0;
+    }
+
+    /* Modern Quick Navigation Styling */
+    .quick-nav {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-lg);
+      margin: 10px 0 30px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(15px);
+      box-shadow: var(--shadow-md);
+      transition: all var(--transition-base);
+    }
+
+    .quick-nav:hover {
+      border-color: rgba(124, 58, 237, 0.5);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.2);
+    }
+
+    .quick-nav-title {
+      color: var(--color-text-primary);
+      flex-basis: 100%;
+      text-align: center;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .quick-nav-link {
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-nav-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(124, 58, 237, 0.2);
+    }
+
+    /* Top Navigation Styling */
+    .top-nav {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--spacing-md) var(--spacing-xl);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-brand {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      background: linear-gradient(45deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-lg);
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color var(--transition-base), text-shadow var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent-light);
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+    }
+
+    /* Back Link Styling */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 20px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+      backdrop-filter: blur(5px);
+      align-self: flex-start;
+    }
+
+    .back-link:hover {
+      color: var(--color-text-primary);
+      background: rgba(124, 58, 237, 0.2);
+      border-color: rgba(124, 58, 237, 0.5);
+      transform: translateX(-5px);
+      box-shadow: 0 4px 10px rgba(124, 58, 237, 0.15);
+    }
+
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: var(--spacing-xl) 0;
+      color: var(--color-text-muted);
+      border-top: 1px solid var(--color-border);
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      margin-top: auto;
+      width: 100%;
+    }
+
+    footer p {
+      margin-bottom: var(--spacing-sm);
+      text-align: center;
+      width: 100%;
+    }
+
+    footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: color var(--transition-base);
+      margin: 0 var(--spacing-sm);
+    }
+
+    footer a:hover {
+      color: var(--color-accent);
+      text-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS Learning Path</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="../register.html"><i class="fas fa-user-plus"></i> Register</a>
+    </div>
+  </nav>
+
+
+
+  <div class="container">
+
+    <a href="ai-ml.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to AI & Machine Learning</a>
+
+
+
+    <div class="terminal-header">
+      <div class="terminal-title">AI IN HEALTHCARE ROADMAP & RESOURCES</div>
+      <div class="terminal-subtitle">Comprehensive guide to mastering AI applications in healthcare with roadmaps,
+        courses, and recommended books</div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Healthcare Fundamentals</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">What is AI in Healthcare?</div>
+          <div class="grid-content">
+            AI in Healthcare involves using artificial intelligence technologies to improve medical diagnosis,
+            treatment, drug discovery, and patient care. It encompasses machine learning, natural language processing,
+            computer vision, and robotics applied to healthcare challenges.
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Core Applications</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Medical Imaging Analysis: Radiology, pathology, dermatology</li>
+              <li class="glass-list-item">Drug Discovery: Molecular modeling, clinical trial optimization</li>
+              <li class="glass-list-item">Clinical Decision Support: Diagnosis assistance, treatment recommendations
+              </li>
+              <li class="glass-list-item">Predictive Analytics: Disease prediction, patient risk assessment</li>
+              <li class="glass-list-item">Personalized Medicine: Tailored treatment plans</li>
+              <li class="glass-list-item">Administrative Automation: Medical coding, billing optimization</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Challenges</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Data Privacy & Security: HIPAA compliance, patient confidentiality</li>
+              <li class="glass-list-item">Data Quality: Inconsistent medical records, missing data</li>
+              <li class="glass-list-item">Regulatory Compliance: FDA approval, clinical validation</li>
+              <li class="glass-list-item">Interpretability: Understanding AI decisions in medical context</li>
+              <li class="glass-list-item">Integration: Incorporating AI into existing healthcare workflows</li>
+              <li class="glass-list-item">Ethical Considerations: Bias, fairness, accountability</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Healthcare Learning Roadmap</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">1. AI/ML Foundations</div>
+          <div class="timeline-content">Machine Learning basics, Python, statistics, linear algebra, data structures
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">2. Healthcare Domain Knowledge</div>
+          <div class="timeline-content">Medical terminology, anatomy, physiology, healthcare systems, regulations
+            (HIPAA, FDA)</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">3. Healthcare Data Handling</div>
+          <div class="timeline-content">Electronic Health Records (EHR), medical imaging formats (DICOM), data privacy,
+            preprocessing</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">4. Computer Vision for Medical Imaging</div>
+          <div class="timeline-content">CNNs for radiology, pathology analysis, image segmentation, transfer learning
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">5. NLP for Healthcare</div>
+          <div class="timeline-content">Clinical text analysis, medical entity recognition, sentiment analysis, chatbots
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">6. Specialized Healthcare AI</div>
+          <div class="timeline-content">Drug discovery models, genomics analysis, predictive modeling, reinforcement
+            learning for treatment optimization</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">7. Deployment & Ethics</div>
+          <div class="timeline-content">Model validation, clinical trials, regulatory compliance, bias mitigation, MLOps
+            in healthcare</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Free Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">AI in Healthcare (Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Stanford University</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Beginner-Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive introduction to AI applications in healthcare</li>
+              <li class="glass-list-item">Covers medical imaging, genomics, drug discovery</li>
+              <li class="glass-list-item">Real-world case studies from Stanford Medicine</li>
+              <li class="glass-list-item">Focus on ethical considerations and regulatory aspects</li>
+              <li class="glass-list-item">Hands-on projects with healthcare datasets</li>
+              <li class="glass-list-item">Perfect for healthcare professionals and AI enthusiasts</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/ai-in-healthcare" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Health Informatics (edX)</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+            <span class="meta-item">Johns Hopkins University</span>
+            <span class="meta-item">8 weeks</span>
+            <span class="meta-item">Beginner</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Introduction to health informatics and data management</li>
+              <li class="glass-list-item">Covers EHR systems, data standards, interoperability</li>
+              <li class="glass-list-item">Focus on healthcare data analytics and AI applications</li>
+              <li class="glass-list-item">Real-world examples from Johns Hopkins</li>
+              <li class="glass-list-item">Essential foundation for AI in healthcare</li>
+              <li class="glass-list-item">Free to audit, certificate available for fee</li>
+            </ul>
+          </div>
+          <a href="https://www.edx.org/course/introduction-to-health-informatics" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Medical Image Analysis with Deep Learning (MIT OpenCourseWare)</div>
+          <div class="grid-meta">
+            <span class="meta-item">MIT OpenCourseWare</span>
+            <span class="meta-item">MIT</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Specialized course on medical imaging AI from MIT</li>
+              <li class="glass-list-item">Covers CNNs, deep learning for radiology and pathology</li>
+              <li class="glass-list-item">Lecture notes and assignments freely available</li>
+              <li class="glass-list-item">Focus on image segmentation and classification</li>
+              <li class="glass-list-item">Industry-standard techniques and frameworks</li>
+              <li class="glass-list-item">Free community-driven learning</li>
+            </ul>
+          </div>
+          <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/" class="btn-glow"
+            target="_blank">Access Course</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Genomics and Computational Biology (Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">UC San Diego</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Computational approaches to genomics and bioinformatics</li>
+              <li class="glass-list-item">Covers sequence analysis, gene expression, proteomics</li>
+              <li class="glass-list-item">AI applications in drug discovery and personalized medicine</li>
+              <li class="glass-list-item">Practical projects with genomic data</li>
+              <li class="glass-list-item">Essential for AI in genomics and drug development</li>
+              <li class="glass-list-item">Strong foundation in bioinformatics</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/specializations/genomic-data-science" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">NLP for Healthcare (Fast.ai)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Fast.ai</span>
+            <span class="meta-item">Fast.ai Community</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical NLP techniques for healthcare applications</li>
+              <li class="glass-list-item">Covers clinical text analysis and entity recognition</li>
+              <li class="glass-list-item">Hands-on examples with PyTorch and transformers</li>
+              <li class="glass-list-item">Free video lectures and Jupyter notebooks</li>
+              <li class="glass-list-item">Focus on practical implementation</li>
+              <li class="glass-list-item">Community-driven learning platform</li>
+            </ul>
+          </div>
+          <a href="https://www.fast.ai/" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Paid Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">AI for Healthcare Specialization</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Imperial College London</span>
+            <span class="meta-item">4 courses</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive AI healthcare specialization</li>
+              <li class="glass-list-item">Covers diagnosis, treatment, drug discovery</li>
+              <li class="glass-list-item">Real-world projects with medical data</li>
+              <li class="glass-list-item">Focus on clinical applications and deployment</li>
+              <li class="glass-list-item">Includes ethics and regulatory considerations</li>
+              <li class="glass-list-item">Certificate from Imperial College London</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/specializations/ai-healthcare" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Machine Learning for Healthcare</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Ryan Ahmed</span>
+            <span class="meta-item">12 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical ML applications in healthcare</li>
+              <li class="glass-list-item">Covers predictive modeling, classification, clustering</li>
+              <li class="glass-list-item">Real healthcare datasets and case studies</li>
+              <li class="glass-list-item">Focus on Python and scikit-learn</li>
+              <li class="glass-list-item">Includes feature engineering and model evaluation</li>
+              <li class="glass-list-item">Perfect for healthcare data scientists</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/machine-learning-for-healthcare/" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Medical Imaging</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Sreenivas Bhattiprolu</span>
+            <span class="meta-item">15 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Advanced deep learning for medical imaging</li>
+              <li class="glass-list-item">Covers CNNs, U-Net, segmentation, classification</li>
+              <li class="glass-list-item">Hands-on projects with chest X-rays, brain MRIs</li>
+              <li class="glass-list-item">Focus on TensorFlow and Keras</li>
+              <li class="glass-list-item">Includes model deployment and optimization</li>
+              <li class="glass-list-item">Essential for radiology AI applications</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/deep-learning-for-medical-imaging/" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">AI in Drug Discovery</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Hiren Patel</span>
+            <span class="meta-item">10 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">AI applications in pharmaceutical research</li>
+              <li class="glass-list-item">Covers molecular modeling, QSAR, virtual screening</li>
+              <li class="glass-list-item">Hands-on projects with drug discovery datasets</li>
+              <li class="glass-list-item">Focus on cheminformatics and computational chemistry</li>
+              <li class="glass-list-item">Includes machine learning for drug design</li>
+              <li class="glass-list-item">Perfect for pharma and biotech professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/ai-in-drug-discovery/" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Clinical NLP: Text Mining Healthcare Data</div>
+          <div class="grid-meta">
+            <span class="meta-item">DataCamp</span>
+            <span class="meta-item">Dr. Christine Moran</span>
+            <span class="meta-item">4 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">NLP techniques for clinical text analysis</li>
+              <li class="glass-list-item">Covers entity extraction, sentiment analysis, classification</li>
+              <li class="glass-list-item">Hands-on projects with EHR and clinical notes</li>
+              <li class="glass-list-item">Focus on NLTK, spaCy, Hugging Face transformers</li>
+              <li class="glass-list-item">Includes HIPAA compliance considerations</li>
+              <li class="glass-list-item">Essential for healthcare NLP practitioners</li>
+            </ul>
+          </div>
+          <a href="https://www.datacamp.com/courses/clinical-nlp-text-mining-healthcare-data" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best E-books for AI in Healthcare</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Artificial Intelligence in Healthcare</div>
+          <div class="grid-meta">
+            <span class="meta-item">Parag Suresh Mahajan</span>
+            <span class="meta-item">320 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$49.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive guide to AI in healthcare</li>
+              <li class="glass-list-item">Covers applications, challenges, and implementation</li>
+              <li class="glass-list-item">Real-world case studies and examples</li>
+              <li class="glass-list-item">Focus on practical deployment strategies</li>
+              <li class="glass-list-item">Includes regulatory and ethical considerations</li>
+              <li class="glass-list-item">Essential for healthcare AI practitioners</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Artificial-Intelligence-Healthcare-Parag-Mahajan/dp/0128184386"
+            class="btn-glow" target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Medicine: How Artificial Intelligence Can Make Healthcare Human Again</div>
+          <div class="grid-meta">
+            <span class="meta-item">Eric Topol</span>
+            <span class="meta-item">400 pages</span>
+            <span class="meta-item">Beginner</span>
+            <span class="meta-item">$16.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Accessible introduction to AI in medicine</li>
+              <li class="glass-list-item">Focus on human-AI collaboration in healthcare</li>
+              <li class="glass-list-item">Real-world examples and future predictions</li>
+              <li class="glass-list-item">Written by leading cardiologist and AI expert</li>
+              <li class="glass-list-item">Emphasizes ethical and practical considerations</li>
+              <li class="glass-list-item">Perfect for healthcare professionals and general audience</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Deep-Medicine-Artificial-Intelligence-Healthcare/dp/1541644638"
+            class="btn-glow" target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Machine Learning for Healthcare</div>
+          <div class="grid-meta">
+            <span class="meta-item">Kamal Gupta, Ashish Kumar</span>
+            <span class="meta-item">250 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$39.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical guide to ML in healthcare</li>
+              <li class="glass-list-item">Covers predictive modeling and diagnostics</li>
+              <li class="glass-list-item">Hands-on examples with Python</li>
+              <li class="glass-list-item">Focus on real healthcare datasets</li>
+              <li class="glass-list-item">Includes deployment and evaluation strategies</li>
+              <li class="glass-list-item">Great for data scientists in healthcare</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Machine-Learning-Healthcare-Kamal-Gupta/dp/0367570177" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Medical Image Analysis</div>
+          <div class="grid-meta">
+            <span class="meta-item">Atam P. Dhawan</span>
+            <span class="meta-item">400 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$89.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive guide to medical image analysis</li>
+              <li class="glass-list-item">Covers AI and ML techniques for imaging</li>
+              <li class="glass-list-item">Focus on radiology, microscopy, endoscopy</li>
+              <li class="glass-list-item">Mathematical foundations and algorithms</li>
+              <li class="glass-list-item">Includes segmentation, registration, classification</li>
+              <li class="glass-list-item">Essential for medical imaging researchers</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Medical-Image-Analysis-Atam-Dhawan/dp/0470622057" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Healthcare Data Analytics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Chandan K. Reddy, Charu C. Aggarwal</span>
+            <span class="meta-item">700 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$79.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive treatment of healthcare analytics</li>
+              <li class="glass-list-item">Covers data mining, ML, predictive modeling</li>
+              <li class="glass-list-item">Focus on EHR data, medical imaging, genomics</li>
+              <li class="glass-list-item">Real-world case studies and applications</li>
+              <li class="glass-list-item">Includes privacy and security considerations</li>
+              <li class="glass-list-item">Essential for healthcare data scientists</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Healthcare-Data-Analytics-Chandan-Reddy/dp/1498746707" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">AI for Drug Discovery, Design, and Development</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Matthew Segall</span>
+            <span class="meta-item">300 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$59.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical guide to AI in drug discovery</li>
+              <li class="glass-list-item">Covers molecular modeling, virtual screening</li>
+              <li class="glass-list-item">Focus on machine learning for pharma</li>
+              <li class="glass-list-item">Real-world examples from drug development</li>
+              <li class="glass-list-item">Includes cheminformatics and computational chemistry</li>
+              <li class="glass-list-item">Perfect for pharma researchers and data scientists</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Drug-Discovery-Design-Development-Segall/dp/0128184386" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <footer>
+    <p>&copy; 2026 RMS Learning Path System. All rights reserved.</p>
+    <p><a href="../index.html">Home</a> &middot; <a href="ai-ml.html">Back</a> &middot; <a href="../login.html">Login</a>
+    </p>
+  </footer>
+
+
+</body>
+
+</html>

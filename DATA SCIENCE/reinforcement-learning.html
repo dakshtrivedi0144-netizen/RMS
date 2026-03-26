@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reinforcement Learning | RMS Intelligence</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-glow: rgba(124, 58, 237, 0.3);
+      --color-accent: #06B6D4;
+      --color-accent-glow: rgba(6, 182, 212, 0.3);
+      --color-bg: #020617;
+      --color-card: rgba(15, 23, 42, 0.7);
+      --color-border: rgba(148, 163, 184, 0.1);
+      --color-text: #F8FAFC;
+      --color-text-dim: #94A3B8;
+      --radius-2xl: 2rem;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientMove 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+
+      100% {
+        transform: scale(1.1) translate(2%, 2%);
+      }
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50px;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(-5px);
+    }
+
+    .terminal-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-2xl);
+      padding: 80px 40px;
+      margin-bottom: 60px;
+      text-align: center;
+      box-shadow: 0 0 50px var(--color-primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-title {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-dim);
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: 60px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 40px;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      transition: 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .grid-item:hover {
+      background: rgba(124, 58, 237, 0.05);
+      transform: translateY(-10px);
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 15px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .meta-item {
+      background: rgba(124, 58, 237, 0.15);
+      color: #A78BFA;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grid-content {
+      color: var(--color-text-dim);
+      margin-bottom: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      padding: 15px 20px;
+      border-radius: 1rem;
+      color: var(--color-text-dim);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+      box-shadow: 0 10px 20px var(--color-primary-glow);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1.5rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .timeline-step {
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    .quick-nav {
+      background: var(--color-card);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 1.5rem;
+      margin-bottom: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+    }
+
+    .quick-nav-title {
+      flex-basis: 100%;
+      text-align: center;
+      color: var(--color-primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .quick-nav-link {
+      text-decoration: none;
+      color: var(--color-text-dim);
+      font-weight: 600;
+      padding: 8px 20px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .quick-nav-link:hover {
+      background: var(--color-primary);
+      color: #FFF;
+      border-color: transparent;
+      transform: translateY(-3px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 100px;
+      color: var(--color-text-dim);
+    }
+
+    footer a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+      }
+
+      .matrix-section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.INTEL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="data-science.html"><i class="fas fa-database"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="data-science.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Intelligence</a>
+
+
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Reinforcement Learning Roadmap</h1>
+      <p class="terminal-subtitle">Master the science of autonomous decision-making through rewards, environments,
+        and
+        iterative optimization.</p>
+    </header>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+      <div class="quick-nav-title">Mission Path</div>
+      <a href="#fundamentals" class="quick-nav-link">RL Foundations</a>
+      <a href="#roadmap" class="quick-nav-link">Agent Roadmap</a>
+      <a href="#free" class="quick-nav-link">Free Resources</a>
+      <a href="#premium" class="quick-nav-link">Premium Training</a>
+      <a href="#ebooks" class="quick-nav-link">E-Books</a>
+    </div>
+
+    <div class="matrix-section" id="fundamentals">
+      <h2 class="section-title">Core RL Architecture</h2>
+      <ul class="grid-features">
+        <li class="glass-list-item">Markov Decision Processes (MDPs)</li>
+        <li class="glass-list-item">Bellman Equations & Q-Learning</li>
+        <li class="glass-list-item">Policy Gradients & Actor-Critic Models</li>
+        <li class="glass-list-item">Exploration vs. Exploitation Trade-offs</li>
+        <li class="glass-list-item">Deep Q-Networks (DQN)</li>
+        <li class="glass-list-item">PPO, SAC, & TRPO Algorithms</li>
+        <li class="glass-list-item">Multi-Agent RL (MARL)</li>
+      </ul>
+    </div>
+
+    <div class="matrix-section" id="roadmap">
+      <h2 class="section-title">Learning Roadmap</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">01. Classical RL foundations</div>
+          <div class="timeline-content">Implementing SARSA, Value Iteration, and simple grid-world environments.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">02. Deep Reinforcement Learning</div>
+          <div class="timeline-content">Bridging neural networks with Q-learning to solve complex state spaces.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">03. Policy Optimization</div>
+          <div class="timeline-content">Mastering state-of-the-art gradients like Proximal Policy Optimization
+            (PPO).
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">04. Simulation & Environments</div>
+          <div class="timeline-content">Expertise in OpenAI Gym, MuJoCo, and Unity ML-Agents for diverse training.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">05. Robot & Game Control</div>
+          <div class="timeline-content">Applying RL to physical robotics control and superhuman gaming agents.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="free">
+      <h2 class="section-title">Free Learning Path</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Hugging Face Deep RL</div>
+          <div class="grid-meta">
+            <span class="meta-item">Open Source</span>
+            <span class="meta-item">Hands-on</span>
+          </div>
+          <p class="grid-content">Master Deep RL with a practical curriculum using PyTorch and stable pipelines.</p>
+          <a href="https://huggingface.co/learn/deep-rl-course" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Spinning Up in Deep RL</div>
+          <div class="grid-meta">
+            <span class="meta-item">OpenAI</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <p class="grid-content">Comprehensive education resource for bridging the gap between theory and code.</p>
+          <a href="https://spinningup.openai.com/" class="btn-glow" target="_blank">View Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="premium">
+      <h2 class="section-title">Premium Specialization</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">RL Specialization</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Alberta Machine Intelligence</span>
+          </div>
+          <p class="grid-content">The definitive 4-course series covering MDPs, value-functions, and algorithms.</p>
+          <a href="https://www.coursera.org/specializations/reinforcement-learning" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="ebooks">
+      <h2 class="section-title">Recommended E-books</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">RL: An Introduction</div>
+          <p class="grid-content">The essential foundational text by Richard Sutton and Andrew Barto.</p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Grokking Deep RL</div>
+          <p class="grid-content">Miguel Morales' guide to understanding agent-based learning through illustration.
+          </p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for Eternal Learning.</p>
+    <div style="margin-top: 15px;">
+      <a href="../index.html">Home</a> &middot;
+      <a href="data-science.html">Intelligence</a> &middot;
+      <a href="../login.html">Portal</a>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cloud Architecture Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC AI SAAS DASHBOARD - REFINED v2
+    ============================================ */
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-light: #A78BFA;
+      --color-accent: #06B6D4;
+      --color-accent-light: #22D3EE;
+      --color-bg-darker: #0A0E27;
+      --color-bg-glass: rgba(15, 23, 42, 0.85);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.15);
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --radius-lg: 1.25rem;
+      --shadow-glow: 0 0 25px rgba(124, 58, 237, 0.3);
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* TERMINAL STYLE HEADER */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      margin: 40px auto;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+    }
+
+    .terminal-title {
+      font-size: 3rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(90deg, #FFF, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-accent-light);
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .glass-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      padding: 22px 28px;
+      border-radius: 12px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(6, 182, 212, 0.08);
+      border-color: var(--color-accent);
+      transform: translateY(-5px);
+    }
+
+    .item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: #FFF;
+      font-size: 1.2rem;
+    }
+
+    .item-desc {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+    }
+
+    .tag {
+      font-size: 0.8rem;
+      padding: 3px 12px;
+      border-radius: 20px;
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--color-primary-light);
+      border: 1px solid var(--color-primary);
+      width: fit-content;
+    }
+
+    /* PROJECT CARDS */
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      color: #FFF;
+      margin-bottom: 15px;
+      font-family: 'Poppins', sans-serif;
+      border-left: 4px solid var(--color-accent);
+      padding-left: 15px;
+    }
+
+    .project-list {
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    .project-list li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .project-list li i {
+      color: var(--color-accent);
+      font-size: 0.8rem;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 32px;
+      background: linear-gradient(45deg, var(--color-accent), var(--color-primary));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all var(--transition-base);
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(6, 182, 212, 0.4);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 35px 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 6rem 0;
+      border-top: 1px solid var(--color-border);
+      background: #05081A;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="networkCanvas"></canvas>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.Cloud</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="web-development.html"><i class="fas fa-satellite-dish"></i> Ecosystem</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="web-development.html" class="back-link"><i class="fas fa-long-arrow-alt-left"></i> RETURN TO PATHS</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Cloud Infrastructure Architecture</h1>
+      <p class="terminal-subtitle">Architect modern, cloud-native solutions by mastering the integration of compute,
+        storage, and networking across global providers.</p>
+    </header>
+
+    <!-- CLOUD LOGIC -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-cloud"></i> The Multi-Cloud Logic</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-server"></i> Service Models</div>
+          <p class="item-desc">Master the differences between IaaS, PaaS, SaaS, and FaaS (Serverless) integration.</p>
+          <span class="tag">Foundation</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-network-wired"></i> Global Network</div>
+          <p class="item-desc">Designing VPCs, Subnets, CDN (Content Delivery Networks), and Global Load Balancers.</p>
+          <span class="tag">Connectivity</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-shield-alt"></i> IAM & Security</div>
+          <p class="item-desc">Managing Identity, fine-grained access policies, and encrypted data-at-rest strategies.
+          </p>
+          <span class="tag">Security</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header"><i class="fas fa-sync"></i> High Availability</div>
+          <p class="item-desc">Implementing Multi-AZ, Multi-Region replication and failover architecture.</p>
+          <span class="tag">Reliability</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTEGRATION PATH -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-route"></i> The Cloud Roadmap</h2>
+
+      <div class="project-grid">
+        <!-- Stage 1 -->
+        <div class="project-card">
+          <h3 class="project-title">Stage 1: Major Providers</h3>
+          <p class="item-desc">Core services of the big three cloud ecosystems.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-caret-right"></i> AWS: EC2, S3, RDS, & VPC</li>
+            <li><i class="fas fa-caret-right"></i> Azure: App Service & Cosmos DB</li>
+            <li><i class="fas fa-caret-right"></i> GCP: Compute Engine & BigQuery</li>
+            <li><i class="fas fa-caret-right"></i> DigitalOcean: Droplets & Spaces</li>
+          </ul>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="project-card" style="border-color: var(--color-accent);">
+          <h3 class="project-title">Stage 2: Serverless Era</h3>
+          <p class="item-desc">Event-driven and highly scalable integration.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-caret-right"></i> AWS Lambda & Cloud Functions</li>
+            <li><i class="fas fa-caret-right"></i> API Gateway & Route53 Management</li>
+            <li><i class="fas fa-caret-right"></i> Event Bridge & Pub/Sub Logic</li>
+            <li><i class="fas fa-caret-right"></i> Serverless Framework Mastery</li>
+          </ul>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="project-card">
+          <h3 class="project-title">Stage 3: Cloud Native Ops</h3>
+          <p class="item-desc">Professional-grade automation and scaling.</p>
+          <ul class="project-list">
+            <li><i class="fas fa-caret-right"></i> Multi-Cloud Terraform Integration</li>
+            <li><i class="fas fa-caret-right"></i> Cloud-Native Storage (Storage Classes)</li>
+            <li><i class="fas fa-caret-right"></i> Zero-Trust Networking Isolation</li>
+            <li><i class="fas fa-caret-right"></i> Cloud Cost Monitoring (FinOps)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE LABS -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-vials"></i> Engineering Challenges</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">Serverless Processor</div>
+          <p class="item-desc">Build a system that auto-triggers image processing upon S3/Storage upload events.</p>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Global CDN Cluster</div>
+          <p class="item-desc">Architect a globally distributed web app with edge caching and local data isolation.</p>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">E-commerce Cloud-Native</div>
+          <p class="item-desc">Deploy a microservices app using Kubernetes with managed DBs and auto-scaling queues.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FREE COURSES -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-gift"></i> Free Courses</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">AWS Skill Builder</div>
+          <p class="item-desc">Free foundational cloud courses from Amazon Web Services.</p>
+          <a href="https://explore.skillbuilder.aws/" target="_blank" class="btn-glow">Learn Free <i
+              class="fas fa-server"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Microsoft Learn for Azure</div>
+          <p class="item-desc">Free modules and learning paths for Microsoft Azure.</p>
+          <a href="https://learn.microsoft.com/en-us/training/azure/" target="_blank" class="btn-glow">Take Path <i
+              class="fas fa-microsoft"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Google Cloud Free Training</div>
+          <p class="item-desc">Google's self-paced labs and fundamental cloud concepts.</p>
+          <a href="https://cloud.google.com/training/free" target="_blank" class="btn-glow">Start Course <i
+              class="fas fa-cloud"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAID COURSES -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-certificate"></i> Paid Courses</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">A Cloud Guru</div>
+          <p class="item-desc">Premium comprehensive platform for AWS, Azure, and GCP certifications.</p>
+          <a href="https://acloudguru.com/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Stephane Maarek's AWS Courses</div>
+          <p class="item-desc">Highly rated Udemy courses for passing AWS Architect and Developer exams.</p>
+          <a href="https://www.udemy.com/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Serverless Framework Masterclass</div>
+          <p class="item-desc">Learn event-driven architectures and building serverless APIs.</p>
+          <a href="https://www.udemy.com/" target="_blank" class="btn-glow">Enroll Now <i
+              class="fas fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- E-BOOKS -->
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-book"></i> E-Books & Literature</h2>
+      <div class="glass-list">
+        <div class="glass-list-item">
+          <div class="item-header">Cloud Native Patterns</div>
+          <p class="item-desc">Designing change-tolerant software by Cornelia Davis.</p>
+          <span class="tag">Architecture</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">AWS Well-Architected Framework</div>
+          <p class="item-desc">Whitepapers on operational excellence, security, and reliability.</p>
+          <span class="tag">Best Practices</span>
+        </div>
+        <div class="glass-list-item">
+          <div class="item-header">Site Reliability Engineering</div>
+          <p class="item-desc">How Google runs production systems (Free online).</p>
+          <span class="tag">Operations</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Cloud Integration Portal. Built for the Global Edge.</p>
+      <div style="margin-top: 15px;">
+        <a href="../index.html">Management Hub</a> &middot;
+        <a href="web-development.html">Infrastructure Overview</a> &middot;
+        <a href="../login.html">Secure Portal Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#7C3AED'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 75; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 150) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.35 * (1 - d / 150)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

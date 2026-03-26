@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cognitive & Behaviour Research Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    PREMIUM ROADMAP SYSTEM - SPATIAL V3 (CYBER ENHANCED)
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-primary-dark: #5B21B6;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-accent-dark: #0891B2;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.8);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.15);
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+      --radius-sm: 0.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      animation: ambientPulse 15s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes ambientPulse {
+      0% {
+        opacity: 0.5;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2.5rem;
+      width: 100%;
+    }
+
+    /* NAVIGATION */
+    .top-nav {
+      background: rgba(2, 6, 23, 0.9);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .nav-brand {
+      font-size: 1.7rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 20px var(--color-primary);
+      transform: scale(1.05);
+    }
+
+    /* QUICK NAV */
+    .quick-nav {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 20px 0 40px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .quick-nav-title {
+      flex-basis: 100%;
+      text-align: center;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--color-primary-light);
+      margin-bottom: 15px;
+    }
+
+    .quick-nav-link {
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      font-weight: 700;
+      padding: 12px 24px;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-size: 0.8rem;
+    }
+
+    .quick-nav-link:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary-light);
+      color: #FFF;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+    }
+
+    /* ROADMAP COMPONENTS */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      transition: 0.3s;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 2rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(139, 92, 246, 0.1);
+      border-color: var(--color-primary);
+      transform: translateX(-10px);
+    }
+
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 2px solid var(--color-primary);
+      border-radius: 2rem;
+      padding: 70px 50px;
+      margin-bottom: 50px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header::before {
+      content: '>';
+      position: absolute;
+      left: 40px;
+      top: 40px;
+      color: var(--color-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2.5rem;
+      font-weight: 900;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .terminal-title {
+      font-size: 4rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -2px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.35rem;
+      max-width: 900px;
+      margin: 0 auto;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--color-border);
+      border-radius: 2.5rem;
+      padding: 60px;
+      margin-bottom: 70px;
+      backdrop-filter: blur(30px);
+      position: relative;
+      animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .matrix-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--color-primary-light);
+      margin-bottom: 50px;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      letter-spacing: -1px;
+    }
+
+    .section-title::after {
+      content: '_';
+      animation: cursorBlink 1s infinite;
+      color: var(--color-accent);
+    }
+
+    @keyframes cursorBlink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* TIMELINE STYLES */
+    .timeline {
+      position: relative;
+      padding-left: 80px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 25px;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent), var(--color-primary));
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 60px;
+      padding: 45px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid var(--color-border);
+      border-radius: 2.5rem;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .timeline-item:hover {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: var(--color-primary);
+      transform: translateX(20px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -72px;
+      top: 50px;
+      width: 30px;
+      height: 30px;
+      background: #FFF;
+      border: 8px solid var(--color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 30px var(--color-primary);
+      z-index: 2;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.8);
+      }
+
+      70% {
+        box-shadow: 0 0 0 20px rgba(139, 92, 246, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+      }
+    }
+
+    .timeline-step {
+      color: var(--color-accent-light);
+      font-weight: 900;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      letter-spacing: 1px;
+    }
+
+    .timeline-content {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      line-height: 1.9;
+    }
+
+    /* GRID STYLES */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 40px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 2px solid var(--color-border);
+      border-radius: 2.5rem;
+      padding: 50px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: 0.8s;
+    }
+
+    .grid-item:hover::after {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    .grid-item:hover {
+      border-color: var(--color-accent);
+      background: rgba(6, 182, 212, 0.08);
+      transform: translateY(-15px);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    }
+
+    .grid-title {
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: #FFF;
+      margin-bottom: 25px;
+      letter-spacing: -0.5px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .meta-item {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--color-accent-light);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 900;
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .grid-content {
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      margin-bottom: 40px;
+      flex-grow: 1;
+      line-height: 1.8;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px 36px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 1.2rem;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      transition: 0.4s;
+      border: none;
+      box-shadow: 0 15px 30px rgba(139, 92, 246, 0.4);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 20px 40px rgba(139, 92, 246, 0.7);
+      filter: brightness(1.3);
+    }
+
+    /* FEATURE LIST */
+    .grid-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      padding: 25px 35px;
+      border-radius: 2rem;
+      color: var(--color-text-secondary);
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .glass-list-item:hover {
+      border-color: var(--color-primary-light);
+      background: rgba(139, 92, 246, 0.15);
+      color: #FFF;
+      transform: translateX(15px);
+    }
+
+    .glass-list-item::before {
+      content: '\f058';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      color: var(--color-accent);
+      font-size: 1.5rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 80px;
+      color: var(--color-text-muted);
+      background: rgba(2, 6, 23, 0.7);
+    }
+
+    footer p {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      letter-spacing: 1px;
+    }
+
+    footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--color-primary-light);
+      text-shadow: 0 0 10px var(--color-primary);
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1rem 2rem;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .nav-links {
+        gap: 2rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+        letter-spacing: -1px;
+      }
+
+      .terminal-header {
+        padding: 50px 30px;
+      }
+
+      .matrix-section {
+        padding: 40px 25px;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        padding-left: 50px;
+      }
+
+      .timeline::before {
+        left: 15px;
+      }
+
+      .timeline-item::before {
+        left: -50px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.SPATIAL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../APP DEV/app.html"><i class="fas fa-mobile-alt"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="ar-vr.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Cognitive & Behaviour Research</h1>
+      <p class="terminal-subtitle">Decoding the human mind through immersive spatial simulations and biometric
+        integration.</p>
+    </header>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+      <div class="quick-nav-title">Mission Path</div>
+      <a href="#fundamentals" class="quick-nav-link">Core Fundamentals</a>
+      <a href="#roadmap" class="quick-nav-link">Scientific Roadmap</a>
+      <a href="#free" class="quick-nav-link">Open Research</a>
+      <a href="#premium" class="quick-nav-link">Specialist Training</a>
+      <a href="#ebooks" class="quick-nav-link">E-Books</a>
+    </div>
+
+    <div class="matrix-section" id="fundamentals">
+      <h2 class="section-title">Core Fundamentals</h2>
+      <ul class="grid-features">
+        <li class="glass-list-item">Behavioural Psychology Foundations</li>
+        <li class="glass-list-item">Spatial Cognition & Perception</li>
+        <li class="glass-list-item">Biometric Data Acquisition (EEG/ECG)</li>
+        <li class="glass-list-item">VR-Based Neural Mapping</li>
+        <li class="glass-list-item">Quantitative Research Methods</li>
+        <li class="glass-list-item">Ethical AI & Research Standards</li>
+        <li class="glass-list-item">Signal Processing & Analytics</li>
+      </ul>
+    </div>
+
+    <div class="matrix-section" id="roadmap">
+      <h2 class="section-title">Scientific Roadmap</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">01. Theoretical Foundations</div>
+          <div class="timeline-content">Deep dive into cognitive neurosciences and previous behavioural research models.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">02. Experimental Environment Design</div>
+          <div class="timeline-content">Engineering high-fidelity VR scenarios to stimulate specific psychological
+            triggers.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">03. Hardware Integration</div>
+          <div class="timeline-content">Syncing Eye-tracking, Heart Rate, and Brain-Computer Interfaces (BCI) with
+            spatial data.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">04. Data Analytics & AI Modeling</div>
+          <div class="timeline-content">Utilizing machine learning to identify patterns in multi-modal human response
+            data.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">05. Clinical & Commercial Validation</div>
+          <div class="timeline-content">Applying research insights to bridge the gap between lab experiments and
+            real-world therapy.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="free">
+      <h2 class="section-title">Open Research Path</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Cognitive Science VR</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Academic</span>
+          </div>
+          <p class="grid-content">Introductory course on how immersive technology influences brain plasticity and
+            spatial memory.</p>
+          <a href="https://www.coursera.org/learn/cognitive-neuroscience" class="btn-glow" target="_blank">Access
+            Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Biometrics in Research</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+            <span class="meta-item">Caltech</span>
+          </div>
+          <p class="grid-content">Master the basics of capturing and interpreting human physical response data.</p>
+          <a href="https://www.edx.org/course/biometrics-research" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Psychology of Presence</div>
+          <div class="grid-meta">
+            <span class="meta-item">FutureLearn</span>
+          </div>
+          <p class="grid-content">Exploring the feeling of 'being there' and its impact on behavioural change.</p>
+          <a href="https://www.futurelearn.com/courses/psychology-of-vr" class="btn-glow" target="_blank">Access
+            Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="premium">
+      <h2 class="section-title">Specialist Training</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Clinical VR Therapy</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Specialist</span>
+          </div>
+          <p class="grid-content">Professional certification for using VR in treating PTSD, anxiety, and phobias.</p>
+          <a href="https://www.udemy.com/course/vr-for-psychology-and-therapy/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Advanced Neuro-spatial Analytics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Stanford Online</span>
+          </div>
+          <p class="grid-content">In-depth technical training for neural mapping and cognitive assessment in XR.</p>
+          <a href="https://online.stanford.edu/courses/neuroscience-design" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="ebooks">
+      <h2 class="section-title">Recommended E-books</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">The Brain in VR</div>
+          <p class="grid-content">Comprehensive study on the neurobiological effects of prolonged spatial immersion.</p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Neuromarketing in Spatial Labs</div>
+          <p class="grid-content">Practical guide on how the commercial world uses cognitive research in XR.</p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Intelligence Systems. Architected for the Spatial Future.</p>
+      <div style="margin-top: 20px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="ar-vr.html">Spatial Hub</a> &middot;
+        <a href="../AI_ML/ai-ml.html">Intelligence</a> &middot;
+        <a href="../login.html">Neural Login</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in Finance | RMS Intelligence</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-glow: rgba(124, 58, 237, 0.3);
+      --color-accent: #06B6D4;
+      --color-accent-glow: rgba(6, 182, 212, 0.3);
+      --color-bg: #020617;
+      --color-card: rgba(15, 23, 42, 0.7);
+      --color-border: rgba(148, 163, 184, 0.1);
+      --color-text: #F8FAFC;
+      --color-text-dim: #94A3B8;
+      --radius-2xl: 2rem;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientMove 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+
+      100% {
+        transform: scale(1.1) translate(2%, 2%);
+      }
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50px;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(-5px);
+    }
+
+    .terminal-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-2xl);
+      padding: 80px 40px;
+      margin-bottom: 60px;
+      text-align: center;
+      box-shadow: 0 0 50px var(--color-primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-title {
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-dim);
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: 60px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 40px;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      transition: 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .grid-item:hover {
+      background: rgba(124, 58, 237, 0.05);
+      transform: translateY(-10px);
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 15px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .meta-item {
+      background: rgba(124, 58, 237, 0.15);
+      color: #A78BFA;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grid-content {
+      color: var(--color-text-dim);
+      margin-bottom: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      padding: 15px 20px;
+      border-radius: 1rem;
+      color: var(--color-text-dim);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(124, 58, 237, 0.1);
+      color: #FFF;
+      border-color: var(--color-primary);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+      box-shadow: 0 10px 20px var(--color-primary-glow);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1.5rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .timeline-step {
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 100px;
+      color: var(--color-text-dim);
+    }
+
+    footer a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+      }
+
+      .matrix-section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.INTEL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="data-science.html"><i class="fas fa-database"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="data-science.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Intelligence</a>
+
+
+
+    <div class="terminal-header">
+      <div class="terminal-title">DATA SCIENCE - AI IN FINANCE</div>
+      <div class="terminal-subtitle">Predicts stock prices, detects fraud, manages risk, and automates trading.
+        Applications include fraud detection, risk management, and algorithmic trading.</div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Finance Fundamentals</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">What is AI in Finance?</div>
+          <div class="grid-content">
+            AI in Finance involves using artificial intelligence and machine learning to optimize financial
+            decisions,
+            detect fraud, manage risk, and automate trading. It combines quantitative analysis, deep learning, and
+            time-series forecasting to improve financial performance. AI enables faster, data-driven decision-making
+            and
+            fraud prevention in banking and investment sectors.
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Core Applications</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Fraud Detection: Identifying fraudulent transactions and suspicious
+                activities
+              </li>
+              <li class="glass-list-item">Risk Management: Predicting credit risk, market risk, and portfolio risk
+              </li>
+              <li class="glass-list-item">Algorithmic Trading: Automated trading strategies and market prediction
+              </li>
+              <li class="glass-list-item">Stock Price Prediction: Time-series forecasting and technical analysis
+              </li>
+              <li class="glass-list-item">Customer Analytics: Segmentation, churn prediction, lifetime value</li>
+              <li class="glass-list-item">Loan Approval: Credit scoring and lending decisions</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Technologies</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Time-Series Forecasting: ARIMA, LSTM, Prophet, Transformer models</li>
+              <li class="glass-list-item">Machine Learning: Classification, regression, ensemble methods</li>
+              <li class="glass-list-item">Deep Learning: RNNs, LSTMs, autoencoders, attention mechanisms</li>
+              <li class="glass-list-item">Feature Engineering: Technical indicators, market features</li>
+              <li class="glass-list-item">Anomaly Detection: Fraud detection algorithms</li>
+              <li class="glass-list-item">Reinforcement Learning: Optimal trading strategies</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Challenges</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Market Volatility: Unpredictable market behavior and black swan events
+              </li>
+              <li class="glass-list-item">Data Quality: Handling missing data, noise, and outliers</li>
+              <li class="glass-list-item">Regulatory Compliance: Adhering to financial regulations and
+                explainability
+                requirements</li>
+              <li class="glass-list-item">Overfitting: Avoiding curve-fitting to historical data</li>
+              <li class="glass-list-item">Interpretability: Explaining AI decisions to stakeholders</li>
+              <li class="glass-list-item">Real-time Processing: Low-latency trading requirements</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Finance Learning Roadmap</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">1. Finance & Economics Fundamentals</div>
+          <div class="timeline-content">Financial markets, instruments, trading basics, portfolio theory, risk
+            concepts
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">2. Programming & Data Handling</div>
+          <div class="timeline-content">Python, data structures, financial data APIs, databases, data preprocessing
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">3. Statistics & Mathematics</div>
+          <div class="timeline-content">Probability, statistics, calculus, linear algebra, differential equations
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">4. Machine Learning Foundations</div>
+          <div class="timeline-content">Supervised learning, unsupervised learning, feature engineering, model
+            evaluation</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">5. Time-Series Analysis</div>
+          <div class="timeline-content">ARIMA, exponential smoothing, stationarity, autocorrelation, forecasting
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">6. Deep Learning for Finance</div>
+          <div class="timeline-content">RNNs, LSTMs, CNNs for finance, attention mechanisms, autoencoders</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">7. Advanced Topics</div>
+          <div class="timeline-content">Reinforcement learning for trading, ensemble methods, risk models,
+            backtesting
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">8. Deployment & Compliance</div>
+          <div class="timeline-content">Model validation, backtesting, compliance, risk management, production
+            deployment</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Free Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Finance for Everyone: Smart Finance, Personal Finance, and Business Finance
+            (Coursera)
+          </div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">University of Michigan</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Beginner</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Introduction to finance fundamentals</li>
+              <li class="glass-list-item">Covers markets, investments, financial instruments</li>
+              <li class="glass-list-item">Real-world examples and case studies</li>
+              <li class="glass-list-item">Foundation for financial AI concepts</li>
+              <li class="glass-list-item">Accessible to non-finance professionals</li>
+              <li class="glass-list-item">Perfect for AI/finance beginners</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/finance-for-everyone" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Machine Learning for Trading (edX)</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+            <span class="meta-item">Georgia Tech</span>
+            <span class="meta-item">8 weeks</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">ML techniques for trading systems</li>
+              <li class="glass-list-item">Covers price prediction, portfolio optimization</li>
+              <li class="glass-list-item">Hands-on projects with market data</li>
+              <li class="glass-list-item">Focus on practical trading applications</li>
+              <li class="glass-list-item">Real-world market scenarios</li>
+              <li class="glass-list-item">Free to audit with paid certificate</li>
+            </ul>
+          </div>
+          <a href="https://www.edx.org/course/machine-learning-for-trading" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Time Series Analysis (MIT OpenCourseWare)</div>
+          <div class="grid-meta">
+            <span class="meta-item">MIT OpenCourseWare</span>
+            <span class="meta-item">MIT</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Time series analysis from MIT</li>
+              <li class="glass-list-item">Covers forecasting, ARIMA, state-space models</li>
+              <li class="glass-list-item">Lecture notes and problem sets</li>
+              <li class="glass-list-item">Essential for financial forecasting</li>
+              <li class="glass-list-item">Academic-quality content</li>
+              <li class="glass-list-item">Free community resource</li>
+            </ul>
+          </div>
+          <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/" class="btn-glow"
+            target="_blank">Access Course</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Fraud Detection with Python (Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">University at Buffalo</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Fraud detection algorithms and techniques</li>
+              <li class="glass-list-item">Covers anomaly detection, classification methods</li>
+              <li class="glass-list-item">Practical projects with fraud datasets</li>
+              <li class="glass-list-item">Focus on real financial fraud scenarios</li>
+              <li class="glass-list-item">Hands-on implementation with Python</li>
+              <li class="glass-list-item">Perfect for financial professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/fraud-detection" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Finance (Fast.ai)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Fast.ai</span>
+            <span class="meta-item">Fast.ai Community</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical deep learning for finance</li>
+              <li class="glass-list-item">Covers LSTMs, time-series models, neural networks</li>
+              <li class="glass-list-item">Hands-on examples with PyTorch</li>
+              <li class="glass-list-item">Free video lectures and code</li>
+              <li class="glass-list-item">Focus on financial applications</li>
+              <li class="glass-list-item">Community-driven platform</li>
+            </ul>
+          </div>
+          <a href="https://www.fast.ai/" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Paid Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Machine Learning for Finance (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Frank Kane</span>
+            <span class="meta-item">18 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Machine learning techniques for finance</li>
+              <li class="glass-list-item">Covers stock prediction, portfolio optimization</li>
+              <li class="glass-list-item">Hands-on projects with market data</li>
+              <li class="glass-list-item">Focus on Python and scikit-learn</li>
+              <li class="glass-list-item">Real-world financial applications</li>
+              <li class="glass-list-item">Perfect for finance professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/machine-learning-for-finance/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Algorithmic Trading with Python (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Mark Shacklady</span>
+            <span class="meta-item">22 hours</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Algorithmic trading strategies and implementation</li>
+              <li class="glass-list-item">Covers backtesting, risk management, optimization</li>
+              <li class="glass-list-item">Hands-on projects with real trading systems</li>
+              <li class="glass-list-item">Focus on practical trading strategies</li>
+              <li class="glass-list-item">Includes machine learning for trading</li>
+              <li class="glass-list-item">Essential for quantitative traders</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/algorithmic-trading-python/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Time Series (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. lazy Programmer</span>
+            <span class="meta-item">15 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning for time series forecasting</li>
+              <li class="glass-list-item">Covers LSTMs, GRUs, attention mechanisms</li>
+              <li class="glass-list-item">Hands-on projects with stock data</li>
+              <li class="glass-list-item">Focus on TensorFlow and Keras</li>
+              <li class="glass-list-item">Includes financial forecasting</li>
+              <li class="glass-list-item">Great for advanced practitioners</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/deep-learning-time-series/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Financial Risk Management with AI (DataCamp)</div>
+          <div class="grid-meta">
+            <span class="meta-item">DataCamp</span>
+            <span class="meta-item">Dr. David Ardia</span>
+            <span class="meta-item">6 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Risk management using machine learning</li>
+              <li class="glass-list-item">Covers credit risk, market risk, portfolio risk</li>
+              <li class="glass-list-item">Hands-on projects with financial data</li>
+              <li class="glass-list-item">Focus on risk modeling and prediction</li>
+              <li class="glass-list-item">Real-world risk scenarios</li>
+              <li class="glass-list-item">Essential for risk managers</li>
+            </ul>
+          </div>
+          <a href="https://www.datacamp.com/courses/financial-risk-management-with-ai" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Quantitative Finance with Python (Coursera+)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">University at Buffalo</span>
+            <span class="meta-item">3 courses</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Quantitative finance and derivatives</li>
+              <li class="glass-list-item">Covers option pricing, portfolio theory, risk models</li>
+              <li class="glass-list-item">Hands-on projects with financial instruments</li>
+              <li class="glass-list-item">Focus on quant finance methods</li>
+              <li class="glass-list-item">Advanced mathematical finance</li>
+              <li class="glass-list-item">Perfect for quant professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/specializations/quantitative-finance" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best E-books for AI in Finance</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Machine Learning for Asset Managers</div>
+          <div class="grid-meta">
+            <span class="meta-item">Marcos López de Prado</span>
+            <span class="meta-item">384 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$89.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">ML for portfolio management and asset allocation</li>
+              <li class="glass-list-item">Covers clustering, feature selection, portfolio optimization</li>
+              <li class="glass-list-item">Practical ML techniques for finance</li>
+              <li class="glass-list-item">Focus on risk management</li>
+              <li class="glass-list-item">Real-world asset management applications</li>
+              <li class="glass-list-item">Essential for portfolio managers</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Machine-Learning-Asset-Managers/dp/1492012696" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Finance</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Anguina Azoff</span>
+            <span class="meta-item">420 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$74.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning techniques for finance</li>
+              <li class="glass-list-item">Covers LSTMs, CNNs, autoencoders, GANs</li>
+              <li class="glass-list-item">Practical examples with TensorFlow</li>
+              <li class="glass-list-item">Focus on forecasting and trading</li>
+              <li class="glass-list-item">Real-world financial applications</li>
+              <li class="glass-list-item">Great for quantitative analysts</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Deep-Learning-Finance-Anguina-Azoff/dp/0521884667" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Algorithmic Trading and DMA</div>
+          <div class="grid-meta">
+            <span class="meta-item">Barry Johnson</span>
+            <span class="meta-item">560 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$79.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive algorithmic trading guide</li>
+              <li class="glass-list-item">Covers trading strategies, execution, risk</li>
+              <li class="glass-list-item">Practical trading system design</li>
+              <li class="glass-list-item">Focus on direct market access</li>
+              <li class="glass-list-item">Real-world trading scenarios</li>
+              <li class="glass-list-item">Essential for algo traders</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Algorithmic-Trading-DMA-Barry-Johnson/dp/0956399207" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Advances in Financial Machine Learning</div>
+          <div class="grid-meta">
+            <span class="meta-item">Marcos López de Prado</span>
+            <span class="meta-item">464 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$84.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Advanced ML techniques for finance</li>
+              <li class="glass-list-item">Covers feature engineering, ML models, evaluation</li>
+              <li class="glass-list-item">Practical financial ML applications</li>
+              <li class="glass-list-item">Focus on avoiding pitfalls</li>
+              <li class="glass-list-item">Real-world hedge fund examples</li>
+              <li class="glass-list-item">Essential for finance & ML professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Advances-Financial-Machine-Learning-Marcos/dp/1119482089" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">The Intelligent Investor</div>
+          <div class="grid-meta">
+            <span class="meta-item">Benjamin Graham</span>
+            <span class="meta-item">623 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$24.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Classic investment philosophy and strategy</li>
+              <li class="glass-list-item">Value investing principles and analysis</li>
+              <li class="glass-list-item">Foundational investing concepts</li>
+              <li class="glass-list-item">Real-world investment scenarios</li>
+              <li class="glass-list-item">Essential for investment understanding</li>
+              <li class="glass-list-item">Foundation for AI in finance</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Intelligent-Investor-Graham/dp/0060555661" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">A Random Walk Down Wall Street (Free Research)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Burton Malkiel & Nobel Prize Economists</span>
+            <span class="meta-item">450 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$28.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Market efficiency and prediction challenges</li>
+              <li class="glass-list-item">Covers behavioral finance and market anomalies</li>
+              <li class="glass-list-item">Foundation for financial AI understanding</li>
+              <li class="glass-list-item">Real-world market behavior</li>
+              <li class="glass-list-item">Important for perspective on AI limitations</li>
+              <li class="glass-list-item">Essential reading for finance professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Random-Walk-Down-Wall-Street/dp/0393352242" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for the Financial Frontier.</p>
+    <div style="margin-top: 15px;">
+      <a href="../index.html">Home</a> &middot;
+      <a href="data-science.html">Intelligence</a> &middot;
+      <a href="../login.html">Portal</a>
+    </div>
+  </footer>
+</body>
+
+</html>

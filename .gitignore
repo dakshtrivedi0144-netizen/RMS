@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+*.egg-info/
+
+# Node (legacy, kept for reference)
+node_modules/
+package-lock.json
+
+# Environment
+.env
+
+# Database (contains user data)
+db.json
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db

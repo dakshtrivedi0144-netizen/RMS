@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hardware & Sensor Integration Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    PREMIUM ROADMAP SYSTEM - SPATIAL V3 (CYBER ENHANCED)
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-primary-dark: #5B21B6;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-accent-dark: #0891B2;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.8);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.15);
+      --radius-lg: 1.5rem;
+      --radius-md: 1rem;
+      --radius-sm: 0.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      scroll-behavior: smooth;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      animation: ambientMove 20s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+
+      100% {
+        transform: scale(1.1) translate(2%, 2%);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    /* NAVIGATION */
+    .top-nav {
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      transition: var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 15px var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+
+    /* QUICK NAV */
+    .quick-nav {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin: 20px 0 40px 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .quick-nav-title {
+      flex-basis: 100%;
+      text-align: center;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--color-primary-light);
+      margin-bottom: 10px;
+    }
+
+    .quick-nav-link {
+      text-decoration: none;
+      color: var(--color-text-secondary);
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      transition: all 0.3s ease;
+      font-size: 0.85rem;
+    }
+
+    .quick-nav-link:hover {
+      background: var(--color-primary);
+      border-color: var(--color-primary-light);
+      color: #FFF;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+    }
+
+    /* ROADMAP COMPONENTS */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50px;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(-5px);
+    }
+
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: 60px 40px;
+      margin-bottom: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header::before {
+      content: '>';
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      color: var(--color-primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 900;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .terminal-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -1px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.25rem;
+      max-width: 800px;
+      margin: 0 auto;
+      font-weight: 400;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(20px);
+      position: relative;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .matrix-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-primary-light);
+      margin-bottom: 40px;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title::after {
+      content: '_';
+      animation: blink 1s infinite;
+      color: var(--color-accent);
+    }
+
+    /* TIMELINE STYLES */
+    .timeline {
+      position: relative;
+      padding-left: 60px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent), var(--color-primary));
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      padding: 35px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: 2rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .timeline-item:hover {
+      background: rgba(139, 92, 246, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(15px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -53px;
+      top: 40px;
+      width: 22px;
+      height: 22px;
+      background: #FFF;
+      border: 5px solid var(--color-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 20px var(--color-primary);
+      z-index: 2;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.7);
+      }
+
+      70% {
+        box-shadow: 0 0 0 15px rgba(139, 92, 246, 0);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+      }
+    }
+
+    .timeline-step {
+      color: var(--color-accent-light);
+      font-weight: 900;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      font-family: 'JetBrains Mono', monospace;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timeline-content {
+      color: var(--color-text-secondary);
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* GRID STYLES */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: 2rem;
+      padding: 40px;
+      transition: all 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 70%);
+      opacity: 0;
+      transition: 0.6s;
+    }
+
+    .grid-item:hover::after {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    .grid-item:hover {
+      border-color: var(--color-accent);
+      background: rgba(6, 182, 212, 0.05);
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-title {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: #FFF;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .meta-item {
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--color-accent-light);
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .grid-content {
+      color: var(--color-text-secondary);
+      font-size: 1rem;
+      margin-bottom: 30px;
+      flex-grow: 1;
+      line-height: 1.7;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 15px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.4s;
+      border: none;
+      box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5);
+      filter: brightness(1.2);
+    }
+
+    /* FEATURE LIST */
+    .grid-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      padding: 20px 30px;
+      border-radius: 1.5rem;
+      color: var(--color-text-secondary);
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-weight: 500;
+    }
+
+    .glass-list-item:hover {
+      border-color: var(--color-primary-light);
+      background: rgba(139, 92, 246, 0.1);
+      color: #FFF;
+      transform: translateX(10px);
+    }
+
+    .glass-list-item::before {
+      content: '\f058';
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      color: var(--color-accent);
+      font-size: 1.2rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 60px;
+      color: var(--color-text-muted);
+      background: rgba(2, 6, 23, 0.5);
+    }
+
+    footer p {
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+
+    footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      color: var(--color-primary-light);
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .terminal-title {
+        font-size: 2.2rem;
+      }
+
+      .matrix-section {
+        padding: 30px;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        padding-left: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.SPATIAL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../APP DEV/app.html"><i class="fas fa-mobile-alt"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="ar-vr.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Hardware & Sensor Integration</h1>
+      <p class="terminal-subtitle">Engineering the physical bridge between user motion and virtual perception.</p>
+    </header>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+      <div class="quick-nav-title">Mission Path</div>
+      <a href="#fundamentals" class="quick-nav-link">Core Fundamentals</a>
+      <a href="#roadmap" class="quick-nav-link">Hardware Blueprint</a>
+      <a href="#lab" class="quick-nav-link">Laboratory Resources</a>
+      <a href="#engineering" class="quick-nav-link">Advanced Engineering</a>
+      <a href="#ebooks" class="quick-nav-link">E-Books</a>
+    </div>
+
+    <div class="matrix-section" id="fundamentals">
+      <h2 class="section-title">Core Fundamentals</h2>
+      <ul class="grid-features">
+        <li class="glass-list-item">Embedded Systems & ARM Cortex</li>
+        <li class="glass-list-item">IMU, GPS, & Lidar Technologies</li>
+        <li class="glass-list-item">Low-Latency Bus (I2C/SPI/UART)</li>
+        <li class="glass-list-item">Real-time OS (RTOS) Workflows</li>
+        <li class="glass-list-item">Sensor Fusion & Kalman Filtering</li>
+        <li class="glass-list-item">BLE & Wi-Fi 6 Communication</li>
+        <li class="glass-list-item">Power Management & Thermals</li>
+      </ul>
+    </div>
+
+    <div class="matrix-section" id="roadmap">
+      <h2 class="section-title">Hardware Blueprint</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">01. Embedded Core</div>
+          <div class="timeline-content">Mastering microcontroller programming and the fundamentals of circuit design.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">02. Spatial Sensing</div>
+          <div class="timeline-content">Implementing high-frequency IMU data pipelines for sub-millimeter motion
+            tracking.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">03. Signal Architecture</div>
+          <div class="timeline-content">Applying digital signal processing (DSP) to clean and interpret raw sensor
+            streams.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">04. Haptic Feedback</div>
+          <div class="timeline-content">Designing driver circuits for tactile actuators and force-feedback systems.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-step">05. XR System Integration</div>
+          <div class="timeline-content">Bridging custom hardware with standard XR runtimes via HID or OpenXR.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="lab">
+      <h2 class="section-title">Laboratory Resources</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Embedded Essentials</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">CU Boulder</span>
+          </div>
+          <p class="grid-content">Building the foundation in firmware and architectural design for hardware.</p>
+          <a href="https://www.coursera.org/learn/embedded-systems" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">IoT Specialization</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+          </div>
+          <p class="grid-content">Mastering connectivity and low-power sensing paradigms for mobile XR.</p>
+          <a href="https://www.coursera.org/specializations/internet-of-things" class="btn-glow" target="_blank">Access
+            Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Arduino for Haptics</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+          </div>
+          <p class="grid-content">Rapid prototyping of physical interfaces and interactive controllers.</p>
+          <a href="https://www.edx.org/course/arduino-programming" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="engineering">
+      <h2 class="section-title">Advanced Engineering</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Complete Electronics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+          </div>
+          <p class="grid-content">Deep dive into the circuit math and component physics of sensor integration.</p>
+          <a href="https://www.udemy.com/course/arduino-complete-course/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">ARM Architecture</div>
+          <div class="grid-meta">
+            <span class="meta-item">Pluralsight</span>
+          </div>
+          <p class="grid-content">Optimizing assembly and C code for high-performance spatial tracking chips.</p>
+          <a href="https://www.pluralsight.com/courses/embedded-systems-arm" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section" id="ebooks">
+      <h2 class="section-title">Recommended E-books</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Make: Sensors</div>
+          <p class="grid-content">Practical handbook for interfacing physical sensors with digital systems.</p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Electronics for Inventors</div>
+          <p class="grid-content">The definitive reference for all hardware components and circuit architecture.</p>
+          <a href="#" class="btn-glow">View Details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Intelligence Systems. Architected for the Spatial Future.</p>
+      <div style="margin-top: 20px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="ar-vr.html">Spatial Hub</a> &middot;
+        <a href="../AI_ML/ai-ml.html">Intelligence</a> &middot;
+        <a href="../login.html">Neural Login</a>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

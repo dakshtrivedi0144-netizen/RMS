@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource Management System</title>
+  <style>
+    /* ============================================
+   FUTURISTIC AI SAAS DASHBOARD - UNIFIED CSS
+   File: modern-theme.css
+   Replaces: style.css, dashboard.css, auth.css, roadmap.css, responsive.css
+   ============================================ */
+
+    /* ROOT VARIABLES */
+    :root {
+      --color-primary: #9D4EDD;
+      --color-primary-light: #B47AE5;
+      --color-primary-dark: #7A28CB;
+      --color-accent: #00F0FF;
+      --color-accent-light: #5CE1E6;
+      --color-accent-dark: #0099DD;
+      --color-bg-dark: #0B101E;
+      --color-bg-darker: #050B14;
+      --color-bg-glass: rgba(11, 16, 30, 0.85);
+      --color-text-primary: #F1F5F9;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #94A3B8;
+      --color-border: rgba(148, 163, 184, 0.2);
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 1rem;
+      --transition-base: 0.3s ease-in-out;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+    }
+
+    /* GLOBAL STYLES */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-bottom: var(--spacing-xl);
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+      animation: gradientShift 15s ease-in-out infinite;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -30px);
+      }
+    }
+
+    /* CUSTOM SCROLLBAR & AUTOFILL RESTORE */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+      border-radius: 4px;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px var(--color-bg-dark) inset !important;
+      -webkit-text-fill-color: white !important;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      color: inherit;
+    }
+
+    /* UTILITY CLASSES FOR COMPATIBILITY */
+    .mb-3 {
+      margin-bottom: 1rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+
+    .mt-3 {
+      margin-top: 1rem;
+    }
+
+    .mt-4 {
+      margin-top: 1.5rem;
+    }
+
+    .w-100 {
+      width: 100%;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-muted {
+      color: var(--color-text-muted) !important;
+    }
+
+    .text-decoration-none {
+      text-decoration: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: var(--spacing-md);
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      transition: all var(--transition-base);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), var(--shadow-glow);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    /* TYPOGRAPHY */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg,
+          transparent,
+          var(--color-primary),
+          var(--color-accent),
+          transparent);
+      border-radius: 999px;
+    }
+
+    /* CARDS & GLASSMORPHISM */
+    .card,
+    .card-glass,
+    .card-elevated,
+    .matrix-section,
+    .app-card-glass,
+    .roadmap-section {
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .matrix-section {
+      margin-bottom: 3rem;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+
+    .matrix-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle,
+          rgba(124, 58, 237, 0.05) 0%,
+          transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .matrix-section>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover,
+    .card-glass:hover,
+    .matrix-section:hover,
+    .app-card-glass:hover,
+    .roadmap-section:hover {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: rgba(124, 58, 237, 0.5);
+      box-shadow: 0 25px 50px rgba(124, 58, 237, 0.15), var(--shadow-glow);
+      transform: translateY(-6px);
+    }
+
+    .card-elevated {
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    /* BUTTONS */
+    .btn-primary,
+    .btn-glow,
+    .btn-outline,
+    .app-btn,
+    .btn-login,
+    input[type="submit"] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-md) var(--spacing-lg);
+      font-weight: 600;
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-decoration: none;
+    }
+
+    .btn-primary,
+    .btn-glow,
+    .app-btn,
+    .btn-login,
+    input[type="submit"] {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+      color: white;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary::before,
+    .btn-glow::before,
+    .app-btn::before,
+    .btn-login::before,
+    input[type="submit"]::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+      z-index: 0;
+    }
+
+    .btn-primary:hover,
+    .btn-glow:hover,
+    .app-btn:hover,
+    .btn-login:hover,
+    input[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.4);
+      color: white;
+    }
+
+    .btn-primary:hover::before,
+    .btn-glow:hover::before,
+    .app-btn:hover::before,
+    .btn-login:hover::before,
+    input[type="submit"]:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    /* FORMS & INPUTS */
+    .input-group,
+    .form-floating,
+    .form-group {
+      margin-bottom: var(--spacing-lg);
+      position: relative;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    select,
+    textarea {
+      width: 100%;
+      padding: var(--spacing-md);
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      transition: all var(--transition-base);
+    }
+
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--color-bg-dark);
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--color-primary);
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), var(--shadow-glow);
+    }
+
+    .form-floating label,
+    .form-group label {
+      display: block;
+      margin-bottom: var(--spacing-sm);
+      color: var(--color-text-secondary);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    /* SIDEBAR & NAVBAR */
+    .sidebar,
+    .app-sidebar-neo {
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(15px);
+      border-right: 1px solid var(--color-border);
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      width: 250px;
+      z-index: 40;
+      transition: all var(--transition-base);
+    }
+
+    .sidebar-item,
+    .app-sidebar-neo a {
+      color: var(--color-text-secondary);
+      padding: var(--spacing-md) var(--spacing-lg);
+      display: block;
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .sidebar-item:hover,
+    .app-sidebar-neo a:hover {
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--color-primary);
+      padding-left: calc(var(--spacing-lg) + 4px);
+      text-decoration: none;
+    }
+
+    .navbar,
+    .app-topbar-neo {
+      background: var(--color-bg-glass) !important;
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--color-border);
+      position: fixed;
+      top: 0;
+      left: 250px;
+      right: 0;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--spacing-xl);
+      z-index: 30;
+      color: var(--color-text-primary);
+    }
+
+    /* DASHBOARD WIDGETS */
+    .dashboard-widget,
+    .stat-card {
+      text-align: center;
+      padding: var(--spacing-xl);
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      transition: all var(--transition-base);
+    }
+
+    .dashboard-widget:hover,
+    .stat-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    /* ANIMATED PROGRESS BAR */
+    .progress-container,
+    .bg-gray-200 {
+      background: var(--color-bg-dark) !important;
+      border-radius: 999px;
+      height: 6px;
+      overflow: hidden;
+    }
+
+    .progress-bar,
+    .bg-blue-600,
+    .bg-green-500,
+    .bg-yellow-500 {
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent)) !important;
+      height: 100%;
+      border-radius: 999px;
+      transition: width var(--transition-base);
+      animation: progressPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes progressPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.8);
+      }
+    }
+
+    /* BADGES */
+    .badge-modern {
+      padding: var(--spacing-xs) var(--spacing-md);
+      background: rgba(124, 58, 237, 0.15);
+      color: var(--color-accent);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      border: 1px solid rgba(124, 58, 237, 0.3);
+    }
+
+    /* AUTHENTICATION SPECIFIC */
+    .auth-shell {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
+      margin-top: 10vh;
+    }
+
+    .auth-container {
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+    }
+
+    .auth-header h2 {
+      font-size: 1.8rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .auth-header p {
+      text-align: center;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-options {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      font-size: 0.85rem;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--color-text-secondary);
+    }
+
+    .form-check label {
+      cursor: pointer;
+      font-size: 0.85rem;
+      text-transform: none;
+    }
+
+    .forgot-password {
+      color: var(--color-accent);
+      font-size: 0.85rem;
+    }
+
+    .forgot-password:hover {
+      color: var(--color-accent-light);
+      text-decoration: underline;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: var(--spacing-lg);
+      color: var(--color-text-muted);
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
+    .form-text {
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      margin-top: var(--spacing-xs);
+    }
+
+    /* GRID SYSTEM OVERRIDES (For old static grids) */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-xl);
+      padding: var(--spacing-xl) 0;
+    }
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg,
+          rgba(124, 58, 237, 0.05) 0%,
+          rgba(6, 182, 212, 0.02) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-xl);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(124, 58, 237, 0.1),
+          transparent);
+      transition: left 0.5s ease;
+      z-index: 0;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 40px rgba(124, 58, 237, 0.2), var(--shadow-glow);
+      background: linear-gradient(135deg,
+          rgba(124, 58, 237, 0.12) 0%,
+          rgba(6, 182, 212, 0.08) 100%);
+    }
+
+    .grid-item:hover::before {
+      left: 100%;
+    }
+
+    .grid-item>* {
+      position: relative;
+      z-index: 1;
+    }
+
+    .grid-title {
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: var(--spacing-md);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .grid-content {
+      color: var(--color-text-secondary);
+      flex-grow: 1;
+      margin-bottom: var(--spacing-lg);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .terminal-header {
+      text-align: center;
+      margin: 2rem 0 3rem 0;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      background: linear-gradient(135deg,
+          rgba(124, 58, 237, 0.08) 0%,
+          rgba(6, 182, 212, 0.06) 100%);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .terminal-title {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      margin-top: var(--spacing-md);
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+
+    /* ALERTS */
+    .alert {
+      padding: var(--spacing-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .alert-danger {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+    }
+
+    .alert-success {
+      background: rgba(34, 197, 94, 0.1);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      color: #86efac;
+    }
+
+    /* MISC HTML TWEAKS */
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--color-accent-light);
+    }
+
+    .bg-white {
+      background-color: var(--color-bg-glass) !important;
+      color: var(--color-text-primary) !important;
+      border: 1px solid var(--color-border) !important;
+    }
+
+    .text-gray-900,
+    .text-gray-800,
+    .text-gray-600,
+    .text-gray-500 {
+      color: var(--color-text-secondary) !important;
+    }
+
+    /* RESPONSIVE LAYOUT */
+    @media (max-width: 768px) {
+
+      .sidebar,
+      .app-sidebar-neo {
+        transform: translateX(-100%);
+        width: 200px;
+      }
+
+      .sidebar.mobile-show,
+      .app-sidebar-neo.mobile-show {
+        transform: translateX(0);
+      }
+
+      .navbar,
+      .app-topbar-neo {
+        left: 0;
+      }
+
+      .dashboard-main {
+        margin-left: 0;
+        padding: var(--spacing-lg);
+      }
+
+      .auth-shell {
+        padding: 0 var(--spacing-md);
+      }
+
+      .terminal-header {
+        padding: var(--spacing-lg);
+        margin: 1.5rem 0 2rem 0;
+      }
+
+      .terminal-title {
+        font-size: 1.8rem;
+      }
+
+      .terminal-subtitle {
+        font-size: 0.95rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+        padding: var(--spacing-lg) 0;
+      }
+
+      .grid-item {
+        padding: var(--spacing-lg);
+      }
+
+      .top-nav {
+        padding: var(--spacing-md);
+        flex-wrap: wrap;
+      }
+
+      .top-nav .nav-brand {
+        font-size: 1.1rem;
+        flex-basis: 100%;
+        margin-bottom: var(--spacing-sm);
+      }
+
+      .top-nav .nav-links {
+        gap: 1rem;
+        flex-basis: 100%;
+        justify-content: center;
+      }
+
+      .top-nav .nav-links a {
+        font-size: 0.85rem;
+      }
+
+      .matrix-section {
+        padding: var(--spacing-lg);
+      }
+
+      .container {
+        padding: 0 var(--spacing-md);
+      }
+    }
+
+    /* GLASS LIST & TIMELINES */
+    .glass-list {
+      list-style: none;
+      padding: 0;
+      margin: var(--spacing-md) 0;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+      margin-bottom: var(--spacing-sm);
+      display: flex;
+      align-items: center;
+      transition: all var(--transition-base);
+      color: var(--color-text-secondary);
+    }
+
+    .glass-list-item:hover {
+      background: rgba(124, 58, 237, 0.1);
+      border-color: rgba(124, 58, 237, 0.3);
+      transform: translateX(5px);
+      color: var(--color-primary-light);
+    }
+
+    .glass-list-item::before {
+      content: '\25B8';
+      color: var(--color-accent);
+      margin-right: var(--spacing-sm);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    /* FLOATING LABELS OVERRIDE */
+    .form-floating {
+      position: relative;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    .form-floating label {
+      position: absolute;
+      top: 50%;
+      left: var(--spacing-md);
+      transform: translateY(-50%);
+      color: var(--color-text-muted);
+      font-size: 0.95rem;
+      transition: all 0.2s ease-out;
+      pointer-events: none;
+      background: transparent;
+      padding: 0 4px;
+    }
+
+    .form-floating input {
+      padding: var(--spacing-lg) var(--spacing-md) var(--spacing-sm) var(--spacing-md) !important;
+    }
+
+    .form-floating input:focus+label,
+    .form-floating input:not(:placeholder-shown)+label {
+      top: 8px;
+      font-size: 0.75rem;
+      color: var(--color-primary-light);
+      transform: translateY(0);
+    }
+
+    .form-floating input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), var(--shadow-glow);
+    }
+
+    /* TOP NAVIGATION (for static HTML pages) */
+    .top-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-md) var(--spacing-xl);
+      background: var(--color-bg-glass);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .top-nav .nav-brand {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .top-nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .top-nav .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .top-nav .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+      transition: width 0.3s ease;
+    }
+
+    .top-nav .nav-links a:hover {
+      color: var(--color-primary-light);
+    }
+
+    .top-nav .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .top-nav .nav-links a.nav-active {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+
+    .top-nav .nav-links a.nav-active::after {
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--color-accent);
+      font-size: 0.9rem;
+      margin-bottom: var(--spacing-lg);
+      text-decoration: none;
+      transition: all var(--transition-base);
+    }
+
+    .back-link:hover {
+      color: var(--color-accent-light);
+      transform: translateX(-4px);
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer p {
+      margin-bottom: var(--spacing-xs);
+    }
+
+    footer a {
+      color: var(--color-accent);
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      margin-bottom: var(--spacing-lg);
+      padding: var(--spacing-sm) 0;
+    }
+
+    .breadcrumb a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb .separator {
+      color: var(--color-text-muted);
+    }
+
+    /* TIMELINE / ROADMAP STEPS */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: var(--spacing-lg) 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+      border-radius: 999px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: var(--spacing-md) var(--spacing-lg);
+      margin-bottom: var(--spacing-md);
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-base);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.65rem;
+      top: 1.2rem;
+      width: 12px;
+      height: 12px;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+      border-radius: 50%;
+      border: 2px solid var(--color-bg-darker);
+      box-shadow: 0 0 8px rgba(124, 58, 237, 0.5);
+    }
+
+    .timeline-item:hover {
+      border-color: rgba(124, 58, 237, 0.4);
+      transform: translateX(6px);
+      box-shadow: var(--shadow-md), var(--shadow-glow);
+    }
+
+    .timeline-step {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-primary-light);
+      margin-bottom: var(--spacing-xs);
+    }
+
+    .timeline-content {
+      color: var(--color-text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* GRID META (Course/Book metadata badges) */
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .meta-item {
+      display: inline-block;
+      padding: 2px 10px;
+      background: rgba(124, 58, 237, 0.12);
+      color: var(--color-accent);
+      border: 1px solid rgba(124, 58, 237, 0.25);
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    /* GRID FEATURES LIST (ul with glass-list-item) */
+    .grid-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--spacing-sm);
+    }
+
+    /* ============================================
+   ENHANCED STRUCTURAL IMPROVEMENTS
+   ============================================ */
+
+    /* MAIN CONTAINER ENHANCEMENTS */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    /* CONTENT WRAPPER */
+    body>div {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* SECTION SPACING */
+    .matrix-section+.matrix-section {
+      margin-top: 4rem;
+    }
+
+    /* GRID ITEM BUTTON ENHANCEMENT */
+    .grid-item .btn-glow {
+      margin-top: auto;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* LINK STYLING */
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--color-accent-light);
+    }
+
+    /* ENHANCED TYPOGRAPHY */
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      color: var(--color-text-primary);
+    }
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--color-primary-light);
+    }
+
+    /* IMPROVED FORM STYLING */
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1), var(--shadow-glow);
+      transform: scale(1.01);
+    }
+
+    /* BUTTON GROUP */
+    .button-group {
+      display: flex;
+      gap: var(--spacing-md);
+      flex-wrap: wrap;
+    }
+
+    .button-group .btn-glow {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    /* ENHANCED BACK LINK */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      color: var(--color-accent);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      color: var(--color-accent-light);
+      transform: translateX(-6px);
+    }
+
+    /* ENHANCED FOOTER */
+    footer {
+      background: linear-gradient(135deg,
+          rgba(124, 58, 237, 0.05) 0%,
+          rgba(6, 182, 212, 0.02) 100%);
+      border-top: 1px solid var(--color-border);
+      padding: 2rem var(--spacing-lg);
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--color-text-muted);
+    }
+
+    footer p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    /* LOADING ANIMATION */
+    @keyframes shimmer {
+      0% {
+        background-position: -1000px 0;
+      }
+
+      100% {
+        background-position: 1000px 0;
+      }
+    }
+
+    .loading {
+      animation: shimmer 2s infinite;
+      background: linear-gradient(90deg,
+          transparent,
+          rgba(124, 58, 237, 0.2),
+          transparent);
+      background-size: 1000px 100%;
+    }
+
+    /* MOBILE IMPROVEMENTS */
+    @media (max-width: 1024px) {
+      .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+
+      .section-title {
+        font-size: 1.6rem;
+      }
+
+      .terminal-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+
+      .button-group .btn-glow {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+
+      h2 {
+        font-size: 1.3rem;
+      }
+
+      .top-nav {
+        gap: var(--spacing-md);
+      }
+
+      .top-nav .nav-links {
+        gap: 0.8rem;
+      }
+
+      .container {
+        padding: 0 var(--spacing-md);
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="box">This is a box</div>
+
+  <div class=\"box\">This is a box</div>
+  <nav class="top-nav">
+    <a href="index.html" class="nav-brand">&#9889; RMS Platform</a>
+    <div class="nav-links" id="navLinks">
+      <a href="home.html"><i class="fas fa-compass"></i> Explore</a>
+      <a href="dashboard.html"><i class="fas fa-th-large"></i> Dashboard</a>
+      <span id="navUser" style="color:#a78bfa;font-weight:600;font-size:.9rem;display:none;align-items:center;gap:.4rem;"><i class="fas fa-user-circle"></i><span id="navUsername"></span></span>
+      <a href="#" id="navLogout" onclick="doLogout()" style="display:none;color:#ef4444;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      <a href="login.html" id="navLogin"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="register.html" id="navRegister" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;padding:.4rem 1rem;border-radius:.5rem;font-weight:600;"><i class="fas fa-rocket"></i> Get Started</a>
+    </div>
+  </nav>
+  <script>
+    (function(){
+      var u = localStorage.getItem('rms_user');
+      if(u){
+        try{
+          var user = JSON.parse(u);
+          document.getElementById('navUser').style.display='flex';
+          document.getElementById('navUsername').textContent = user.username || 'User';
+          document.getElementById('navLogout').style.display='flex';
+          document.getElementById('navLogin').style.display='none';
+          document.getElementById('navRegister').style.display='none';
+        }catch(e){}
+      }
+    })();
+    function doLogout(){
+      localStorage.removeItem('rms_token');
+      localStorage.removeItem('rms_user');
+      window.location.href='index.html';
+    }
+  </script>
+
+  <!-- HERO + SEARCH -->
+  <div class="terminal-header" style="position:relative;">
+    <div class="terminal-title">Explore Learning Paths</div>
+    <div class="terminal-subtitle">50+ expert-curated roadmaps. Find yours below.</div>
+    <!-- Live user greeting -->
+    <div id="liveGreet" style="margin-top:1rem;font-size:.95rem;color:#a78bfa;display:none;">
+      👋 Welcome back, <strong id="liveUser"></strong>! Ready to learn something new?
+    </div>
+    <!-- Search bar -->
+    <div style="margin-top:1.5rem;max-width:560px;margin-left:auto;margin-right:auto;position:relative;">
+      <i class="fas fa-search" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:#64748b;pointer-events:none;"></i>
+      <input id="searchInput" type="text" placeholder="Search paths... e.g. Python, React, Machine Learning, Hacking..."
+        style="width:100%;padding:.85rem 1rem .85rem 2.75rem;background:rgba(15,23,42,.85);border:1px solid rgba(148,163,184,.2);border-radius:.875rem;color:#f1f5f9;font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s,box-shadow .2s;"
+        oninput="filterPaths(this.value)"
+        onfocus="this.style.borderColor='#7c3aed';this.style.boxShadow='0 0 0 3px rgba(124,58,237,.15)'"
+        onblur="this.style.borderColor='rgba(148,163,184,.2)';this.style.boxShadow='none'">
+    </div>
+    <div id="searchCount" style="margin-top:.6rem;font-size:.8rem;color:#64748b;"></div>
+  </div>
+
+  <!-- Live stats bar -->
+  <div id="liveStats" style="display:none;max-width:1400px;margin:0 auto 2rem;padding:0 2rem;">
+    <div style="background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:1rem;padding:1rem 2rem;display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:#cbd5e1;">
+        <i class="fas fa-user-circle" style="color:#a78bfa;"></i>
+        Logged in as <strong id="statsUser" style="color:#a78bfa;"></strong>
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:#cbd5e1;">
+        <i class="fas fa-layer-group" style="color:#06b6d4;"></i>
+        Level: <strong id="statsLevel" style="color:#06b6d4;"></strong>
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem;font-size:.875rem;color:#cbd5e1;">
+        <i class="fas fa-route" style="color:#10b981;"></i>
+        <strong style="color:#10b981;">50+</strong>&nbsp;paths available
+      </div>
+      <a href="dashboard.html" style="margin-left:auto;background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;padding:.45rem 1.1rem;border-radius:.6rem;font-size:.82rem;font-weight:600;text-decoration:none;">
+        <i class="fas fa-th-large"></i> Dashboard
+      </a>
+    </div>
+  </div>
+
+  <div id="noResults" style="display:none;text-align:center;padding:3rem;color:#64748b;">
+    <i class="fas fa-search" style="font-size:2rem;margin-bottom:1rem;display:block;"></i>
+    No paths found for "<span id="noResultsTerm"></span>". Try a different keyword.
+  </div>
+
+  <div class="matrix-section" id="section-main">
+    <h2 class="section-title">All Learning Paths</h2>
+    <div class="grid-container" id="allPaths"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Platform. All rights reserved.</p>
+  </footer>
+
+  <!-- Auth Gate Modal -->
+  <div id="authGate" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);align-items:center;justify-content:center;">
+    <div style="background:#0f172a;border:1px solid rgba(124,58,237,.4);border-radius:1.25rem;padding:2.5rem;max-width:420px;width:90%;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,.6);">
+      <div style="font-size:2.5rem;margin-bottom:1rem;">🔒</div>
+      <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:.5rem;">Login Required</h3>
+      <p style="color:#94a3b8;font-size:.9rem;margin-bottom:1.75rem;">You need to be logged in to access learning paths and enroll in domains.</p>
+      <div style="display:flex;gap:.75rem;justify-content:center;">
+        <a id="gateLoginBtn" href="login.html" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;padding:.75rem 1.5rem;border-radius:.75rem;font-weight:600;text-decoration:none;font-size:.9rem;">
+          <i class="fas fa-sign-in-alt"></i> Sign In
+        </a>
+        <a href="register.html" style="background:transparent;color:#06b6d4;border:1px solid rgba(6,182,212,.3);padding:.75rem 1.5rem;border-radius:.75rem;font-weight:600;text-decoration:none;font-size:.9rem;">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+        <button onclick="document.getElementById('authGate').style.display='none'" style="background:transparent;border:none;color:#64748b;cursor:pointer;font-size:.85rem;padding:.75rem;">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // ── Live user data ──────────────────────────────────────────────────────
+  var isLoggedIn = false;
+  (function(){
+    var u = localStorage.getItem('rms_user');
+    if(u){
+      try{
+        var user = JSON.parse(u);
+        isLoggedIn = true;
+        document.getElementById('liveGreet').style.display='block';
+        document.getElementById('liveUser').textContent = user.username;
+        document.getElementById('liveStats').style.display='block';
+        document.getElementById('statsUser').textContent = user.username;
+        document.getElementById('statsLevel').textContent = (user.currentLevel||'beginner').charAt(0).toUpperCase()+(user.currentLevel||'beginner').slice(1);
+      }catch(e){}
+    }
+  })();
+
+  // ── Auth gate — intercept path clicks ───────────────────────────────────
+  function goToPath(url, event) {
+    if(event) event.preventDefault();
+    if(isLoggedIn){
+      window.location.href = url;
+    } else {
+      // Save destination so login can redirect back
+      localStorage.setItem('rms_redirect', url);
+      document.getElementById('gateLoginBtn').href = 'login.html?redirect=' + encodeURIComponent(url);
+      document.getElementById('authGate').style.display = 'flex';
+    }
+  }
+
+  // ── Search data — every path with keywords ──────────────────────────────
+  var PATHS = [
+    {title:'🤖 AI & Machine Learning', desc:'Foundations, deep learning, NLP, computer vision and applied AI.', url:'AI_ML/ai-ml.html', tags:'ai machine learning deep learning neural network python tensorflow pytorch nlp'},
+    {title:'💻 Web Development', desc:'Frontend, backend and full-stack guides for modern web apps.', url:'WEB D/web-development.html', tags:'web html css javascript react vue node express frontend backend fullstack'},
+    {title:'🔐 Cybersecurity', desc:'Security fundamentals, ethical hacking and incident response.', url:'CYBER S/cyber_security.html', tags:'cybersecurity hacking security network ethical penetration testing'},
+    {title:'📱 App Development', desc:'Mobile, desktop and embedded application development.', url:'APP DEV/app.html', tags:'app mobile android ios flutter react native desktop swift kotlin'},
+    {title:'🕶️ AR / VR', desc:'Immersive experiences, 3D, and hardware integration.', url:'AR_VR/ar-vr.html', tags:'ar vr augmented virtual reality unity unreal 3d immersive'},
+    {title:'📊 Data Science', desc:'Data analysis, visualization and ML for data-driven products.', url:'DATA SCIENCE/data-science.html', tags:'data science pandas numpy matplotlib statistics analysis visualization'},
+    {title:'🧠 Machine Learning', desc:'Core ML algorithms, supervised and unsupervised learning.', url:'AI_ML/machine-learning-roadmap.html', tags:'machine learning regression classification clustering python scikit'},
+    {title:'🔥 Deep Learning', desc:'Neural networks, CNNs, RNNs and transformer architectures.', url:'AI_ML/deep-learning-roadmap.html', tags:'deep learning cnn rnn lstm transformer bert gpt neural network'},
+    {title:'💬 NLP & LLMs', desc:'Natural language processing and large language models.', url:'AI_ML/nlp-roadmap.html', tags:'nlp natural language processing llm gpt bert text classification'},
+    {title:'👁️ Computer Vision', desc:'Image processing, object detection and visual AI.', url:'AI_ML/computer-vision-roadmap.html', tags:'computer vision opencv image detection yolo face recognition'},
+    {title:'🎮 Reinforcement Learning', desc:'Train agents with reward-based optimization.', url:'AI_ML/reinforcement-learning-roadmap.html', tags:'reinforcement learning rl agent reward q-learning policy'},
+    {title:'⚙️ MLOps & AutoML', desc:'Scale AI from research to production pipelines.', url:'AI_ML/auto-ml-mlops-roadmap.html', tags:'mlops automl pipeline deployment docker kubernetes ci cd'},
+    {title:'🎤 Speech Recognition', desc:'Voice recognition, synthesis and audio AI.', url:'AI_ML/speech-recognition-generation-roadmap.html', tags:'speech recognition voice synthesis audio nlp whisper'},
+    {title:'🤖 AI Robotics', desc:'Autonomous navigation, control and sensor fusion.', url:'AI_ML/ai-robotics-roadmap.html', tags:'robotics ros autonomous navigation sensor fusion control'},
+    {title:'🛡️ AI in Cybersecurity', desc:'AI for threat detection and automated defense.', url:'AI_ML/ai-cybersecurity-roadmap.html', tags:'ai security threat detection anomaly intrusion'},
+    {title:'💰 AI in Finance', desc:'Portfolio optimization, fraud detection and trading AI.', url:'AI_ML/ai-finance-roadmap.html', tags:'finance trading fraud detection portfolio prediction'},
+    {title:'🏥 AI in Healthcare', desc:'Diagnostics, drug discovery and patient monitoring.', url:'AI_ML/ai-healthcare-roadmap.html', tags:'healthcare medical diagnosis drug discovery patient ai'},
+    {title:'🖥️ Frontend Development', desc:'HTML, CSS, JavaScript, React, Vue and modern UI.', url:'WEB D/frontend-roadmap.html', tags:'frontend html css javascript react vue angular typescript ui'},
+    {title:'⚡ Backend Development', desc:'APIs, databases, Node.js, PHP and server architecture.', url:'WEB D/backend-roadmap.html', tags:'backend node express php api rest graphql server database'},
+    {title:'⚛️ MERN Stack', desc:'MongoDB, Express, React, Node.js full-stack.', url:'WEB D/mern-stack.html', tags:'mern mongodb express react node fullstack javascript'},
+    {title:'🅰️ MEAN Stack', desc:'MongoDB, Express, Angular, Node.js full-stack.', url:'WEB D/mean-stack.html', tags:'mean mongodb express angular node fullstack'},
+    {title:'🎨 UI/UX Design', desc:'User experience, wireframing and interface design.', url:'WEB D/ui-ux.html', tags:'ui ux design figma wireframe prototype user experience'},
+    {title:'☁️ DevOps & Cloud', desc:'CI/CD, containers, Kubernetes and cloud platforms.', url:'WEB D/devops.html', tags:'devops docker kubernetes aws azure gcp ci cd pipeline cloud'},
+    {title:'🗄️ Database Management', desc:'SQL, NoSQL, schema design and optimization.', url:'WEB D/database-management.html', tags:'database sql mysql postgresql mongodb nosql redis schema'},
+    {title:'🌐 Cloud Integration', desc:'Serverless, microservices and cloud-native apps.', url:'WEB D/cloud-integration.html', tags:'cloud aws azure gcp serverless microservices lambda'},
+    {title:'📱 Responsive Web', desc:'Mobile-first design and responsive layouts.', url:'WEB D/responsive-mobile-app.html', tags:'responsive mobile css flexbox grid bootstrap tailwind'},
+    {title:'🎮 Web Game Dev', desc:'Browser games with JavaScript, Canvas and WebGL.', url:'WEB D/web-game.html', tags:'game javascript canvas webgl phaser unity browser'},
+    {title:'🔒 Network Security', desc:'Firewalls, VPNs and network protection.', url:'CYBER S/network-security.html', tags:'network security firewall vpn intrusion detection wireshark'},
+    {title:'🛡️ Ethical Hacking', desc:'Penetration testing and vulnerability assessment.', url:'CYBER S/ethical-hacking.html', tags:'ethical hacking penetration testing kali linux metasploit burp'},
+    {title:'🔑 Cryptography', desc:'Encryption, digital signatures and secure protocols.', url:'CYBER S/cryptography.html', tags:'cryptography encryption aes rsa hash ssl tls'},
+    {title:'🕵️ Digital Forensics', desc:'Cyber crime investigation and evidence collection.', url:'CYBER S/digital-forensics.html', tags:'forensics investigation evidence cyber crime analysis'},
+    {title:'🏢 Application Security', desc:'Secure coding and vulnerability testing.', url:'CYBER S/application-security.html', tags:'appsec owasp secure coding xss sql injection vulnerability'},
+    {title:'📊 Data Analysis', desc:'Pandas, NumPy, statistics and data wrangling.', url:'DATA SCIENCE/data-science.html', tags:'data analysis pandas numpy statistics python jupyter'},
+    {title:'🧬 Deep Learning (DS)', desc:'Neural networks for data science applications.', url:'DATA SCIENCE/deep-learning.html', tags:'deep learning tensorflow keras pytorch data science'},
+    {title:'🗣️ NLP (Data Science)', desc:'Text mining and language model applications.', url:'DATA SCIENCE/nlp.html', tags:'nlp text mining sentiment analysis topic modeling'},
+    {title:'🥽 AR/VR Development', desc:'Build immersive AR and VR experiences.', url:'AR_VR/ar-vr-development-roadmap.html', tags:'ar vr development unity unreal xr mixed reality'},
+    {title:'📱 Mobile App Dev', desc:'iOS, Android and cross-platform mobile apps.', url:'APP DEV/mobile_app.html', tags:'mobile ios android flutter react native swift kotlin'},
+    {title:'🖥️ Desktop Apps', desc:'Cross-platform desktop with Electron, .NET, Java.', url:'APP DEV/desktop_app.html', tags:'desktop electron dotnet java javafx wpf cross platform'},
+    {title:'🎮 Game Development', desc:'Unity, Unreal Engine and Godot game dev.', url:'APP DEV/game_development.html', tags:'game unity unreal godot c++ c# game engine 3d 2d'},
+  ];
+
+  var allGrid = document.getElementById('allPaths');
+
+  function renderPaths(list){
+    allGrid.innerHTML = list.map(function(p){
+      return '<div class="grid-item path-card">'
+        +'<div class="grid-title">'+p.title+'</div>'
+        +'<div class="grid-content">'+p.desc+'</div>'
+        +(isLoggedIn
+          ? '<a href="'+p.url+'" class="btn-glow">Explore Path &rarr;</a>'
+          : '<a href="#" class="btn-glow" onclick="goToPath(\''+p.url+'\',event)">Explore Path &rarr;</a>')
+        +'</div>';
+    }).join('');
+  }
+
+  renderPaths(PATHS);
+  document.getElementById('searchCount').textContent = PATHS.length + ' paths available';
+
+  function filterPaths(q){
+    q = q.trim().toLowerCase();
+    var noRes = document.getElementById('noResults');
+    var secMain = document.getElementById('section-main');
+    if(!q){
+      renderPaths(PATHS);
+      document.getElementById('searchCount').textContent = PATHS.length + ' paths available';
+      noRes.style.display='none';
+      secMain.style.display='block';
+      return;
+    }
+    var filtered = PATHS.filter(function(p){
+      return p.tags.indexOf(q)!==-1 || p.title.toLowerCase().indexOf(q)!==-1 || p.desc.toLowerCase().indexOf(q)!==-1;
+    });
+    document.getElementById('searchCount').textContent = filtered.length + ' result'+(filtered.length!==1?'s':'') + ' for "'+q+'"';
+    if(filtered.length===0){
+      allGrid.innerHTML='';
+      document.getElementById('noResultsTerm').textContent=q;
+      noRes.style.display='block';
+      secMain.style.display='none';
+    } else {
+      noRes.style.display='none';
+      secMain.style.display='block';
+      renderPaths(filtered);
+    }
+  }
+  </script>
+
+  // ── Search data — every path with keywords ──────────────────────────────
+  var PATHS = [
+    {title:'🤖 AI & Machine Learning', desc:'Foundations, deep learning, NLP, computer vision and applied AI.', url:'AI_ML/ai-ml.html', tags:'ai machine learning deep learning neural network python tensorflow pytorch nlp'},
+    {title:'💻 Web Development', desc:'Frontend, backend and full-stack guides for modern web apps.', url:'WEB D/web-development.html', tags:'web html css javascript react vue node express frontend backend fullstack'},
+    {title:'🔐 Cybersecurity', desc:'Security fundamentals, ethical hacking and incident response.', url:'CYBER S/cyber_security.html', tags:'cybersecurity hacking security network ethical penetration testing'},
+    {title:'📱 App Development', desc:'Mobile, desktop and embedded application development.', url:'APP DEV/app.html', tags:'app mobile android ios flutter react native desktop swift kotlin'},
+    {title:'🕶️ AR / VR', desc:'Immersive experiences, 3D, and hardware integration.', url:'AR_VR/ar-vr.html', tags:'ar vr augmented virtual reality unity unreal 3d immersive'},
+    {title:'📊 Data Science', desc:'Data analysis, visualization and ML for data-driven products.', url:'DATA SCIENCE/data-science.html', tags:'data science pandas numpy matplotlib statistics analysis visualization'},
+    {title:'🧠 Machine Learning', desc:'Core ML algorithms, supervised and unsupervised learning.', url:'AI_ML/machine-learning-roadmap.html', tags:'machine learning regression classification clustering python scikit'},
+    {title:'🔥 Deep Learning', desc:'Neural networks, CNNs, RNNs and transformer architectures.', url:'AI_ML/deep-learning-roadmap.html', tags:'deep learning cnn rnn lstm transformer bert gpt neural network'},
+    {title:'💬 NLP & LLMs', desc:'Natural language processing and large language models.', url:'AI_ML/nlp-roadmap.html', tags:'nlp natural language processing llm gpt bert text classification'},
+    {title:'👁️ Computer Vision', desc:'Image processing, object detection and visual AI.', url:'AI_ML/computer-vision-roadmap.html', tags:'computer vision opencv image detection yolo face recognition'},
+    {title:'🎮 Reinforcement Learning', desc:'Train agents with reward-based optimization.', url:'AI_ML/reinforcement-learning-roadmap.html', tags:'reinforcement learning rl agent reward q-learning policy'},
+    {title:'⚙️ MLOps & AutoML', desc:'Scale AI from research to production pipelines.', url:'AI_ML/auto-ml-mlops-roadmap.html', tags:'mlops automl pipeline deployment docker kubernetes ci cd'},
+    {title:'🎤 Speech Recognition', desc:'Voice recognition, synthesis and audio AI.', url:'AI_ML/speech-recognition-generation-roadmap.html', tags:'speech recognition voice synthesis audio nlp whisper'},
+    {title:'🤖 AI Robotics', desc:'Autonomous navigation, control and sensor fusion.', url:'AI_ML/ai-robotics-roadmap.html', tags:'robotics ros autonomous navigation sensor fusion control'},
+    {title:'🛡️ AI in Cybersecurity', desc:'AI for threat detection and automated defense.', url:'AI_ML/ai-cybersecurity-roadmap.html', tags:'ai security threat detection anomaly intrusion'},
+    {title:'💰 AI in Finance', desc:'Portfolio optimization, fraud detection and trading AI.', url:'AI_ML/ai-finance-roadmap.html', tags:'finance trading fraud detection portfolio prediction'},
+    {title:'🏥 AI in Healthcare', desc:'Diagnostics, drug discovery and patient monitoring.', url:'AI_ML/ai-healthcare-roadmap.html', tags:'healthcare medical diagnosis drug discovery patient ai'},
+    {title:'🖥️ Frontend Development', desc:'HTML, CSS, JavaScript, React, Vue and modern UI.', url:'WEB D/frontend-roadmap.html', tags:'frontend html css javascript react vue angular typescript ui'},
+    {title:'⚡ Backend Development', desc:'APIs, databases, Node.js, PHP and server architecture.', url:'WEB D/backend-roadmap.html', tags:'backend node express php api rest graphql server database'},
+    {title:'⚛️ MERN Stack', desc:'MongoDB, Express, React, Node.js full-stack.', url:'WEB D/mern-stack.html', tags:'mern mongodb express react node fullstack javascript'},
+    {title:'🅰️ MEAN Stack', desc:'MongoDB, Express, Angular, Node.js full-stack.', url:'WEB D/mean-stack.html', tags:'mean mongodb express angular node fullstack'},
+    {title:'🎨 UI/UX Design', desc:'User experience, wireframing and interface design.', url:'WEB D/ui-ux.html', tags:'ui ux design figma wireframe prototype user experience'},
+    {title:'☁️ DevOps & Cloud', desc:'CI/CD, containers, Kubernetes and cloud platforms.', url:'WEB D/devops.html', tags:'devops docker kubernetes aws azure gcp ci cd pipeline cloud'},
+    {title:'🗄️ Database Management', desc:'SQL, NoSQL, schema design and optimization.', url:'WEB D/database-management.html', tags:'database sql mysql postgresql mongodb nosql redis schema'},
+    {title:'🌐 Cloud Integration', desc:'Serverless, microservices and cloud-native apps.', url:'WEB D/cloud-integration.html', tags:'cloud aws azure gcp serverless microservices lambda'},
+    {title:'📱 Responsive Web', desc:'Mobile-first design and responsive layouts.', url:'WEB D/responsive-mobile-app.html', tags:'responsive mobile css flexbox grid bootstrap tailwind'},
+    {title:'🎮 Web Game Dev', desc:'Browser games with JavaScript, Canvas and WebGL.', url:'WEB D/web-game.html', tags:'game javascript canvas webgl phaser unity browser'},
+    {title:'🔒 Network Security', desc:'Firewalls, VPNs and network protection.', url:'CYBER S/network-security.html', tags:'network security firewall vpn intrusion detection wireshark'},
+    {title:'🛡️ Ethical Hacking', desc:'Penetration testing and vulnerability assessment.', url:'CYBER S/ethical-hacking.html', tags:'ethical hacking penetration testing kali linux metasploit burp'},
+    {title:'🔑 Cryptography', desc:'Encryption, digital signatures and secure protocols.', url:'CYBER S/cryptography.html', tags:'cryptography encryption aes rsa hash ssl tls'},
+    {title:'🕵️ Digital Forensics', desc:'Cyber crime investigation and evidence collection.', url:'CYBER S/digital-forensics.html', tags:'forensics investigation evidence cyber crime analysis'},
+    {title:'🏢 Application Security', desc:'Secure coding and vulnerability testing.', url:'CYBER S/application-security.html', tags:'appsec owasp secure coding xss sql injection vulnerability'},
+    {title:'📊 Data Analysis', desc:'Pandas, NumPy, statistics and data wrangling.', url:'DATA SCIENCE/data-science.html', tags:'data analysis pandas numpy statistics python jupyter'},
+    {title:'🧬 Deep Learning (DS)', desc:'Neural networks for data science applications.', url:'DATA SCIENCE/deep-learning.html', tags:'deep learning tensorflow keras pytorch data science'},
+    {title:'🗣️ NLP (Data Science)', desc:'Text mining and language model applications.', url:'DATA SCIENCE/nlp.html', tags:'nlp text mining sentiment analysis topic modeling'},
+    {title:'🥽 AR/VR Development', desc:'Build immersive AR and VR experiences.', url:'AR_VR/ar-vr-development-roadmap.html', tags:'ar vr development unity unreal xr mixed reality'},
+    {title:'📱 Mobile App Dev', desc:'iOS, Android and cross-platform mobile apps.', url:'APP DEV/mobile_app.html', tags:'mobile ios android flutter react native swift kotlin'},
+    {title:'🖥️ Desktop Apps', desc:'Cross-platform desktop with Electron, .NET, Java.', url:'APP DEV/desktop_app.html', tags:'desktop electron dotnet java javafx wpf cross platform'},
+    {title:'🎮 Game Development', desc:'Unity, Unreal Engine and Godot game dev.', url:'APP DEV/game_development.html', tags:'game unity unreal godot c++ c# game engine 3d 2d'},
+  ];
+
+  var allGrid = document.getElementById('allPaths');
+
+  function renderPaths(list){
+    allGrid.innerHTML = list.map(function(p){
+      return '<div class="grid-item path-card" data-tags="'+p.tags+'" data-title="'+p.title.toLowerCase()+'">'
+        +'<div class="grid-title">'+p.title+'</div>'
+        +'<div class="grid-content">'+p.desc+'</div>'
+        +'<a href="'+p.url+'" class="btn-glow">Explore Path &rarr;</a>'
+        +'</div>';
+    }).join('');
+  }
+
+  renderPaths(PATHS);
+  document.getElementById('searchCount').textContent = PATHS.length + ' paths available';
+
+  function filterPaths(q){
+    q = q.trim().toLowerCase();
+    var noRes = document.getElementById('noResults');
+    var secMain = document.getElementById('section-main');
+    if(!q){
+      renderPaths(PATHS);
+      document.getElementById('searchCount').textContent = PATHS.length + ' paths available';
+      noRes.style.display='none';
+      secMain.style.display='block';
+      return;
+    }
+    var filtered = PATHS.filter(function(p){
+      return p.tags.indexOf(q)!==-1 || p.title.toLowerCase().indexOf(q)!==-1 || p.desc.toLowerCase().indexOf(q)!==-1;
+    });
+    document.getElementById('searchCount').textContent = filtered.length + ' result'+(filtered.length!==1?'s':'') + ' for "'+q+'"';
+    if(filtered.length===0){
+      allGrid.innerHTML='';
+      document.getElementById('noResultsTerm').textContent=q;
+      noRes.style.display='block';
+      secMain.style.display='none';
+    } else {
+      noRes.style.display='none';
+      secMain.style.display='block';
+      renderPaths(filtered);
+    }
+  }
+  </script>
+
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI in Robotics | RMS Intelligence</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-glow: rgba(124, 58, 237, 0.3);
+      --color-accent: #06B6D4;
+      --color-accent-glow: rgba(6, 182, 212, 0.3);
+      --color-bg: #020617;
+      --color-card: rgba(15, 23, 42, 0.7);
+      --color-border: rgba(148, 163, 184, 0.1);
+      --color-text: #F8FAFC;
+      --color-text-dim: #94A3B8;
+      --radius-2xl: 2rem;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientMove 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+
+      100% {
+        transform: scale(1.1) translate(2%, 2%);
+      }
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50px;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(-5px);
+    }
+
+    .terminal-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-2xl);
+      padding: 80px 40px;
+      margin-bottom: 60px;
+      text-align: center;
+      box-shadow: 0 0 50px var(--color-primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-title {
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-dim);
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: 60px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 40px;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      transition: 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .grid-item:hover {
+      background: rgba(124, 58, 237, 0.05);
+      transform: translateY(-10px);
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 15px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .meta-item {
+      background: rgba(124, 58, 237, 0.15);
+      color: #A78BFA;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grid-content {
+      color: var(--color-text-dim);
+      margin-bottom: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      padding: 15px 20px;
+      border-radius: 1rem;
+      color: var(--color-text-dim);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(124, 58, 237, 0.1);
+      color: #FFF;
+      border-color: var(--color-primary);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+      box-shadow: 0 10px 20px var(--color-primary-glow);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1.5rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .timeline-step {
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 100px;
+      color: var(--color-text-dim);
+    }
+
+    footer a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+      }
+
+      .matrix-section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.INTEL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="data-science.html"><i class="fas fa-database"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="data-science.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Intelligence</a>
+
+
+
+    <div class="terminal-header">
+      <div class="terminal-title">DATA SCIENCE - AI IN ROBOTICS</div>
+      <div class="terminal-subtitle">Combines AI and robotics to create machines that can sense, think, and act.
+        Used in
+        automation, manufacturing, drones, and service robots.</div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Robotics Fundamentals</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">What is AI in Robotics?</div>
+          <div class="grid-content">
+            AI in Robotics combines artificial intelligence with mechanical systems to create intelligent robots
+            that
+            can perceive their environment, make decisions, and take actions. It integrates computer vision, machine
+            learning, natural language processing, and control systems to enable robots to perform complex tasks
+            autonomously or semi-autonomously.
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Core Applications</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Industrial Automation: Assembly, manufacturing, material handling</li>
+              <li class="glass-list-item">Healthcare Robotics: Surgery, rehabilitation, patient care, disinfection
+              </li>
+              <li class="glass-list-item">Autonomous Vehicles: Self-driving cars, delivery robots, drones</li>
+              <li class="glass-list-item">Service Robots: Hospitality, cleaning, customer service</li>
+              <li class="glass-list-item">Exploration & Research: Space exploration, underwater drones, aerial
+                surveys
+              </li>
+              <li class="glass-list-item">Agricultural Robotics: Crop monitoring, harvesting, precision farming</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Technologies</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Computer Vision: Perception and object recognition</li>
+              <li class="glass-list-item">Reinforcement Learning: Robot control and decision making</li>
+              <li class="glass-list-item">Deep Learning: Neural networks for complex tasks</li>
+              <li class="glass-list-item">Motion Planning: Path optimization and collision avoidance</li>
+              <li class="glass-list-item">Sensor Fusion: Integration of multiple sensor data</li>
+              <li class="glass-list-item">SLAM: Simultaneous Localization and Mapping</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Challenges</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Real-time Processing: Low-latency perception and control</li>
+              <li class="glass-list-item">Hardware Constraints: Limited computing power and energy</li>
+              <li class="glass-list-item">Environmental Variability: Adapting to changing environments</li>
+              <li class="glass-list-item">Safety & Ethics: Robot safety, human-robot interaction, accountability
+              </li>
+              <li class="glass-list-item">Data Annotation: Labeled data for training</li>
+              <li class="glass-list-item">Robustness: Handling edge cases and failures</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">AI in Robotics Learning Roadmap</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">1. Programming Fundamentals</div>
+          <div class="timeline-content">Python, C++, Data structures, algorithms, software engineering basics</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">2. Mathematics & Physics</div>
+          <div class="timeline-content">Linear algebra, calculus, physics basics, kinematics, dynamics, control
+            theory
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">3. Robotics Foundations</div>
+          <div class="timeline-content">Robot hardware, sensors, actuators, communication protocols, ROS (Robot
+            Operating System)</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">4. Computer Vision</div>
+          <div class="timeline-content">Image processing, object detection, pose estimation, 3D vision, kinematic
+            chains
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">5. Motion Planning & Control</div>
+          <div class="timeline-content">Path planning, trajectory optimization, inverse kinematics, control
+            algorithms,
+            PID controllers</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">6. Machine Learning & AI for Robotics</div>
+          <div class="timeline-content">Supervised learning, reinforcement learning, deep learning, neural networks,
+            imitation learning</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">7. Advanced Topics</div>
+          <div class="timeline-content">SLAM, autonomous navigation, multi-agent systems, human-robot interaction,
+            swarm
+            robotics</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">8. Practical Applications & Deployment</div>
+          <div class="timeline-content">Project development, simulation (Gazebo, V-REP), real-world testing,
+            deployment
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Free Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Introduction to Robotics (Stanford - Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Stanford University</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive introduction to robotics foundations</li>
+              <li class="glass-list-item">Covers kinematics, dynamics, control, motion planning</li>
+              <li class="glass-list-item">Mathematical foundations and practical applications</li>
+              <li class="glass-list-item">Real-world examples from Stanford labs</li>
+              <li class="glass-list-item">Hands-on projects with simulation</li>
+              <li class="glass-list-item">Perfect for robotics beginners and enthusiasts</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/robotics-perception" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Robotics Specialization (University of Pennsylvania)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Penn Robotics</span>
+            <span class="meta-item">6 courses</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive robotics specialization</li>
+              <li class="glass-list-item">Covers perception, planning, control, and learning</li>
+              <li class="glass-list-item">Advanced topics in autonomous systems</li>
+              <li class="glass-list-item">Hands-on projects with real robots</li>
+              <li class="glass-list-item">Focus on practical implementation</li>
+              <li class="glass-list-item">Certificate from University of Pennsylvania</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/specializations/robotics" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">ROS (Robot Operating System) Basics (MIT OpenCourseWare)</div>
+          <div class="grid-meta">
+            <span class="meta-item">MIT OpenCourseWare</span>
+            <span class="meta-item">MIT</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Learn Robot Operating System from MIT</li>
+              <li class="glass-list-item">Covers ROS architecture, nodes, topics, services</li>
+              <li class="glass-list-item">Lecture notes and hands-on tutorials</li>
+              <li class="glass-list-item">Integration with Gazebo simulator</li>
+              <li class="glass-list-item">Essential for robotics development</li>
+              <li class="glass-list-item">Free community-driven resource</li>
+            </ul>
+          </div>
+          <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/" class="btn-glow"
+            target="_blank">Access Course</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Robotics (Fast.ai)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Fast.ai</span>
+            <span class="meta-item">Fast.ai Community</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical deep learning for robotics applications</li>
+              <li class="glass-list-item">Covers vision, object detection, neural networks</li>
+              <li class="glass-list-item">Hands-on examples with PyTorch</li>
+              <li class="glass-list-item">Free video lectures and code examples</li>
+              <li class="glass-list-item">Focus on practical implementation</li>
+              <li class="glass-list-item">Community-driven learning platform</li>
+            </ul>
+          </div>
+          <a href="https://www.fast.ai/" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Computer Vision for Robotics (edX)</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+            <span class="meta-item">UC San Diego</span>
+            <span class="meta-item">8 weeks</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Computer vision techniques for robotics</li>
+              <li class="glass-list-item">Covers image processing, feature detection, tracking</li>
+              <li class="glass-list-item">3D vision and pose estimation</li>
+              <li class="glass-list-item">Real-world robotics applications</li>
+              <li class="glass-list-item">Hands-on projects and assignments</li>
+              <li class="glass-list-item">Free to audit with paid certificate option</li>
+            </ul>
+          </div>
+          <a href="https://www.edx.org/course/computer-vision-for-robotics" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Paid Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Advanced Robotics (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Zamora</span>
+            <span class="meta-item">30 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Advanced robotics techniques and algorithms</li>
+              <li class="glass-list-item">Covers kinematics, dynamics, motion planning</li>
+              <li class="glass-list-item">Hands-on projects with ROS and Gazebo</li>
+              <li class="glass-list-item">Focus on real-world robotics applications</li>
+              <li class="glass-list-item">Includes simulation and deployment</li>
+              <li class="glass-list-item">Essential for professional roboticists</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/advanced-robotics/" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Reinforcement Learning for Robotics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Phil Tabor</span>
+            <span class="meta-item">15 hours</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Reinforcement learning for robot control</li>
+              <li class="glass-list-item">Covers Q-learning, policy gradients, actor-critic</li>
+              <li class="glass-list-item">Hands-on projects with robotic simulations</li>
+              <li class="glass-list-item">Focus on autonomous learning</li>
+              <li class="glass-list-item">Deep RL for complex robot tasks</li>
+              <li class="glass-list-item">Perfect for robot learning applications</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/reinforcement-learning-for-robotics/" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">ROS 2 Masterclass (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Edouard Renard</span>
+            <span class="meta-item">25 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Complete ROS 2 development course</li>
+              <li class="glass-list-item">Covers architecture, nodes, services, actions</li>
+              <li class="glass-list-item">Hands-on projects with actual robots</li>
+              <li class="glass-list-item">Best practices and design patterns</li>
+              <li class="glass-list-item">Integration with Gazebo simulator</li>
+              <li class="glass-list-item">Industry-standard development practices</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/ros-2-masterclass/" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Autonomous Vehicles: Deep Learning (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Rayan Slim</span>
+            <span class="meta-item">20 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning for autonomous vehicles</li>
+              <li class="glass-list-item">Covers self-driving car fundamentals</li>
+              <li class="glass-list-item">Computer vision for autonomous navigation</li>
+              <li class="glass-list-item">Hands-on projects with CARLA simulator</li>
+              <li class="glass-list-item">Focus on perception and decision making</li>
+              <li class="glass-list-item">Essential for autonomous robotics</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/autonomous-vehicles-deep-learning/" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Computer Vision for Robotics & Drones (DataCamp)</div>
+          <div class="grid-meta">
+            <span class="meta-item">DataCamp</span>
+            <span class="meta-item">Dr. Ismail Elezzabi</span>
+            <span class="meta-item">6 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Computer vision for robots and drones</li>
+              <li class="glass-list-item">Covers object detection, tracking, 3D vision</li>
+              <li class="glass-list-item">Hands-on projects with drone applications</li>
+              <li class="glass-list-item">Focus on OpenCV and deep learning</li>
+              <li class="glass-list-item">Real-world robotics vision systems</li>
+              <li class="glass-list-item">Perfect for UAV and robot developers</li>
+            </ul>
+          </div>
+          <a href="https://www.datacamp.com/courses/computer-vision-for-robotics-and-drones" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best E-books for AI in Robotics</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Robotics: Modelling, Planning and Control</div>
+          <div class="grid-meta">
+            <span class="meta-item">Bruno Siciliano, Lorenzo Sciavicco</span>
+            <span class="meta-item">632 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$99.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive robotics textbook</li>
+              <li class="glass-list-item">Covers modeling, kinematics, dynamics, control</li>
+              <li class="glass-list-item">Mathematical foundations and algorithms</li>
+              <li class="glass-list-item">Real-world robotics applications</li>
+              <li class="glass-list-item">Focus on motion planning and control</li>
+              <li class="glass-list-item">Essential reference for roboticists</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Robotics-Modelling-Planning-Siciliano-Bruno/dp/1846286413" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Robotics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Maxim Lapan, Pavel Popov</span>
+            <span class="meta-item">480 pages</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+            <span class="meta-item">$59.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning techniques for robotics</li>
+              <li class="glass-list-item">Covers CNNs, RNNs, reinforcement learning</li>
+              <li class="glass-list-item">Practical examples with PyTorch</li>
+              <li class="glass-list-item">Focus on robot vision and control</li>
+              <li class="glass-list-item">Real-world robotics applications</li>
+              <li class="glass-list-item">Great for AI-driven robotics development</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Deep-Learning-Robotics-Maxim-Lapan/dp/1789342065" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Artificial Intelligence and Robotics</div>
+          <div class="grid-meta">
+            <span class="meta-item">Rajkumar Buyya, Ganesh Papadimitriou</span>
+            <span class="meta-item">400 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$49.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive guide to AI and robotics integration</li>
+              <li class="glass-list-item">Covers perception, planning, and decision making</li>
+              <li class="glass-list-item">Real-world applications and case studies</li>
+              <li class="glass-list-item">Focus on intelligent robot systems</li>
+              <li class="glass-list-item">Includes ethical and safety considerations</li>
+              <li class="glass-list-item">Perfect for robotics professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Artificial-Intelligence-Robotics-Buyya-Rajkumar/dp/0128169605"
+            class="btn-glow" target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Robot Vision (Free PDF)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Berthold K.P. Horn</span>
+            <span class="meta-item">680 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">Free</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Classic textbook on robot vision</li>
+              <li class="glass-list-item">Covers image processing and 3D vision</li>
+              <li class="glass-list-item">Mathematical foundations and algorithms</li>
+              <li class="glass-list-item">Focus on visual perception for robots</li>
+              <li class="glass-list-item">Free PDF available online</li>
+              <li class="glass-list-item">Reference for computer vision in robotics</li>
+            </ul>
+          </div>
+          <a href="http://people.csail.mit.edu/berthold/Publications.html" class="btn-glow" target="_blank">Get
+            Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Introduction to Autonomous Mobile Robots</div>
+          <div class="grid-meta">
+            <span class="meta-item">Roland Siegwart, Illah R. Nourbakhsh</span>
+            <span class="meta-item">564 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$84.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive guide to autonomous mobile robots</li>
+              <li class="glass-list-item">Covers locomotion, sensing, and navigation</li>
+              <li class="glass-list-item">SLAM and path planning algorithms</li>
+              <li class="glass-list-item">Practical examples and case studies</li>
+              <li class="glass-list-item">Focus on autonomous systems</li>
+              <li class="glass-list-item">Essential for mobile robot development</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Introduction-Autonomous-Mobile-Robots-Siegwart/dp/0262015676" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Learning Computing as a Language</div>
+          <div class="grid-meta">
+            <span class="meta-item">Allen B. Downey</span>
+            <span class="meta-item">350 pages</span>
+            <span class="meta-item">Beginner-Intermediate</span>
+            <span class="meta-item">$35.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Programming fundamentals for robotics</li>
+              <li class="glass-list-item">Python for robotics applications</li>
+              <li class="glass-list-item">Hands-on programming exercises</li>
+              <li class="glass-list-item">Focus on practical problem solving</li>
+              <li class="glass-list-item">Great foundation for robot programming</li>
+              <li class="glass-list-item">Perfect for beginners in robotics</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Think-Like-Programmer-Introduction-Creative/dp/1593274246" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for the Robotic Frontier.</p>
+    <div style="margin-top: 15px;">
+      <a href="../index.html">Home</a> &middot;
+      <a href="data-science.html">Intelligence</a> &middot;
+      <a href="../login.html">Portal</a>
+    </div>
+  </footer>
+</body>
+
+</html>

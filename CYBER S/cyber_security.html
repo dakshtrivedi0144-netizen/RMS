@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyber Security Ecosystem | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC CYBER SECURITY SAAS DASHBOARD
+    ============================================ */
+    :root {
+      --color-primary: #10B981;
+      --color-primary-light: #34D399;
+      --color-accent: #3B82F6;
+      --color-accent-light: #60A5FA;
+      --color-bg-darker: #050B14;
+      --color-bg-glass: rgba(5, 11, 20, 0.85);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #64748B;
+      --color-border: rgba(16, 185, 129, 0.2);
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --radius-lg: 1.25rem;
+      --shadow-glow: 0 0 25px rgba(16, 185, 129, 0.3);
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(5, 11, 20, 0.8);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary-light);
+      transform: translateY(-2px);
+    }
+
+    /* TERMINAL STYLE HEADER */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      margin: 40px auto;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+    }
+
+    .terminal-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(90deg, #FFF, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(10, 15, 30, 0.6);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.22rem;
+      color: var(--color-primary-light);
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-item {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.7), rgba(5, 11, 20, 0.9));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
+    }
+
+    .grid-item:hover::before {
+      opacity: 1;
+    }
+
+    .track-icon {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+
+    .grid-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #FFF;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-content {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: auto;
+      transition: all var(--transition-base);
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 5rem 0;
+      border-top: 1px solid var(--color-border);
+      background: #03060C;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 30px 0;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+    }
+  </style>
+</head>
+
+<body>
+  <script>if(!localStorage.getItem('rms_token')){localStorage.setItem('rms_redirect',window.location.href);window.location.href='../login.html';}</script>
+  <canvas id="networkCanvas"></canvas>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.DEFENSE</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="#" style="color: var(--color-primary-light);"><i class="fas fa-shield-alt"></i> Cyber Security</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Cyber Security Domain</h1>
+      <p class="terminal-subtitle">Defend the digital frontier. Master the skills to protect, detect, and respond to the
+        ever-evolving landscape of cyber threats.</p>
+    </header>
+
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-lock"></i> Core Security Tracks</h2>
+      <div class="grid-container">
+        <!-- NETWORK SECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-network-wired track-icon"></i>
+          <h3 class="grid-title">Network Security</h3>
+          <p class="grid-content">Network security focuses on protecting computer networks from unauthorized access,
+            misuse, or theft using firewalls and VPNs.</p>
+          <a href="network-security.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- APPLICATION SECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-window-maximize track-icon"></i>
+          <h3 class="grid-title">Application Security</h3>
+          <p class="grid-content">Secure software applications from threats throughout their lifecycle, covering secure
+            coding practices and vulnerability testing.</p>
+          <a href="application-security.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- CLOUD SECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-cloud track-icon"></i>
+          <h3 class="grid-title">Cloud Security</h3>
+          <p class="grid-content">Protect data, applications, and infrastructure in cloud computing environments across
+            major platforms like AWS, Azure, and GCP.</p>
+          <a href="cloud-security.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- ETHICAL HACKING -->
+        <div class="grid-item">
+          <i class="fas fa-user-secret track-icon"></i>
+          <h3 class="grid-title">Ethical Hacking</h3>
+          <p class="grid-content">Perform authorized penetration testing to identify vulnerabilities and help
+            organizations strengthen their security defenses.</p>
+          <a href="ethical-hacking.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- INCIDENT RESPONSE -->
+        <div class="grid-item">
+          <i class="fas fa-shield-virus track-icon"></i>
+          <h3 class="grid-title">Incident Response</h3>
+          <p class="grid-content">Prepare for, detect, and respond to cybersecurity incidents through digital forensics,
+            malware analysis, and recovery procedures.</p>
+          <a href="incident-response.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- SECURITY OPERATIONS -->
+        <div class="grid-item">
+          <i class="fas fa-satellite-dish track-icon"></i>
+          <h3 class="grid-title">Security Operations</h3>
+          <p class="grid-content">Continuously monitor and manage security systems using Security Operations Centers
+            (SOC) and threat intelligence.</p>
+          <a href="security-operations.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- CRYPTOGRAPHY -->
+        <div class="grid-item">
+          <i class="fas fa-key track-icon"></i>
+          <h3 class="grid-title">Cryptography</h3>
+          <p class="grid-content">Secure information through complex encryption algorithms, digital signatures, hash
+            functions, and secure communication protocols.</p>
+          <a href="cryptography.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- IOT SECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-microchip track-icon"></i>
+          <h3 class="grid-title">IoT Security</h3>
+          <p class="grid-content">Protect internet-connected devices, industrial control systems, and ensure secure
+            communication between IoT components.</p>
+          <a href="iot-security.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- DIGITAL FORENSICS -->
+        <div class="grid-item">
+          <i class="fas fa-search track-icon"></i>
+          <h3 class="grid-title">Digital Forensics</h3>
+          <p class="grid-content">Investigate cyber crimes and incidents through meticulous evidence collection,
+            including computer and mobile device forensics.</p>
+          <a href="digital-forensics.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- RISK MANAGEMENT -->
+        <div class="grid-item">
+          <i class="fas fa-chart-pie track-icon"></i>
+          <h3 class="grid-title">Risk Management</h3>
+          <p class="grid-content">Identify, assess, and mitigate cybersecurity risks via assessment frameworks,
+            compliance requirements, and business continuity planning.</p>
+          <a href="risk-management.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- IDENTITY & ACCESS MANAGEMENT -->
+        <div class="grid-item">
+          <i class="fas fa-fingerprint track-icon"></i>
+          <h3 class="grid-title">Identity & Access Management</h3>
+          <p class="grid-content">Manage digital identities and control resource access using authentication methods,
+            SSO, MFA, and identity governance.</p>
+          <a href="iam.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Defense Systems. Securing the Future of Data.</p>
+      <div style="margin-top: 15px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="../WEB D/web-development.html">Engineering</a> &middot;
+        <a href="../login.html">Secure Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#10B981'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 80; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 180) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.3 * (1 - d / 180)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

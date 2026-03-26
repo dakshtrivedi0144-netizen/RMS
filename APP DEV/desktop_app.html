@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Desktop App Development Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC AI SAAS DASHBOARD - UNIFIED CSS
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.75);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.1);
+      --spacing-md: 1.25rem;
+      --radius-lg: 1.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      animation: gradientShift 15s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, -20px);
+      }
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      transform: translateY(-2px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .terminal-header {
+      background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: var(--radius-lg);
+      margin: 60px auto 40px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .terminal-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, #C4B5FD, #22D3EE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(30px);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.22rem;
+      color: #FFF;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+
+    .section-title i {
+      color: var(--color-accent-light);
+      filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.5));
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 15px;
+      transition: all var(--transition-base);
+      color: var(--color-text-secondary);
+    }
+
+    .glass-list-item:hover {
+      background: rgba(139, 92, 246, 0.05);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateX(15px);
+      color: #FFF;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      transition: 0.8s;
+    }
+
+    .grid-item:hover::after {
+      left: 100%;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-10px);
+      border-color: rgba(139, 92, 246, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.1);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0;
+      font-weight: 700;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      transform: translateX(-10px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 80px;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .terminal-title {
+        font-size: 2rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.APP</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="app.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Desktop App Development</h1>
+      <p>Build high-performance, OS-integrated software for Windows, macOS, and Linux.</p>
+    </header>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-cubes"></i> Popular Technologies</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <h3>Electron</h3>
+          <p>The standard for cross-platform apps using web technologies. Powers VS Code and Slack.</p>
+        </div>
+        <div class="grid-item">
+          <h3>WinUI 3 & .NET</h3>
+          <p>Native Windows development with high performance and modern Fluent Design.</p>
+        </div>
+        <div class="grid-item">
+          <h3>Qt & C++</h3>
+          <p>The gold standard for resource-intensive professional applications like Adobe suite.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Free Technical Training</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Electron Crash Course</div>
+          <p class="grid-content">Master the basics of building cross-platform JS applications for the desktop.</p>
+          <a href="https://www.youtube.com/watch?v=kN1Czs0m1SU" target="_blank" class="btn-glow">Watch Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Qt for Beginners</div>
+          <p class="grid-content">Learn the fundamentals of the powerful C++ framework for high-performance apps.</p>
+          <a href="https://doc.qt.io/archives/qt-4.8/gettingstartedqt.html" target="_blank" class="btn-glow">Read
+            Docs</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">WinUI 3 Training</div>
+          <p class="grid-content">Official Microsoft training for building modern, native Windows applications.</p>
+          <a href="https://learn.microsoft.com/en-us/windows/apps/winui/winui3/" target="_blank" class="btn-glow">Start
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-gem"></i> Premium Desktop Mastery</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Mastering Qt 6</div>
+          <p class="grid-content">By Udemy. Go from beginner to expert in professional C++ desktop development.</p>
+          <a href="https://www.udemy.com/course/mastering-qt-6-cpp-gui-development-for-beginners/" target="_blank"
+            class="btn-glow">Enroll Now</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Electron Expert</div>
+          <p class="grid-content">A deep dive into security, performance, and distribution of Electron apps.</p>
+          <a href="https://www.pluralsight.com/courses/electron-expert" target="_blank" class="btn-glow">Join Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-book"></i> Desktop Architecture E-books</h2>
+      <ul class="glass-list">
+        <li class="glass-list-item"><strong>Electron in Action</strong> - By Steve Kinney</li>
+        <li class="glass-list-item"><strong>Foundations of Qt Development</strong> - By Johan Thelin</li>
+        <li class="glass-list-item"><strong>Visual Studio Code: The Missing Manual</strong> - Tips for developers</li>
+        <li class=" glass-list-item"><strong>Designing High-Performance Apps</strong> - Systems engineering for desktop
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems.</p>
+  </footer>
+</body>
+
+</html>

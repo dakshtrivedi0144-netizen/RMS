@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mobile App Development Roadmap | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC AI SAAS DASHBOARD - UNIFIED CSS
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.75);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.1);
+      --spacing-md: 1.25rem;
+      --radius-lg: 1.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      animation: gradientShift 15s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes gradientShift {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, -30px);
+      }
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      transform: translateY(-2px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .terminal-header {
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: var(--radius-lg);
+      margin: 60px auto 40px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .terminal-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, #C4B5FD, #22D3EE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(30px);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.22rem;
+      color: #FFF;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+
+    .section-title i {
+      color: var(--color-accent-light);
+      filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.5));
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px 25px;
+      margin-bottom: 15px;
+      transition: all var(--transition-base);
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(139, 92, 246, 0.05);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateX(15px);
+      color: #FFF;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      transition: 0.8s;
+    }
+
+    .grid-item:hover::after {
+      left: 100%;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-10px);
+      border-color: rgba(139, 92, 246, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.1);
+    }
+
+    .grid-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #FFF;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-content {
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 25px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+      transform: scale(1.05);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0;
+      font-weight: 700;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      transform: translateX(-10px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 80px;
+      color: var(--color-text-muted);
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .terminal-title {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.APP</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="app.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Mobile App Development</h1>
+      <p class="terminal-subtitle">Comprehensive roadmap to building powerful applications for iOS and Android.</p>
+    </header>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-layer-group"></i> Basic Development</h2>
+      <ul class="glass-list">
+        <li class="glass-list-item"><strong>UI/UX Fundamentals:</strong> Touch interfaces, responsiveness, platform
+          guidelines (Material Design, Human Interface Guidelines).</li>
+        <li class="glass-list-item"><strong>Native vs Cross-platform:</strong> Swift/Kotlin basics or Flutter/React
+          Native.</li>
+        <li class="glass-list-item"><strong>IDEs & Tools:</strong> Android Studio, Xcode, VS Code.</li>
+        <li class="glass-list-item"><strong>Version Control:</strong> Git essentials for mobile projects.</li>
+      </ul>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-rocket"></i> Intermediate concepts</h2>
+      <ul class="glass-list">
+        <li class="glass-list-item"><strong>State Management:</strong> Provider, Redux, or Native architectures.</li>
+        <li class="glass-list-item"><strong>Networking:</strong> RESTful APIs and GraphQL integration.</li>
+        <li class="glass-list-item"><strong>Local Storage:</strong> SQLite, Room, or SharedPreferences.</li>
+        <li class="glass-list-item"><strong>Hardware Features:</strong> Camera, GPS, Notifications.</li>
+      </ul>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-gift"></i> Free Learning Resources</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Google Android Basics</div>
+          <p class="grid-content">Master Kotlin and Jetpack Compose directly from the creators of Android.</p>
+          <a href="https://developer.android.com/courses" target="_blank" class="btn-glow">Start Learning</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Apple SwiftUI Tutorials</div>
+          <p class="grid-content">Learn modern iOS development with Swift and SwiftUI's declarative syntax.</p>
+          <a href="https://developer.apple.com/tutorials/swiftui" target="_blank" class="btn-glow">Explore Now</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Flutter Bootcamp</div>
+          <p class="grid-content">The ultimate guide to building cross-platform apps with a single codebase.</p>
+          <a href="https://docs.flutter.dev/get-started/codelab" target="_blank" class="btn-glow">Enroll Free</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">freeCodeCamp Mobile App</div>
+          <p class="grid-content">Comprehensive lessons on React Native, covering components, navigation, and state.</p>
+          <a href="https://www.freecodecamp.org/learn/mobile-app-development/" target="_blank" class="btn-glow">Begin
+            Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-crown"></i> Premium Specializations</h2>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Flutter & Dart - The Complete Guide</div>
+          <p class="grid-content">By Academind. A comprehensive deep dive into the Flutter framework from scratch.</p>
+          <a href="https://www.udemy.com/course/learn-flutter-dart-complete-guide/" target="_blank"
+            class="btn-glow">View Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">React Native - The Practical Guide</div>
+          <p class="grid-content">Master React Native to build real native mobile apps for iOS and Android.</p>
+          <a href="https://www.udemy.com/course/react-native-the-practical-guide/" target="_blank" class="btn-glow">View
+            Course</a>
+        </div>
+        <div class="grid-item">
+          <div class="grid-title">Complete iOS Development Bootcamp</div>
+          <p class="grid-content">Dr. Angela Yu's world-famous course for mastering Swift and iOS development.</p>
+          <a href="https://www.udemy.com/course/ios-13-app-development-bootcamp/" target="_blank" class="btn-glow">Join
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-book"></i> Recommended E-books</h2>
+      <ul class="glass-list">
+        <li class="glass-list-item"><strong>Flutter in Action</strong> - By Eric Windmill</li>
+        <li class="glass-list-item"><strong>React Native in Action</strong> - By Nader Dabit</li>
+        <li class="glass-list-item"><strong>Big Nerd Ranch Guides</strong> - iOS & Android Essentials</li>
+        <li class="glass-list-item"><strong>Effective Kotlin</strong> - Best practices for professional Android
+          development</li>
+        <li class="glass-list-item"><strong>Clean Architecture for Mobile</strong> - Strategies for maintainable mobile
+          apps</li>
+      </ul>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for the Mobile Era.</p>
+  </footer>
+</body>
+
+</html>

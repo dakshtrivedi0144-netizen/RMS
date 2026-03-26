@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Speech Recognition | RMS Intelligence</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-glow: rgba(124, 58, 237, 0.3);
+      --color-accent: #06B6D4;
+      --color-accent-glow: rgba(6, 182, 212, 0.3);
+      --color-bg: #020617;
+      --color-card: rgba(15, 23, 42, 0.7);
+      --color-border: rgba(148, 163, 184, 0.1);
+      --color-text: #F8FAFC;
+      --color-text-dim: #94A3B8;
+      --radius-2xl: 2rem;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+      animation: ambientMove 25s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientMove {
+      0% {
+        transform: scale(1) translate(0, 0);
+      }
+
+      100% {
+        transform: scale(1.1) translate(2%, 2%);
+      }
+    }
+
+    .top-nav {
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 10px var(--color-primary);
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 40px 0 20px 0;
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      transition: 0.3s;
+      padding: 10px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 50px;
+      border: 1px solid var(--color-border);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--color-primary);
+      transform: translateX(-5px);
+    }
+
+    .terminal-header {
+      background: var(--color-card);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-2xl);
+      padding: 80px 40px;
+      margin-bottom: 60px;
+      text-align: center;
+      box-shadow: 0 0 50px var(--color-primary-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-title {
+      font-size: 4.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-dim);
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: 60px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(20px);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 40px;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      transition: 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .grid-item:hover {
+      background: rgba(124, 58, 237, 0.05);
+      transform: translateY(-10px);
+      border-color: var(--color-primary);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+
+    .grid-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF;
+      margin-bottom: 15px;
+    }
+
+    .grid-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .meta-item {
+      background: rgba(124, 58, 237, 0.15);
+      color: #A78BFA;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .grid-content {
+      color: var(--color-text-dim);
+      margin-bottom: 20px;
+    }
+
+    .glass-list-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--color-border);
+      padding: 15px 20px;
+      border-radius: 1rem;
+      color: var(--color-text-dim);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .glass-list-item:hover {
+      background: rgba(124, 58, 237, 0.1);
+      color: #FFF;
+      border-color: var(--color-primary);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: 0.3s;
+      margin-top: auto;
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      filter: brightness(1.1);
+      box-shadow: 0 10px 20px var(--color-primary-glow);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1.5rem;
+      border: 1px solid var(--color-border);
+    }
+
+    .timeline-step {
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 100px 0;
+      border-top: 1px solid var(--color-border);
+      margin-top: 100px;
+      color: var(--color-text-dim);
+    }
+
+    footer a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+      }
+
+      .matrix-section {
+        padding: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.INTEL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="data-science.html"><i class="fas fa-database"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="data-science.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Intelligence</a>
+
+    <div class="terminal-header">
+      <div class="terminal-title">DATA SCIENCE - SPEECH RECOGNITION & GENERATION</div>
+      <div class="terminal-subtitle">Converts spoken language into text (ASR) or text into speech (TTS). Enables
+        voice-based human-computer interaction and accessibility solutions.</div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Speech Recognition & Generation Fundamentals</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">What is Speech Recognition & Generation?</div>
+          <div class="grid-content">
+            Speech Recognition & Generation involves processing and understanding spoken language. Automatic Speech
+            Recognition (ASR) converts audio into text, while Text-to-Speech (TTS) converts text into natural-sounding
+            audio. These technologies enable voice-based interfaces, accessibility tools, translation services, and
+            human-computer interaction.
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Core Applications</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Voice Assistants: Siri, Alexa, Google Assistant, Cortana</li>
+              <li class="glass-list-item">Transcription: Meeting transcription, subtitle generation, podcast captioning
+              </li>
+              <li class="glass-list-item">Accessibility: Screen readers, voice control for disabilities</li>
+              <li class="glass-list-item">Customer Service: Voice chatbots, IVR systems, automated support</li>
+              <li class="glass-list-item">Language Translation: Real-time speech translation</li>
+              <li class="glass-list-item">Entertainment: Voice-controlled gaming, voice narration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Technologies</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Acoustic Modeling: Deep neural networks for sound patterns</li>
+              <li class="glass-list-item">Language Modeling: N-grams, RNNs, Transformers for context</li>
+              <li class="glass-list-item">Speech Feature Extraction: MFCCs, Spectrograms, Mel-frequency analysis</li>
+              <li class="glass-list-item">Vocoding: Synthesizing natural-sounding speech</li>
+              <li class="glass-list-item">Voice Cloning: Neural networks for speaker adaptation</li>
+              <li class="glass-list-item">Attention Mechanisms: Seq2seq models for speech</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Key Challenges</div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Noise Robustness: Handling background noise and acoustic variations</li>
+              <li class="glass-list-item">Accents & Dialects: Supporting diverse speech patterns</li>
+              <li class="glass-list-item">Real-time Processing: Low-latency inference requirements</li>
+              <li class="glass-list-item">Multi-language Support: Building models for multiple languages</li>
+              <li class="glass-list-item">Speaker Variability: Handling different voices and speaking styles</li>
+              <li class="glass-list-item">Naturalness: Making synthesized speech sound human-like</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Speech Recognition & Generation Learning Roadmap</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-step">1. Audio Signal Processing Fundamentals</div>
+          <div class="timeline-content">Digital signal processing, audio formats, sampling, frequency analysis, Fourier
+            analysis</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">2. Speech Features & Acoustic Analysis</div>
+          <div class="timeline-content">MFCCs, Spectrograms, Mel-frequency analysis, feature extraction, signal
+            conditioning</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">3. Machine Learning & Deep Learning Basics</div>
+          <div class="timeline-content">Supervised learning, neural networks, CNNs, RNNs, LSTMs, attention mechanisms
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">4. Automatic Speech Recognition (ASR)</div>
+          <div class="timeline-content">Acoustic models, language models, decoding, hybrid models, end-to-end ASR</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">5. Text-to-Speech (TTS) Synthesis</div>
+          <div class="timeline-content">Vocoding, mel-spectrograms, WaveNet, Tacotron, neural vocoding, prosody modeling
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">6. Advanced Models & Transformers</div>
+          <div class="timeline-content">Transformer models, Whisper, Wave2Vec, Conformer, multimodal models</div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">7. Voice Cloning & Biometrics</div>
+          <div class="timeline-content">Speaker embeddings, voice conversion, speaker verification, voice authentication
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-step">8. Real-world Deployment & Optimization</div>
+          <div class="timeline-content">Model compression, edge deployment, real-time inference, mobile optimization
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Free Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Speech Recognition & NLP (Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">University of Illinois</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Beginner-Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive introduction to speech processing</li>
+              <li class="glass-list-item">Covers ASR, NLP, signal processing fundamentals</li>
+              <li class="glass-list-item">Real-world examples and applications</li>
+              <li class="glass-list-item">Hands-on projects with audio data</li>
+              <li class="glass-list-item">Focus on practical speech technologies</li>
+              <li class="glass-list-item">Perfect for speech processing beginners</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/speech-recognition" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Audio Processing with Python (Coursera)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Coursera</span>
+            <span class="meta-item">Universitat Autònoma de Barcelona</span>
+            <span class="meta-item">6 weeks</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Audio signal processing with Python</li>
+              <li class="glass-list-item">Covers digital signal processing, audio features</li>
+              <li class="glass-list-item">Hands-on projects with real audio data</li>
+              <li class="glass-list-item">Focus on practical audio analysis</li>
+              <li class="glass-list-item">Essential foundation for speech processing</li>
+              <li class="glass-list-item">Free to audit with certificate option</li>
+            </ul>
+          </div>
+          <a href="https://www.coursera.org/learn/audio-signal-processing" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Natural Language Processing (MIT OpenCourseWare)</div>
+          <div class="grid-meta">
+            <span class="meta-item">MIT OpenCourseWare</span>
+            <span class="meta-item">MIT</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning techniques for NLP from MIT</li>
+              <li class="glass-list-item">Covers RNNs, LSTMs, Transformers, attention mechanisms</li>
+              <li class="glass-list-item">Applicable to speech and language tasks</li>
+              <li class="glass-list-item">Lecture notes and assignments freely available</li>
+              <li class="glass-list-item">Focus on modern deep learning methods</li>
+              <li class="glass-list-item">Free community-driven resource</li>
+            </ul>
+          </div>
+          <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/" class="btn-glow"
+            target="_blank">Access Course</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Speech Processing (edX)</div>
+          <div class="grid-meta">
+            <span class="meta-item">edX</span>
+            <span class="meta-item">TU München</span>
+            <span class="meta-item">8 weeks</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive speech processing course</li>
+              <li class="glass-list-item">Covers acoustic analysis, ASR, TTS</li>
+              <li class="glass-list-item">Hands-on projects with speech tools</li>
+              <li class="glass-list-item">Real-world applications and examples</li>
+              <li class="glass-list-item">Focus on speech signal processing</li>
+              <li class="glass-list-item">Free to audit with paid certificate option</li>
+            </ul>
+          </div>
+          <a href="https://www.edx.org/course/speech-processing" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Audio Signal Processing (Fast.ai)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Fast.ai</span>
+            <span class="meta-item">Fast.ai Community</span>
+            <span class="meta-item">Self-paced</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Practical audio and speech processing</li>
+              <li class="glass-list-item">Covers audio features, deep learning for audio</li>
+              <li class="glass-list-item">Hands-on examples with PyTorch</li>
+              <li class="glass-list-item">Free video lectures and notebooks</li>
+              <li class="glass-list-item">Focus on applied audio AI</li>
+              <li class="glass-list-item">Community-driven learning platform</li>
+            </ul>
+          </div>
+          <a href="https://www.fast.ai/" class="btn-glow" target="_blank">Access Course</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best Paid Courses</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Advanced Speech Recognition (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Aladdin Persson</span>
+            <span class="meta-item">18 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Advanced ASR algorithms and techniques</li>
+              <li class="glass-list-item">Covers acoustic models, language models, end-to-end ASR</li>
+              <li class="glass-list-item">Hands-on projects with real speech data</li>
+              <li class="glass-list-item">Focus on modern deep learning approaches</li>
+              <li class="glass-list-item">Includes Whisper and Wav2Vec models</li>
+              <li class="glass-list-item">Perfect for speech AI professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/advanced-speech-recognition/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Text-to-Speech & Voice Synthesis (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. James Baker</span>
+            <span class="meta-item">15 hours</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">TTS synthesis and voice generation</li>
+              <li class="glass-list-item">Covers Tacotron, WaveNet, neural vocoding</li>
+              <li class="glass-list-item">Hands-on projects with voice synthesis</li>
+              <li class="glass-list-item">Focus on natural-sounding speech generation</li>
+              <li class="glass-list-item">Includes prosody and voice styling</li>
+              <li class="glass-list-item">Essential for TTS applications</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/text-to-speech-voice-synthesis/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Audio Deep Learning (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Valerio Velardo</span>
+            <span class="meta-item">20 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning for audio applications</li>
+              <li class="glass-list-item">Covers CNNs, RNNs for audio, attention mechanisms</li>
+              <li class="glass-list-item">Hands-on projects with TensorFlow/PyTorch</li>
+              <li class="glass-list-item">Focus on audio feature extraction</li>
+              <li class="glass-list-item">Includes speech and music processing</li>
+              <li class="glass-list-item">Great for audio AI enthusiasts</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/audio-deep-learning/" class="btn-glow" target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Voice Cloning & Speaker Adaptation (DataCamp)</div>
+          <div class="grid-meta">
+            <span class="meta-item">DataCamp</span>
+            <span class="meta-item">Dr. Yonghao Wang</span>
+            <span class="meta-item">5 hours</span>
+            <span class="meta-item">Advanced</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Voice cloning and speaker adaptation techniques</li>
+              <li class="glass-list-item">Covers speaker embeddings, voice conversion</li>
+              <li class="glass-list-item">Hands-on projects with voice data</li>
+              <li class="glass-list-item">Focus on personalized speech synthesis</li>
+              <li class="glass-list-item">Includes speaker verification techniques</li>
+              <li class="glass-list-item">Essential for advanced TTS applications</li>
+            </ul>
+          </div>
+          <a href="https://www.datacamp.com/courses/voice-cloning-and-speaker-adaptation" class="btn-glow"
+            target="_blank">Enroll Now</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Speech Emotion Recognition (Udemy)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Udemy</span>
+            <span class="meta-item">Dr. Abhishek Sharma</span>
+            <span class="meta-item">12 hours</span>
+            <span class="meta-item">Intermediate</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Speech emotion recognition and analysis</li>
+              <li class="glass-list-item">Covers feature extraction, classification models</li>
+              <li class="glass-list-item">Hands-on projects with emotion datasets</li>
+              <li class="glass-list-item">Focus on deep learning for emotions</li>
+              <li class="glass-list-item">Includes multimodal analysis</li>
+              <li class="glass-list-item">Perfect for emotion AI applications</li>
+            </ul>
+          </div>
+          <a href="https://www.udemy.com/course/speech-emotion-recognition/" class="btn-glow" target="_blank">Enroll
+            Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="matrix-section">
+      <div class="section-title">Best E-books for Speech Recognition & Generation</div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <div class="grid-title">Automatic Speech Recognition: Fundamentals and Practice</div>
+          <div class="grid-meta">
+            <span class="meta-item">Xuedong Huang, Alex Acero, Hsiao-Wuen Hon</span>
+            <span class="meta-item">472 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$89.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive ASR textbook and reference</li>
+              <li class="glass-list-item">Covers acoustic models, language models, decoding</li>
+              <li class="glass-list-item">Mathematical foundations and algorithms</li>
+              <li class="glass-list-item">Real-world ASR systems and applications</li>
+              <li class="glass-list-item">Focus on practical implementation</li>
+              <li class="glass-list-item">Essential reference for ASR professionals</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Automatic-Speech-Recognition-Fundamentals-Practice/dp/0965053385"
+            class="btn-glow" target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Deep Learning for Speech Recognition</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Chandra Sekhar Reddy, Dr. Sampath Kumar</span>
+            <span class="meta-item">380 pages</span>
+            <span class="meta-item">Intermediate-Advanced</span>
+            <span class="meta-item">$59.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Deep learning techniques for speech</li>
+              <li class="glass-list-item">Covers RNNs, LSTMs, CNNs for speech</li>
+              <li class="glass-list-item">Practical examples with TensorFlow/PyTorch</li>
+              <li class="glass-list-item">Focus on modern neural architectures</li>
+              <li class="glass-list-item">Includes end-to-end speech recognition</li>
+              <li class="glass-list-item">Great for deep learning in speech</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Deep-Learning-Speech-Recognition-Reddy/dp/1484242521" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Text-to-Speech Synthesis</div>
+          <div class="grid-meta">
+            <span class="meta-item">Paul Taylor</span>
+            <span class="meta-item">523 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$79.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Comprehensive TTS synthesis guide</li>
+              <li class="glass-list-item">Covers text analysis, prosody, vocoding</li>
+              <li class="glass-list-item">Mathematical foundations and algorithms</li>
+              <li class="glass-list-item">Real-world TTS system design</li>
+              <li class="glass-list-item">Focus on natural-sounding speech</li>
+              <li class="glass-list-item">Essential for TTS developers</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Text-Speech-Synthesis-Paul-Taylor/dp/0521899834" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Audio Signal Processing with NumPy and SciPy</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Julius O. Smith III</span>
+            <span class="meta-item">400 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">$49.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Audio signal processing with Python</li>
+              <li class="glass-list-item">Covers digital signal processing fundamentals</li>
+              <li class="glass-list-item">Practical examples with NumPy/SciPy</li>
+              <li class="glass-list-item">Focus on audio feature extraction</li>
+              <li class="glass-list-item">Great foundation for speech processing</li>
+              <li class="glass-list-item">Perfect for audio engineers</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Audio-Signal-Processing-NumPy-SciPy/dp/0128220163" class="btn-glow"
+            target="_blank">Get Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Fundamentals of Speech Production & Acoustic Phonetics (Free)</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Peter Ladefoged</span>
+            <span class="meta-item">230 pages</span>
+            <span class="meta-item">Intermediate</span>
+            <span class="meta-item">Free PDF</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Speech production and phonetics fundamentals</li>
+              <li class="glass-list-item">Covers acoustic phonetics, speech features</li>
+              <li class="glass-list-item">Essential background for speech processing</li>
+              <li class="glass-list-item">Free PDF available online</li>
+              <li class="glass-list-item">Classic reference in speech science</li>
+              <li class="glass-list-item">Perfect for understanding speech physics</li>
+            </ul>
+          </div>
+          <a href="https://linguistics.ucla.edu/people/ladefog/vowels.html" class="btn-glow" target="_blank">Get
+            Book</a>
+        </div>
+
+        <div class="grid-item">
+          <div class="grid-title">Voice Conversion: Techniques and Applications</div>
+          <div class="grid-meta">
+            <span class="meta-item">Dr. Yannis Stylianou, Dr. Abeer Alwan</span>
+            <span class="meta-item">350 pages</span>
+            <span class="meta-item">Advanced</span>
+            <span class="meta-item">$69.99</span>
+          </div>
+          <div class="grid-content">
+            <ul class="grid-features">
+              <li class="glass-list-item">Voice conversion and speaker transformation</li>
+              <li class="glass-list-item">Covers voice cloning, speaker adaptation</li>
+              <li class="glass-list-item">Practical techniques and algorithms</li>
+              <li class="glass-list-item">Real-world applications in speech synthesis</li>
+              <li class="glass-list-item">Focus on neural voice conversion</li>
+              <li class="glass-list-item">Essential for personalized speech</li>
+            </ul>
+          </div>
+          <a href="https://www.amazon.com/Voice-Conversion-Techniques-Applications-Stylianou/dp/3030518167"
+            class="btn-glow" target="_blank">Get Book</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for the Sonic Frontier.</p>
+    <div style="margin-top: 15px;">
+      <a href="../index.html">Home</a> &middot;
+      <a href="data-science.html">Intelligence</a> &middot;
+      <a href="../login.html">Portal</a>
+    </div>
+  </footer>
+</body>
+
+</html>

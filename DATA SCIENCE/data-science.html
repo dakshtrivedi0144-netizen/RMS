@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Science Intelligence | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* ========================================================
+       SPATIAL V3 - DATA SCIENCE ULTIMATE DOMAIN
+       Aesthetic: Hyper-Modern / Glassmorphic / Atmospheric
+    ======================================================== */
+    :root {
+      --color-bg: #020617;
+      --color-bg-alt: #0b1120;
+      --color-primary: #7C3AED;
+      --color-primary-light: #A78BFA;
+      --color-primary-glow: rgba(124, 58, 237, 0.15);
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-accent-glow: rgba(6, 182, 212, 0.15);
+      --color-border: rgba(255, 255, 255, 0.08);
+      --color-text: #F8FAFC;
+      --color-text-dim: #94A3B8;
+      --color-glass: rgba(15, 23, 42, 0.6);
+      --glass-blur: blur(20px);
+      --shadow-glow: 0 0 30px rgba(124, 58, 237, 0.15);
+      --radius-2xl: 2.5rem;
+      --radius-xl: 1.5rem;
+      --radius-lg: 1rem;
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      cursor: default;
+    }
+
+    a,
+    button {
+      cursor: pointer;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(var(--color-primary), var(--color-accent));
+      border-radius: 10px;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--color-bg);
+      color: var(--color-text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    /* Ambient Glows */
+    .bg-glow {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--color-primary-glow) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(100px);
+      z-index: -1;
+      pointer-events: none;
+      animation: drift 20s infinite alternate;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate(-10%, -10%) scale(1);
+      }
+
+      to {
+        transform: translate(10%, 10%) scale(1.1);
+      }
+    }
+
+    /* Top Nav */
+    .top-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFF, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      letter-spacing: -2px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-brand i {
+      font-size: 1.4rem;
+      color: var(--color-primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      transform: translateY(-2px);
+      text-shadow: 0 0 15px var(--color-primary-light);
+    }
+
+    .nav-links a.active {
+      color: var(--color-accent-light);
+    }
+
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 4rem;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Terminal Header */
+    .terminal-header {
+      background: var(--color-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      padding: 100px 60px;
+      margin: 60px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .terminal-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 100%);
+    }
+
+    .terminal-title {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -3px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-dim);
+      font-size: 1.4rem;
+      max-width: 900px;
+      margin: 0 auto;
+      font-weight: 400;
+      line-height: 1.8;
+    }
+
+    /* Section Control */
+    .matrix-section {
+      margin-bottom: 100px;
+      padding: 80px;
+      background: var(--color-glass);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-2xl);
+      backdrop-filter: var(--glass-blur);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--color-primary-light);
+      margin-bottom: 50px;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      letter-spacing: -1px;
+    }
+
+    .section-title i {
+      padding: 15px;
+      background: rgba(124, 58, 237, 0.1);
+      border-radius: 1rem;
+      color: var(--color-accent-light);
+    }
+
+    /* Grid Enhancement */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 35px;
+    }
+
+    .grid-item {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 45px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .grid-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-10px) scale(1.02);
+      border-color: var(--color-primary-light);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(124, 58, 237, 0.2);
+    }
+
+    .track-icon {
+      font-size: 2.5rem;
+      margin-bottom: 25px;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .grid-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #FFF;
+      margin-bottom: 18px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-content {
+      color: var(--color-text-dim);
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+      line-height: 1.7;
+    }
+
+    .grid-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .glass-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-dim);
+      font-size: 0.9rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 15px;
+      border-radius: 0.8rem;
+    }
+
+    .glass-list-item::before {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--color-accent-light);
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 1rem;
+      font-weight: 900;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: var(--transition);
+      margin-top: auto;
+      border: none;
+    }
+
+    .btn-glow i {
+      transition: transform 0.3s;
+    }
+
+    .btn-glow:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+      box-shadow: 0 15px 30px var(--color-primary-glow);
+    }
+
+    .btn-glow:hover i {
+      transform: translateX(5px);
+    }
+
+    /* Footer Elite */
+    footer {
+      text-align: center;
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+      background: rgba(2, 6, 23, 0.5);
+      margin-top: auto;
+    }
+
+    footer p {
+      color: var(--color-text-dim);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .footer-links a {
+      color: var(--color-text-dim);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #FFF;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-dim);
+      text-decoration: none;
+      margin-bottom: 40px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateX(-5px);
+    }
+
+    @media (max-width: 1024px) {
+      .top-nav {
+        padding: 1rem 2rem;
+      }
+
+      .container {
+        padding: 0 2rem;
+      }
+
+      .terminal-title {
+        font-size: 3.5rem;
+      }
+
+      .matrix-section {
+        padding: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .terminal-title {
+        font-size: 2.8rem;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>if(!localStorage.getItem('rms_token')){localStorage.setItem('rms_redirect',window.location.href);window.location.href='../login.html';}</script>
+  <div class="bg-glow"></div>
+  <canvas id="networkCanvas"></canvas>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">
+      <i class="fas fa-atom"></i> RMS.INTEL
+    </a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-user-astronaut"></i> Portal</a>
+      <a href="data-science.html" class="active"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> RETURN TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Data Science Universe</h1>
+      <p class="terminal-subtitle">Architect of the algorithmic frontier. Master machine learning, deep neural networks,
+        and the future of artificial intelligence.</p>
+    </header>
+
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-dna"></i> Intelligence Verticals</h2>
+      <div class="grid-container">
+        <!-- MACHINE LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-brain track-icon"></i>
+          <h3 class="grid-title">Machine Learning (ML)</h3>
+          <p class="grid-content">Teaches machines to learn from data and improve over time without explicit
+            programming. Includes supervised, unsupervised, and reinforcement learning.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Python, Scikit-learn, TensorFlow, PyTorch</li>
+          </ul>
+          <a href="ml.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- DEEP LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-network-wired track-icon"></i>
+          <h3 class="grid-title">Deep Learning</h3>
+          <p class="grid-content">A subset of ML that uses neural networks with many layers to handle complex tasks.
+            Used for image recognition, speech, NLP, etc.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">TensorFlow, Keras, PyTorch, CUDA</li>
+          </ul>
+          <a href="deep-learning.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- NLP -->
+        <div class="grid-item">
+          <i class="fas fa-language track-icon"></i>
+          <h3 class="grid-title">NLP & LLMs</h3>
+          <p class="grid-content">Enables machines to understand, interpret, and generate human language. Used in
+            chatbots, sentiment analysis, and translation.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">NLTK, spaCy, Transformers, GPT</li>
+          </ul>
+          <a href="nlp.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- COMPUTER VISION -->
+        <div class="grid-item">
+          <i class="fas fa-eye track-icon"></i>
+          <h3 class="grid-title">Computer Vision</h3>
+          <p class="grid-content">Allows computers to see, identify, and process images or video like humans. Used in
+            face detection, object recognition, OCR, etc.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">OpenCV, YOLO, TensorFlow, PyTorch</li>
+          </ul>
+          <a href="computer-vision.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- REINFORCEMENT LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-gamepad track-icon"></i>
+          <h3 class="grid-title">Reinforcement Learning</h3>
+          <p class="grid-content">Agents learn by interacting with an environment and receiving rewards or penalties.
+            Used in robotics, gaming, self-driving cars.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">OpenAI Gym, Unity ML-Agents</li>
+          </ul>
+          <a href="reinforcement-learning.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- DATA SCIENCE & ANALYTICS -->
+        <div class="grid-item">
+          <i class="fas fa-chart-bar track-icon"></i>
+          <h3 class="grid-title">Data Science & Analytics</h3>
+          <p class="grid-content">Extracting insights from structured and unstructured data. Uses statistical methods
+            and ML to make data-driven decisions.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Pandas, NumPy, Matplotlib, Power BI</li>
+          </ul>
+          <a href="#" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- HEALTHCARE -->
+        <div class="grid-item">
+          <i class="fas fa-heartbeat track-icon"></i>
+          <h3 class="grid-title">AI in Healthcare</h3>
+          <p class="grid-content">Applies AI to diagnose diseases, analyze medical images, and drug discovery. Uses
+            models trained on specialized medical data.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Medical imaging, Drug discovery</li>
+          </ul>
+          <a href="DShealthcare.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- FINANCE -->
+        <div class="grid-item">
+          <i class="fas fa-chart-line track-icon"></i>
+          <h3 class="grid-title">AI in Finance</h3>
+          <p class="grid-content">Predicts stock prices, detects fraud, manages risk, and automates trading using
+            time-series forecasting and anomaly detection.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Fraud detection, Risk management</li>
+          </ul>
+          <a href="DSfinance.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- ROBOTICS -->
+        <div class="grid-item">
+          <i class="fas fa-robot track-icon"></i>
+          <h3 class="grid-title">AI in Robotics</h3>
+          <p class="grid-content">Combines AI and robotics to create machines that can sense, think, and act. Used in
+            automation, manufacturing, and drones.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Autonomous systems, Industrial automation</li>
+          </ul>
+          <a href="DSrobotics.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- CYBERSECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-user-shield track-icon"></i>
+          <h3 class="grid-title">AI in Cybersecurity</h3>
+          <p class="grid-content">Uses AI to detect anomalies, phishing, malware, and prevent threats. Involves behavior
+            analysis and automated threat detection.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Threat detection, Anomaly detection</li>
+          </ul>
+          <a href="DScybersecurity.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- SPEECH -->
+        <div class="grid-item">
+          <i class="fas fa-microphone track-icon"></i>
+          <h3 class="grid-title">Speech Systems</h3>
+          <p class="grid-content">Converts spoken language into text (ASR) or text into speech (TTS). Enables
+            voice-based interaction and accessibility.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">Google Speech API, Whisper by OpenAI</li>
+          </ul>
+          <a href="DSspeech-recognition.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- MLOPS -->
+        <div class="grid-item">
+          <i class="fas fa-infinity track-icon"></i>
+          <h3 class="grid-title">AutoML & MLOps</h3>
+          <p class="grid-content">AutoML automates selection and tuning. MLOps combines DevOps with ML to deploy,
+            monitor, and manage production models.</p>
+          <ul class="grid-features">
+            <li class="glass-list-item">MLflow, Kubeflow, SageMaker</li>
+          </ul>
+          <a href="#" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 RMS Intelligence Systems. Architected for the Future of Data.</p>
+    <div style="margin-top: 15px;">
+      <a href="../index.html">Home</a> &middot;
+      <a href="data-science.html">Intelligence</a> &middot;
+      <a href="../login.html">Portal</a>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#7C3AED'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 80; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 180) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.4 * (1 - d / 180)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

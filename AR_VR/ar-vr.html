@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AR/VR & Spatial Computing Hub | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC SPATIAL COMPUTING HUB - PREMIUM
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.75);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.1);
+      --radius-lg: 1.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(25px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      transform: translateY(-2px);
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+
+    /* HEADER */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: var(--radius-lg);
+      margin: 60px auto 40px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.05) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .terminal-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      background: linear-gradient(to right, #FFF, #C4B5FD, #22D3EE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      z-index: 1;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.25rem;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      opacity: 0.9;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(30px);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.22rem;
+      color: #FFF;
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+
+    .section-title i {
+      color: var(--color-accent-light);
+      filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.5));
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+      transition: 0.8s;
+    }
+
+    .grid-item:hover::before {
+      left: 100%;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-10px);
+      border-color: rgba(139, 92, 246, 0.5);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(139, 92, 246, 0.1);
+    }
+
+    .track-icon {
+      font-size: 2.8rem;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .grid-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #FFF;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-content {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 14px 28px;
+      background: rgba(139, 92, 246, 0.1);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: auto;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0;
+      font-weight: 700;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      transform: translateX(-10px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+      background: #020617;
+      margin-top: 50px;
+      color: var(--color-text-muted);
+    }
+
+    footer a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      margin: 0 15px;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      color: #FFF;
+    }
+
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 1.25rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .terminal-title {
+        font-size: 2.5rem;
+      }
+
+      .matrix-section {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script>if(!localStorage.getItem('rms_token')){localStorage.setItem('rms_redirect',window.location.href);window.location.href='../login.html';}</script>
+  <canvas id="networkCanvas"></canvas>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.SPATIAL</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../APP DEV/app.html"><i class="fas fa-mobile-alt"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO OPERATIONS</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">Spatial Computing Universe</h1>
+      <p class="terminal-subtitle">Deep dive into the intersection of physical and digital realities. Master AR, VR, and
+        Mixed Reality architectures.</p>
+    </header>
+
+    <div class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-vr-cardboard"></i> Immersive Experience Tracks</h2>
+      <div class="grid-container">
+        <!-- AR/VR DEVELOPMENT -->
+        <div class="grid-item">
+          <i class="fas fa-cubes track-icon"></i>
+          <h3 class="grid-title">AR/VR Development</h3>
+          <p class="grid-content">Master Unity, Unreal Engine, and spatial SDKs like ARKit and ARCore to build immersive
+            real-time 3D experiences.</p>
+          <a href="ar-vr-development-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- IMMERSIVE UX/UI -->
+        <div class="grid-item">
+          <i class="fas fa-pencil-ruler track-icon"></i>
+          <h3 class="grid-title">UX/UI Design</h3>
+          <p class="grid-content">Craft intuitive spatial interfaces, 3D interactions, and user comfort strategies for
+            next-gen immersive devices.</p>
+          <a href="immersive-ux-ui-design-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="grid-item">
+          <i class="fas fa-graduation-cap track-icon"></i>
+          <h3 class="grid-title">Education & Training</h3>
+          <p class="grid-content">Revolutionize learning through interactive simulations, virtual classrooms, and
+            high-retention hands-on VR training.</p>
+          <a href="ar-vr-education-training-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- HEALTHCARE -->
+        <div class="grid-item">
+          <i class="fas fa-heartbeat track-icon"></i>
+          <h3 class="grid-title">Healthcare AR/VR</h3>
+          <p class="grid-content">Implement surgical planning, virtual therapy, and complex medical visualization for
+            enhanced patient care.</p>
+          <a href="healthcare-medical-application-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- RETAIL -->
+        <div class="grid-item">
+          <i class="fas fa-shopping-cart track-icon"></i>
+          <h3 class="grid-title">Retail & E-Commerce</h3>
+          <p class="grid-content">Transform the shopping experience with virtual try-ons, 3D product visualization, and
+            augmented retail environments.</p>
+          <a href="ar-e-commerce-retail-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- AEC -->
+        <div class="grid-item">
+          <i class="fas fa-building track-icon"></i>
+          <h3 class="grid-title">AEC & Construction</h3>
+          <p class="grid-content">Bridge the gap between design and reality with virtual walkthroughs and collaborative
+            spatial planning.</p>
+          <a href="aec-architecture-engineering-construction-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- GAMING -->
+        <div class="grid-item">
+          <i class="fas fa-gamepad track-icon"></i>
+          <h3 class="grid-title">Gaming & Media</h3>
+          <p class="grid-content">Push the boundaries of digital engagement with immersive storytelling, virtual
+            concerts, and 6DoF game worlds.</p>
+          <a href="gaming-entertainment-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="grid-item">
+          <i class="fas fa-map-marked-alt track-icon"></i>
+          <h3 class="grid-title">Spatial Navigation</h3>
+          <p class="grid-content">Develop location-based AR overlays for wayfinding, tourism, and real-time world
+            interaction.</p>
+          <a href="navigation-location-based-ar-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- 360 VIDEO -->
+        <div class="grid-item">
+          <i class="fas fa-video track-icon"></i>
+          <h3 class="grid-title">360 Video Tours</h3>
+          <p class="grid-content">Create immersive exploration of real-world environments through spherical video and
+            interactive virtual tours.</p>
+          <a href="360-video-virtual-tours-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- HARDWARE -->
+        <div class="grid-item">
+          <i class="fas fa-microchip track-icon"></i>
+          <h3 class="grid-title">Hardware Integration</h3>
+          <p class="grid-content">Engineer responsive sensory systems, haptic feedback, and low-latency tracking for
+            AR/VR
+            peripherals.</p>
+          <a href="hardware-sensor-integration-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- RESEARCH -->
+        <div class="grid-item">
+          <i class="fas fa-brain track-icon"></i>
+          <h3 class="grid-title">Cognitive Research</h3>
+          <p class="grid-content">Utilize controlled immersive environments to study human perception, learning, and
+            behavioral patterns.</p>
+          <a href="cognitive-behaviour-research-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Intelligence Systems. Architected for the Spatial Future.</p>
+      <div style="margin-top: 20px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="../AI_ML/ai-ml.html">Intelligence</a> &middot;
+        <a href="../login.html">Neural Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#8B5CF6'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 80; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 180) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.4 * (1 - d / 180)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

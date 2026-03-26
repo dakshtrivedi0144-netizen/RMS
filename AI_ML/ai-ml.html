@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI & Machine Learning Ecosystem | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC AI SAAS DASHBOARD - REFINED v2
+    ============================================ */
+    :root {
+      --color-primary: #7C3AED;
+      --color-primary-light: #A78BFA;
+      --color-accent: #06B6D4;
+      --color-accent-light: #22D3EE;
+      --color-bg-darker: #0A0E27;
+      --color-bg-glass: rgba(15, 23, 42, 0.85);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #CBD5E1;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.15);
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --radius-lg: 1.25rem;
+      --shadow-glow: 0 0 25px rgba(124, 58, 237, 0.3);
+      --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(10, 14, 39, 0.8);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-accent-light);
+      transform: translateY(-2px);
+    }
+
+    /* TERMINAL STYLE HEADER */
+    .terminal-header {
+      background: var(--color-bg-glass);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      margin: 40px auto;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow);
+      position: relative;
+    }
+
+    .terminal-title {
+      font-size: 3.2rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(90deg, #FFF, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 15px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 35px;
+      margin-bottom: 50px;
+    }
+
+    .section-title {
+      font-size: 2.22rem;
+      color: var(--color-accent-light);
+      margin-bottom: 35px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 25px;
+    }
+
+    .grid-item {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-8px);
+      border-color: var(--color-primary);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(124, 58, 237, 0.2);
+    }
+
+    .grid-item:hover::before {
+      opacity: 1;
+    }
+
+    .track-icon {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 5px;
+    }
+
+    .grid-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #FFF;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .grid-content {
+      font-size: 0.95rem;
+      color: var(--color-text-secondary);
+      line-height: 1.6;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px 24px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      margin-top: auto;
+      transition: all var(--transition-base);
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+    }
+
+    footer {
+      text-align: center;
+      padding: 5rem 0;
+      border-top: 1px solid var(--color-border);
+      background: #070B1D;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 30px 0;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+    }
+  </style>
+</head>
+
+<body>
+  <script>if(!localStorage.getItem('rms_token')){localStorage.setItem('rms_redirect',window.location.href);window.location.href='../login.html';}</script>
+  <canvas id="networkCanvas"></canvas>
+
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.AI</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html" style="color: var(--color-accent-light);"><i class="fas fa-brain"></i>
+        Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">AI & Machine Learning Universe</h1>
+      <p class="terminal-subtitle">Navigate through the computational frontiers of intelligence, from statistical
+        modeling to autonomous robotic systems.</p>
+    </header>
+
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-microchip"></i> Specialized Intelligence Tracks</h2>
+      <div class="grid-container">
+        <!-- MACHINE LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-brain track-icon"></i>
+          <h3 class="grid-title">Machine Learning</h3>
+          <p class="grid-content">Master the mathematical foundations, core algorithms, and statistical patterns that
+            drive predictive logic.</p>
+          <a href="machine-learning-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- DEEP LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-network-wired track-icon"></i>
+          <h3 class="grid-title">Deep Learning</h3>
+          <p class="grid-content">Architect multi-layered neural systems for advanced recognition, prediction, and
+            generation tasks.</p>
+          <a href="deep-learning-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- NLP -->
+        <div class="grid-item">
+          <i class="fas fa-language track-icon"></i>
+          <h3 class="grid-title">NLP & LLMs</h3>
+          <p class="grid-content">Process human language at scale, from basic tokenization to engineering Large Language
+            Models.</p>
+          <a href="nlp-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- COMPUTER VISION -->
+        <div class="grid-item">
+          <i class="fas fa-eye track-icon"></i>
+          <h3 class="grid-title">Computer Vision</h3>
+          <p class="grid-content">Bridge the gap between raw pixels and semantic understanding for real-time visual
+            automation.</p>
+          <a href="computer-vision-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- REINFORCEMENT LEARNING -->
+        <div class="grid-item">
+          <i class="fas fa-gamepad track-icon"></i>
+          <h3 class="grid-title">Reinforcement Learning</h3>
+          <p class="grid-content">Train autonomous agents to solve complex problems through iterative reward-based
+            optimization.</p>
+          <a href="reinforcement-learning-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- ML OPS -->
+        <div class="grid-item">
+          <i class="fas fa-infinity track-icon"></i>
+          <h3 class="grid-title">MLOps & AutoML</h3>
+          <p class="grid-content">Scale AI systems from research to production with automated pipelines and deployment
+            cycles.</p>
+          <a href="auto-ml-mlops-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- SPEECH RECOGNITION -->
+        <div class="grid-item">
+          <i class="fas fa-microphone track-icon"></i>
+          <h3 class="grid-title">Speech Systems</h3>
+          <p class="grid-content">Design systems for recognition, synthesis, and real-time audio interaction
+            technologies.</p>
+          <a href="speech-recognition-generation-roadmap.html" class="btn-glow">Explore Path <i
+              class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- ROBOTICS -->
+        <div class="grid-item">
+          <i class="fas fa-robot track-icon"></i>
+          <h3 class="grid-title">AI Robotics</h3>
+          <p class="grid-content">Embody intelligence in hardware through autonomous navigation, control, and sensor
+            fusion.</p>
+          <a href="ai-robotics-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- CYBERSECURITY -->
+        <div class="grid-item">
+          <i class="fas fa-user-shield track-icon"></i>
+          <h3 class="grid-title">AI in Cybersecurity</h3>
+          <p class="grid-content">Deploy AI for threat detection, anomaly behavior analysis, and automated defense
+            systems.</p>
+          <a href="ai-cybersecurity-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- FINANCE -->
+        <div class="grid-item">
+          <i class="fas fa-chart-line track-icon"></i>
+          <h3 class="grid-title">AI in Finance</h3>
+          <p class="grid-content">Optimize portfolios, detect fraud, and automate trading using advanced predictive
+            finance APIs.</p>
+          <a href="ai-finance-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- HEALTHCARE -->
+        <div class="grid-item">
+          <i class="fas fa-heartbeat track-icon"></i>
+          <h3 class="grid-title">AI in Healthcare</h3>
+          <p class="grid-content">Revolutionize diagnostics, drug discovery, and patient monitoring with personalized AI
+            care.</p>
+          <a href="ai-healthcare-roadmap.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Intelligence Systems. Architected for the Future of Data.</p>
+      <div style="margin-top: 15px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="../WEB D/web-development.html">Engineering</a> &middot;
+        <a href="../login.html">Neural Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#7C3AED'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 80; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 180) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.4 * (1 - d / 180)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>

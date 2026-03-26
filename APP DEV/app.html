@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>App Development Hub | RMS</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    /* ============================================
+    FUTURISTIC APP DEV DASHBOARD - PREMIUM
+    ============================================ */
+    :root {
+      --color-primary: #8B5CF6;
+      --color-primary-light: #C4B5FD;
+      --color-accent: #06B6D4;
+      --color-accent-light: #67E8F9;
+      --color-bg-darker: #020617;
+      --color-bg-glass: rgba(15, 23, 42, 0.75);
+      --color-text-primary: #F8FAFC;
+      --color-text-secondary: #94A3B8;
+      --color-text-muted: #64748B;
+      --color-border: rgba(148, 163, 184, 0.1);
+      --spacing-md: 1.25rem;
+      --spacing-lg: 2rem;
+      --radius-lg: 1.5rem;
+      --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
+      --transition-base: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+
+    #networkCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+      width: 100%;
+    }
+
+    /* PREMIUM NAVIGATION */
+    .top-nav {
+      background: rgba(2, 6, 23, 0.7);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--color-border);
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .nav-brand {
+      font-size: 1.8rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--color-primary-light), var(--color-accent-light));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 3rem;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition-base);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+      color: #FFF;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+      transform: translateY(-3px);
+    }
+
+    /* TERMINAL STYLE HEADER */
+    .terminal-header {
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent),
+        var(--color-bg-glass);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      border-radius: var(--radius-lg);
+      margin: 60px auto;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: var(--shadow-glow), inset 0 0 40px rgba(139, 92, 246, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.1), transparent);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .terminal-title {
+      font-size: 4rem;
+      font-weight: 900;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #FFF, #C4B5FD, #22D3EE);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      letter-spacing: -2px;
+    }
+
+    .terminal-subtitle {
+      color: var(--color-text-secondary);
+      font-size: 1.3rem;
+      max-width: 850px;
+      margin: 0 auto;
+      font-weight: 300;
+    }
+
+    /* SECTIONS */
+    .matrix-section {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--color-border);
+      backdrop-filter: blur(30px);
+      border-radius: var(--radius-lg);
+      padding: 50px;
+      margin-bottom: 80px;
+      position: relative;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: #FFF;
+      margin-bottom: 45px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+    }
+
+    .section-title i {
+      color: var(--color-accent-light);
+      filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.5));
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 30px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.6));
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      transition: all var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+      transition: 0.8s;
+    }
+
+    .grid-item:hover::before {
+      left: 100%;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: rgba(139, 92, 246, 0.5);
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.6), rgba(15, 23, 42, 0.8));
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(139, 92, 246, 0.15);
+    }
+
+    .track-icon {
+      font-size: 3.5rem;
+      background: linear-gradient(135deg, #A78BFA, #06B6D4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.3));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .grid-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #FFF;
+      font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.5px;
+    }
+
+    .grid-content {
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      line-height: 1.7;
+    }
+
+    .btn-glow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 15px 30px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--color-border);
+      color: #FFF;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: auto;
+      transition: all var(--transition-base);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+    }
+
+    .btn-glow:hover {
+      background: linear-gradient(45deg, var(--color-primary), var(--color-accent));
+      border-color: transparent;
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+      color: #FFF;
+    }
+
+    footer {
+      text-align: center;
+      padding: 80px 0;
+      border-top: 1px solid var(--color-border);
+      background: #020617;
+      margin-top: 100px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      margin: 40px 0;
+      font-weight: 700;
+      transition: all 0.3s;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .back-link:hover {
+      color: #FFF;
+      transform: translateX(-10px);
+    }
+
+    /* CUSTOM SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--color-bg-darker);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1E293B;
+      border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  </style>
+</head>
+
+<body>
+  <script>if(!localStorage.getItem('rms_token')){localStorage.setItem('rms_redirect',window.location.href);window.location.href='../login.html';}</script>
+  <canvas id="networkCanvas"></canvas>
+  <nav class="top-nav">
+    <a href="../index.html" class="nav-brand">RMS.APP</a>
+    <div class="nav-links">
+      <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
+      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
+
+    <header class="terminal-header">
+      <h1 class="terminal-title">App Development Universe</h1>
+      <p class="terminal-subtitle">Architecting the future of human-device interaction, from mobile micro-experiences to
+        massive enterprise systems.</p>
+    </header>
+
+    <section class="matrix-section">
+      <h2 class="section-title"><i class="fas fa-layer-group"></i> Specialization Tracks</h2>
+      <div class="grid-container">
+        <!-- MOBILE APP -->
+        <div class="grid-item">
+          <i class="fas fa-mobile-alt track-icon"></i>
+          <h3 class="grid-title">Mobile App Development</h3>
+          <p class="grid-content">Focus on creating applications for smartphones and tablets. Master the art of
+            designing intuitive interfaces and building robust functionality for Android and iOS.</p>
+          <a href="mobile_app.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- DESKTOP APP -->
+        <div class="grid-item">
+          <i class="fas fa-desktop track-icon"></i>
+          <h3 class="grid-title">Desktop App Development</h3>
+          <p class="grid-content">Build software applications that run locally on Windows, macOS, or Linux. Master
+            technologies like Electron, .NET, and Java for high-performance desktop tools.</p>
+          <a href="desktop_app.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- GAME DEV -->
+        <div class="grid-item">
+          <i class="fas fa-gamepad track-icon"></i>
+          <h3 class="grid-title">Game Development</h3>
+          <p class="grid-content">Create interactive and entertaining games for mobile and desktop platforms. Harness
+            the power of engines like Unity, Unreal, and Godot.</p>
+          <a href="game_development.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- EMBEDDED -->
+        <div class="grid-item">
+          <i class="fas fa-microchip track-icon"></i>
+          <h3 class="grid-title">Embedded System App</h3>
+          <p class="grid-content">Develop specialized software for hardware devices, IoT gadgets, automotive systems,
+            and high-precision industrial controllers.</p>
+          <a href="embadded_app.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="grid-item">
+          <i class="fas fa-building track-icon"></i>
+          <h3 class="grid-title">Enterprise App Development</h3>
+          <p class="grid-content">Deliver robust, scalable solutions for large-scale businesses. Streamline complex
+            operations and integrate with enterprise systems like ERP and CRM.</p>
+          <a href="enterprize.html" class="btn-glow">Explore Path <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 RMS Intelligence Systems. Architected for the Future of Tech.</p>
+      <div style="margin-top: 15px;">
+        <a href="../index.html">Operations</a> &middot;
+        <a href="../AI_ML/ai-ml.html">Intelligence</a> &middot;
+        <a href="../login.html">Neural Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, nodes = [];
+    const resize = () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; };
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Node {
+      constructor() {
+        this.x = Math.random() * width; this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.4; this.vy = (Math.random() - 0.5) * 0.4;
+      }
+      update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+      }
+      draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#7C3AED'; ctx.fill();
+      }
+    }
+    for (let i = 0; i < 80; i++) nodes.push(new Node());
+
+    const animate = () => {
+      ctx.clearRect(0, 0, width, height);
+      nodes.forEach(n => {
+        n.update(); n.draw();
+        nodes.forEach(m => {
+          const d = Math.hypot(n.x - m.x, n.y - m.y);
+          if (d < 180) {
+            ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(m.x, m.y);
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.4 * (1 - d / 180)})`;
+            ctx.lineWidth = 0.5; ctx.stroke();
+          }
+        });
+      });
+      requestAnimationFrame(animate);
+    };
+    animate();
+  </script>
+</body>
+
+</html>
