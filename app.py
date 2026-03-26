@@ -35,19 +35,29 @@ CORS(app)
 
 
 # ─────────────────────────────────────────────
-#  Database Helpers
+#  Database Helpers (JSON file with in-memory fallback for serverless)
 # ─────────────────────────────────────────────
 
+_memory_db = {"users": []}  # fallback for serverless (Vercel)
+
 def read_db() -> dict:
-    """Read the JSON database file. Creates it if missing."""
-    if not DB_FILE.exists():
-        DB_FILE.write_text(json.dumps({"users": []}, indent=2))
-    return json.loads(DB_FILE.read_text())
+    """Read the JSON database. Falls back to in-memory on serverless."""
+    try:
+        if DB_FILE.exists():
+            return json.loads(DB_FILE.read_text())
+    except Exception:
+        pass
+    return _memory_db
 
 
 def write_db(data: dict) -> None:
-    """Persist data to the JSON database file."""
-    DB_FILE.write_text(json.dumps(data, indent=2, default=str))
+    """Persist data. Falls back to in-memory on serverless."""
+    global _memory_db
+    _memory_db = data
+    try:
+        DB_FILE.write_text(json.dumps(data, indent=2, default=str))
+    except Exception:
+        pass  # serverless — keep in memory only
 
 
 # ─────────────────────────────────────────────
