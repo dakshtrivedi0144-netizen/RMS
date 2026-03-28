@@ -628,8 +628,8 @@
     /* GRID SYSTEM OVERRIDES (For old static grids) */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--spacing-md);
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
       margin-top: var(--spacing-xl);
       padding: var(--spacing-xl) 0;
     }
@@ -637,15 +637,14 @@
     .grid-item {
       display: flex;
       flex-direction: column;
-      background: linear-gradient(135deg,
-          rgba(124, 58, 237, 0.05) 0%,
-          rgba(6, 182, 212, 0.02) 100%);
+      background: linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(6,182,212,0.03) 100%);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--spacing-xl);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 1.25rem;
+      padding: 2rem;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
       overflow: hidden;
+      min-height: 220px;
     }
 
     .grid-item::before {
