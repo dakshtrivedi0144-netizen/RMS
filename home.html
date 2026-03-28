@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -1504,47 +1504,14 @@
     }
   }
 
-  // ── Search data — every path with keywords ──────────────────────────────
+// ── 6 Domain Cards — sub-paths searchable via tags ──────────────────────
   var PATHS = [
-    {title:'🤖 AI & Machine Learning', desc:'Foundations, deep learning, NLP, computer vision and applied AI.', url:'AI_ML/ai-ml.html', tags:'ai machine learning deep learning neural network python tensorflow pytorch nlp'},
-    {title:'💻 Web Development', desc:'Frontend, backend and full-stack guides for modern web apps.', url:'WEB D/web-development.html', tags:'web html css javascript react vue node express frontend backend fullstack'},
-    {title:'🔐 Cybersecurity', desc:'Security fundamentals, ethical hacking and incident response.', url:'CYBER S/cyber_security.html', tags:'cybersecurity hacking security network ethical penetration testing'},
-    {title:'📱 App Development', desc:'Mobile, desktop and embedded application development.', url:'APP DEV/app.html', tags:'app mobile android ios flutter react native desktop swift kotlin'},
-    {title:'🕶️ AR / VR', desc:'Immersive experiences, 3D, and hardware integration.', url:'AR_VR/ar-vr.html', tags:'ar vr augmented virtual reality unity unreal 3d immersive'},
-    {title:'📊 Data Science', desc:'Data analysis, visualization and ML for data-driven products.', url:'DATA SCIENCE/data-science.html', tags:'data science pandas numpy matplotlib statistics analysis visualization'},
-    {title:'🧠 Machine Learning', desc:'Core ML algorithms, supervised and unsupervised learning.', url:'AI_ML/machine-learning-roadmap.html', tags:'machine learning regression classification clustering python scikit'},
-    {title:'🔥 Deep Learning', desc:'Neural networks, CNNs, RNNs and transformer architectures.', url:'AI_ML/deep-learning-roadmap.html', tags:'deep learning cnn rnn lstm transformer bert gpt neural network'},
-    {title:'💬 NLP & LLMs', desc:'Natural language processing and large language models.', url:'AI_ML/nlp-roadmap.html', tags:'nlp natural language processing llm gpt bert text classification'},
-    {title:'👁️ Computer Vision', desc:'Image processing, object detection and visual AI.', url:'AI_ML/computer-vision-roadmap.html', tags:'computer vision opencv image detection yolo face recognition'},
-    {title:'🎮 Reinforcement Learning', desc:'Train agents with reward-based optimization.', url:'AI_ML/reinforcement-learning-roadmap.html', tags:'reinforcement learning rl agent reward q-learning policy'},
-    {title:'⚙️ MLOps & AutoML', desc:'Scale AI from research to production pipelines.', url:'AI_ML/auto-ml-mlops-roadmap.html', tags:'mlops automl pipeline deployment docker kubernetes ci cd'},
-    {title:'🎤 Speech Recognition', desc:'Voice recognition, synthesis and audio AI.', url:'AI_ML/speech-recognition-generation-roadmap.html', tags:'speech recognition voice synthesis audio nlp whisper'},
-    {title:'🤖 AI Robotics', desc:'Autonomous navigation, control and sensor fusion.', url:'AI_ML/ai-robotics-roadmap.html', tags:'robotics ros autonomous navigation sensor fusion control'},
-    {title:'🛡️ AI in Cybersecurity', desc:'AI for threat detection and automated defense.', url:'AI_ML/ai-cybersecurity-roadmap.html', tags:'ai security threat detection anomaly intrusion'},
-    {title:'💰 AI in Finance', desc:'Portfolio optimization, fraud detection and trading AI.', url:'AI_ML/ai-finance-roadmap.html', tags:'finance trading fraud detection portfolio prediction'},
-    {title:'🏥 AI in Healthcare', desc:'Diagnostics, drug discovery and patient monitoring.', url:'AI_ML/ai-healthcare-roadmap.html', tags:'healthcare medical diagnosis drug discovery patient ai'},
-    {title:'🖥️ Frontend Development', desc:'HTML, CSS, JavaScript, React, Vue and modern UI.', url:'WEB D/frontend-roadmap.html', tags:'frontend html css javascript react vue angular typescript ui'},
-    {title:'⚡ Backend Development', desc:'APIs, databases, Node.js, PHP and server architecture.', url:'WEB D/backend-roadmap.html', tags:'backend node express php api rest graphql server database'},
-    {title:'⚛️ MERN Stack', desc:'MongoDB, Express, React, Node.js full-stack.', url:'WEB D/mern-stack.html', tags:'mern mongodb express react node fullstack javascript'},
-    {title:'🅰️ MEAN Stack', desc:'MongoDB, Express, Angular, Node.js full-stack.', url:'WEB D/mean-stack.html', tags:'mean mongodb express angular node fullstack'},
-    {title:'🎨 UI/UX Design', desc:'User experience, wireframing and interface design.', url:'WEB D/ui-ux.html', tags:'ui ux design figma wireframe prototype user experience'},
-    {title:'☁️ DevOps & Cloud', desc:'CI/CD, containers, Kubernetes and cloud platforms.', url:'WEB D/devops.html', tags:'devops docker kubernetes aws azure gcp ci cd pipeline cloud'},
-    {title:'🗄️ Database Management', desc:'SQL, NoSQL, schema design and optimization.', url:'WEB D/database-management.html', tags:'database sql mysql postgresql mongodb nosql redis schema'},
-    {title:'🌐 Cloud Integration', desc:'Serverless, microservices and cloud-native apps.', url:'WEB D/cloud-integration.html', tags:'cloud aws azure gcp serverless microservices lambda'},
-    {title:'📱 Responsive Web', desc:'Mobile-first design and responsive layouts.', url:'WEB D/responsive-mobile-app.html', tags:'responsive mobile css flexbox grid bootstrap tailwind'},
-    {title:'🎮 Web Game Dev', desc:'Browser games with JavaScript, Canvas and WebGL.', url:'WEB D/web-game.html', tags:'game javascript canvas webgl phaser unity browser'},
-    {title:'🔒 Network Security', desc:'Firewalls, VPNs and network protection.', url:'CYBER S/network-security.html', tags:'network security firewall vpn intrusion detection wireshark'},
-    {title:'🛡️ Ethical Hacking', desc:'Penetration testing and vulnerability assessment.', url:'CYBER S/ethical-hacking.html', tags:'ethical hacking penetration testing kali linux metasploit burp'},
-    {title:'🔑 Cryptography', desc:'Encryption, digital signatures and secure protocols.', url:'CYBER S/cryptography.html', tags:'cryptography encryption aes rsa hash ssl tls'},
-    {title:'🕵️ Digital Forensics', desc:'Cyber crime investigation and evidence collection.', url:'CYBER S/digital-forensics.html', tags:'forensics investigation evidence cyber crime analysis'},
-    {title:'🏢 Application Security', desc:'Secure coding and vulnerability testing.', url:'CYBER S/application-security.html', tags:'appsec owasp secure coding xss sql injection vulnerability'},
-    {title:'📊 Data Analysis', desc:'Pandas, NumPy, statistics and data wrangling.', url:'DATA SCIENCE/data-science.html', tags:'data analysis pandas numpy statistics python jupyter'},
-    {title:'🧬 Deep Learning (DS)', desc:'Neural networks for data science applications.', url:'DATA SCIENCE/deep-learning.html', tags:'deep learning tensorflow keras pytorch data science'},
-    {title:'🗣️ NLP (Data Science)', desc:'Text mining and language model applications.', url:'DATA SCIENCE/nlp.html', tags:'nlp text mining sentiment analysis topic modeling'},
-    {title:'🥽 AR/VR Development', desc:'Build immersive AR and VR experiences.', url:'AR_VR/ar-vr-development-roadmap.html', tags:'ar vr development unity unreal xr mixed reality'},
-    {title:'📱 Mobile App Dev', desc:'iOS, Android and cross-platform mobile apps.', url:'APP DEV/mobile_app.html', tags:'mobile ios android flutter react native swift kotlin'},
-    {title:'🖥️ Desktop Apps', desc:'Cross-platform desktop with Electron, .NET, Java.', url:'APP DEV/desktop_app.html', tags:'desktop electron dotnet java javafx wpf cross platform'},
-    {title:'🎮 Game Development', desc:'Unity, Unreal Engine and Godot game dev.', url:'APP DEV/game_development.html', tags:'game unity unreal godot c++ c# game engine 3d 2d'},
+    {title:'🤖 AI & Machine Learning',desc:'11 tracks — Machine Learning, Deep Learning, NLP, Computer Vision, Reinforcement Learning, MLOps, Speech Recognition, AI Robotics, AI in Cybersecurity, Finance and Healthcare.',url:'AI_ML/ai-ml.html',tags:'ai machine learning deep learning neural network nlp llm gpt bert computer vision reinforcement learning mlops automl speech recognition robotics cybersecurity finance healthcare tensorflow pytorch python scikit cnn rnn transformer'},
+    {title:'💻 Web Development',desc:'10 tracks — Frontend, Backend, MERN Stack, MEAN Stack, UI/UX Design, DevOps, Database Management, Cloud Integration, Responsive Web and Web Game Dev.',url:'WEB D/web-development.html',tags:'web frontend backend mern mean react angular vue node express html css javascript typescript ui ux design figma devops docker kubernetes cloud aws azure database sql mysql mongodb nosql redis responsive mobile bootstrap tailwind game canvas webgl fullstack api rest graphql'},
+    {title:'🔐 Cybersecurity',desc:'11 tracks — Network Security, Ethical Hacking, Cryptography, Digital Forensics, Application Security, Cloud Security, Incident Response, Security Operations, IoT Security, Risk Management and IAM.',url:'CYBER S/cyber_security.html',tags:'cybersecurity network security ethical hacking penetration testing kali linux metasploit burp cryptography encryption aes rsa ssl tls digital forensics investigation application security owasp xss sql injection cloud security incident response soc iot risk management iam identity access'},
+    {title:'📊 Data Science',desc:'13 tracks — Data Analysis, Deep Learning, NLP, Computer Vision, AutoML, Reinforcement Learning, Speech Recognition, AI Robotics, Cybersecurity, Finance, Healthcare and more.',url:'DATA SCIENCE/data-science.html',tags:'data science analysis pandas numpy matplotlib statistics visualization python jupyter deep learning tensorflow keras pytorch nlp text mining sentiment computer vision automl reinforcement learning speech robotics finance healthcare machine learning regression classification'},
+    {title:'🥽 AR / VR Development',desc:'12 tracks — AR/VR Development, Gaming, Healthcare, Education, Immersive UX/UI, Hardware Integration, Navigation, Retail, Architecture and more.',url:'AR_VR/ar-vr.html',tags:'ar vr augmented virtual reality unity unreal 3d immersive gaming entertainment healthcare education training ux ui hardware sensor navigation location retail ecommerce architecture construction cognitive research 360 video'},
+    {title:'📱 App Development',desc:'6 tracks — Mobile App Development, Desktop Applications, Game Development, Enterprise Apps, Embedded Systems and cross-platform development.',url:'APP DEV/app.html',tags:'app mobile android ios flutter react native swift kotlin desktop electron dotnet java javafx wpf game unity unreal godot c++ c# enterprise embedded systems cross platform xamarin ionic'},
   ];
 
   var allGrid = document.getElementById('allPaths');
@@ -1592,47 +1559,14 @@
   }
   </script>
 
-  // ── Search data — every path with keywords ──────────────────────────────
+// ── 6 Domain Cards — sub-paths searchable via tags ──────────────────────
   var PATHS = [
-    {title:'🤖 AI & Machine Learning', desc:'Foundations, deep learning, NLP, computer vision and applied AI.', url:'AI_ML/ai-ml.html', tags:'ai machine learning deep learning neural network python tensorflow pytorch nlp'},
-    {title:'💻 Web Development', desc:'Frontend, backend and full-stack guides for modern web apps.', url:'WEB D/web-development.html', tags:'web html css javascript react vue node express frontend backend fullstack'},
-    {title:'🔐 Cybersecurity', desc:'Security fundamentals, ethical hacking and incident response.', url:'CYBER S/cyber_security.html', tags:'cybersecurity hacking security network ethical penetration testing'},
-    {title:'📱 App Development', desc:'Mobile, desktop and embedded application development.', url:'APP DEV/app.html', tags:'app mobile android ios flutter react native desktop swift kotlin'},
-    {title:'🕶️ AR / VR', desc:'Immersive experiences, 3D, and hardware integration.', url:'AR_VR/ar-vr.html', tags:'ar vr augmented virtual reality unity unreal 3d immersive'},
-    {title:'📊 Data Science', desc:'Data analysis, visualization and ML for data-driven products.', url:'DATA SCIENCE/data-science.html', tags:'data science pandas numpy matplotlib statistics analysis visualization'},
-    {title:'🧠 Machine Learning', desc:'Core ML algorithms, supervised and unsupervised learning.', url:'AI_ML/machine-learning-roadmap.html', tags:'machine learning regression classification clustering python scikit'},
-    {title:'🔥 Deep Learning', desc:'Neural networks, CNNs, RNNs and transformer architectures.', url:'AI_ML/deep-learning-roadmap.html', tags:'deep learning cnn rnn lstm transformer bert gpt neural network'},
-    {title:'💬 NLP & LLMs', desc:'Natural language processing and large language models.', url:'AI_ML/nlp-roadmap.html', tags:'nlp natural language processing llm gpt bert text classification'},
-    {title:'👁️ Computer Vision', desc:'Image processing, object detection and visual AI.', url:'AI_ML/computer-vision-roadmap.html', tags:'computer vision opencv image detection yolo face recognition'},
-    {title:'🎮 Reinforcement Learning', desc:'Train agents with reward-based optimization.', url:'AI_ML/reinforcement-learning-roadmap.html', tags:'reinforcement learning rl agent reward q-learning policy'},
-    {title:'⚙️ MLOps & AutoML', desc:'Scale AI from research to production pipelines.', url:'AI_ML/auto-ml-mlops-roadmap.html', tags:'mlops automl pipeline deployment docker kubernetes ci cd'},
-    {title:'🎤 Speech Recognition', desc:'Voice recognition, synthesis and audio AI.', url:'AI_ML/speech-recognition-generation-roadmap.html', tags:'speech recognition voice synthesis audio nlp whisper'},
-    {title:'🤖 AI Robotics', desc:'Autonomous navigation, control and sensor fusion.', url:'AI_ML/ai-robotics-roadmap.html', tags:'robotics ros autonomous navigation sensor fusion control'},
-    {title:'🛡️ AI in Cybersecurity', desc:'AI for threat detection and automated defense.', url:'AI_ML/ai-cybersecurity-roadmap.html', tags:'ai security threat detection anomaly intrusion'},
-    {title:'💰 AI in Finance', desc:'Portfolio optimization, fraud detection and trading AI.', url:'AI_ML/ai-finance-roadmap.html', tags:'finance trading fraud detection portfolio prediction'},
-    {title:'🏥 AI in Healthcare', desc:'Diagnostics, drug discovery and patient monitoring.', url:'AI_ML/ai-healthcare-roadmap.html', tags:'healthcare medical diagnosis drug discovery patient ai'},
-    {title:'🖥️ Frontend Development', desc:'HTML, CSS, JavaScript, React, Vue and modern UI.', url:'WEB D/frontend-roadmap.html', tags:'frontend html css javascript react vue angular typescript ui'},
-    {title:'⚡ Backend Development', desc:'APIs, databases, Node.js, PHP and server architecture.', url:'WEB D/backend-roadmap.html', tags:'backend node express php api rest graphql server database'},
-    {title:'⚛️ MERN Stack', desc:'MongoDB, Express, React, Node.js full-stack.', url:'WEB D/mern-stack.html', tags:'mern mongodb express react node fullstack javascript'},
-    {title:'🅰️ MEAN Stack', desc:'MongoDB, Express, Angular, Node.js full-stack.', url:'WEB D/mean-stack.html', tags:'mean mongodb express angular node fullstack'},
-    {title:'🎨 UI/UX Design', desc:'User experience, wireframing and interface design.', url:'WEB D/ui-ux.html', tags:'ui ux design figma wireframe prototype user experience'},
-    {title:'☁️ DevOps & Cloud', desc:'CI/CD, containers, Kubernetes and cloud platforms.', url:'WEB D/devops.html', tags:'devops docker kubernetes aws azure gcp ci cd pipeline cloud'},
-    {title:'🗄️ Database Management', desc:'SQL, NoSQL, schema design and optimization.', url:'WEB D/database-management.html', tags:'database sql mysql postgresql mongodb nosql redis schema'},
-    {title:'🌐 Cloud Integration', desc:'Serverless, microservices and cloud-native apps.', url:'WEB D/cloud-integration.html', tags:'cloud aws azure gcp serverless microservices lambda'},
-    {title:'📱 Responsive Web', desc:'Mobile-first design and responsive layouts.', url:'WEB D/responsive-mobile-app.html', tags:'responsive mobile css flexbox grid bootstrap tailwind'},
-    {title:'🎮 Web Game Dev', desc:'Browser games with JavaScript, Canvas and WebGL.', url:'WEB D/web-game.html', tags:'game javascript canvas webgl phaser unity browser'},
-    {title:'🔒 Network Security', desc:'Firewalls, VPNs and network protection.', url:'CYBER S/network-security.html', tags:'network security firewall vpn intrusion detection wireshark'},
-    {title:'🛡️ Ethical Hacking', desc:'Penetration testing and vulnerability assessment.', url:'CYBER S/ethical-hacking.html', tags:'ethical hacking penetration testing kali linux metasploit burp'},
-    {title:'🔑 Cryptography', desc:'Encryption, digital signatures and secure protocols.', url:'CYBER S/cryptography.html', tags:'cryptography encryption aes rsa hash ssl tls'},
-    {title:'🕵️ Digital Forensics', desc:'Cyber crime investigation and evidence collection.', url:'CYBER S/digital-forensics.html', tags:'forensics investigation evidence cyber crime analysis'},
-    {title:'🏢 Application Security', desc:'Secure coding and vulnerability testing.', url:'CYBER S/application-security.html', tags:'appsec owasp secure coding xss sql injection vulnerability'},
-    {title:'📊 Data Analysis', desc:'Pandas, NumPy, statistics and data wrangling.', url:'DATA SCIENCE/data-science.html', tags:'data analysis pandas numpy statistics python jupyter'},
-    {title:'🧬 Deep Learning (DS)', desc:'Neural networks for data science applications.', url:'DATA SCIENCE/deep-learning.html', tags:'deep learning tensorflow keras pytorch data science'},
-    {title:'🗣️ NLP (Data Science)', desc:'Text mining and language model applications.', url:'DATA SCIENCE/nlp.html', tags:'nlp text mining sentiment analysis topic modeling'},
-    {title:'🥽 AR/VR Development', desc:'Build immersive AR and VR experiences.', url:'AR_VR/ar-vr-development-roadmap.html', tags:'ar vr development unity unreal xr mixed reality'},
-    {title:'📱 Mobile App Dev', desc:'iOS, Android and cross-platform mobile apps.', url:'APP DEV/mobile_app.html', tags:'mobile ios android flutter react native swift kotlin'},
-    {title:'🖥️ Desktop Apps', desc:'Cross-platform desktop with Electron, .NET, Java.', url:'APP DEV/desktop_app.html', tags:'desktop electron dotnet java javafx wpf cross platform'},
-    {title:'🎮 Game Development', desc:'Unity, Unreal Engine and Godot game dev.', url:'APP DEV/game_development.html', tags:'game unity unreal godot c++ c# game engine 3d 2d'},
+    {title:'🤖 AI & Machine Learning',desc:'11 tracks — Machine Learning, Deep Learning, NLP, Computer Vision, Reinforcement Learning, MLOps, Speech Recognition, AI Robotics, AI in Cybersecurity, Finance and Healthcare.',url:'AI_ML/ai-ml.html',tags:'ai machine learning deep learning neural network nlp llm gpt bert computer vision reinforcement learning mlops automl speech recognition robotics cybersecurity finance healthcare tensorflow pytorch python scikit cnn rnn transformer'},
+    {title:'💻 Web Development',desc:'10 tracks — Frontend, Backend, MERN Stack, MEAN Stack, UI/UX Design, DevOps, Database Management, Cloud Integration, Responsive Web and Web Game Dev.',url:'WEB D/web-development.html',tags:'web frontend backend mern mean react angular vue node express html css javascript typescript ui ux design figma devops docker kubernetes cloud aws azure database sql mysql mongodb nosql redis responsive mobile bootstrap tailwind game canvas webgl fullstack api rest graphql'},
+    {title:'🔐 Cybersecurity',desc:'11 tracks — Network Security, Ethical Hacking, Cryptography, Digital Forensics, Application Security, Cloud Security, Incident Response, Security Operations, IoT Security, Risk Management and IAM.',url:'CYBER S/cyber_security.html',tags:'cybersecurity network security ethical hacking penetration testing kali linux metasploit burp cryptography encryption aes rsa ssl tls digital forensics investigation application security owasp xss sql injection cloud security incident response soc iot risk management iam identity access'},
+    {title:'📊 Data Science',desc:'13 tracks — Data Analysis, Deep Learning, NLP, Computer Vision, AutoML, Reinforcement Learning, Speech Recognition, AI Robotics, Cybersecurity, Finance, Healthcare and more.',url:'DATA SCIENCE/data-science.html',tags:'data science analysis pandas numpy matplotlib statistics visualization python jupyter deep learning tensorflow keras pytorch nlp text mining sentiment computer vision automl reinforcement learning speech robotics finance healthcare machine learning regression classification'},
+    {title:'🥽 AR / VR Development',desc:'12 tracks — AR/VR Development, Gaming, Healthcare, Education, Immersive UX/UI, Hardware Integration, Navigation, Retail, Architecture and more.',url:'AR_VR/ar-vr.html',tags:'ar vr augmented virtual reality unity unreal 3d immersive gaming entertainment healthcare education training ux ui hardware sensor navigation location retail ecommerce architecture construction cognitive research 360 video'},
+    {title:'📱 App Development',desc:'6 tracks — Mobile App Development, Desktop Applications, Game Development, Enterprise Apps, Embedded Systems and cross-platform development.',url:'APP DEV/app.html',tags:'app mobile android ios flutter react native swift kotlin desktop electron dotnet java javafx wpf game unity unreal godot c++ c# enterprise embedded systems cross platform xamarin ionic'},
   ];
 
   var allGrid = document.getElementById('allPaths');
