@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Enterprise App Development | RMS</title>
+  <title>Embedded System Development | RMS</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet">
@@ -53,19 +53,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.12) 0%, transparent 60%),
-        radial-gradient(circle at 70% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
-      animation: pulseBg 10s ease-in-out infinite alternate;
+      background: radial-gradient(circle at 10% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      animation: gradientMove 20s infinite alternate;
       z-index: -1;
     }
 
-    @keyframes pulseBg {
+    @keyframes gradientMove {
       from {
-        opacity: 0.5;
+        transform: scale(1);
       }
 
       to {
-        opacity: 1;
+        transform: scale(1.1) translate(2%, 2%);
       }
     }
 
@@ -86,7 +86,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     }
 
     .nav-brand {
@@ -101,7 +101,7 @@
     }
 
     .terminal-header {
-      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
+      background: radial-gradient(circle at center, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
       border: 1px solid rgba(139, 92, 246, 0.3);
       border-radius: var(--radius-lg);
       margin: 60px 0 40px;
@@ -247,6 +247,7 @@
       border-top: 1px solid var(--color-border);
       margin-top: 80px;
       color: var(--color-text-muted);
+
     }
 
     @media (max-width: 768px) {
@@ -279,7 +280,7 @@
     <div class="nav-links">
       <a href="../index.html"><i class="fas fa-home"></i> Home</a>
       <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
-      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../WEBD/web-development.html"><i class="fas fa-code"></i> Engineering</a>
       <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
     </div>
   </nav>
@@ -288,76 +289,76 @@
     <a href="app.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
 
     <header class="terminal-header">
-      <h1 class="terminal-title">Enterprise Systems</h1>
-      <p>Building scalable, secure software for the world's largest organizations.</p>
+      <h1 class="terminal-title">Embedded Systems</h1>
+      <p>Building specialized software for the hardware frontier.</p>
     </header>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-server"></i> Core Architectures</h2>
+      <h2 class="section-title"><i class="fas fa-microchip"></i> Hardware Platforms</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <h3>Microservices</h3>
-          <p>Decoupling complex systems into small, manageable services for massive scalability.</p>
+          <h3>Arduino & ESP32</h3>
+          <p>Perfect for rapid prototyping and IoT connectivity over Wi-Fi/Bluetooth.</p>
         </div>
         <div class="grid-item">
-          <h3>Cloud Native</h3>
-          <p>Leveraging AWS, Azure, and GCP for high-availability and global distribution.</p>
+          <h3>Raspberry Pi</h3>
+          <p>High-power single board computers for Linux-based complex automation.</p>
         </div>
         <div class="grid-item">
-          <h3>Security & Compliance</h3>
-          <p>Implementing GDPR, HIPAA, and robust encryption for sensitive organizational data.</p>
+          <h3>ARM & STM32</h3>
+          <p>Professional grade microcontrollers for industrial and automotive applications.</p>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Free Enterprise Learning</h2>
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Free Hardware Training</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <div class="grid-title">Spring.io Guides</div>
-          <p class="grid-content">Official hands-on guides for building microservices and cloud-native Java apps.</p>
-          <a href="https://spring.io/guides" target="_blank" class="btn-glow">Explore Guides</a>
+          <div class="grid-title">Arduino for Beginners</div>
+          <p class="grid-content">Official Arduino project hub lessons for building your first hardware projects.</p>
+          <a href="https://projecthub.arduino.cc/" target="_blank" class="btn-glow">Start Building</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">Microservices Architecture</div>
-          <p class="grid-content">By edX. Learn how to architect large systems using a service-oriented approach.</p>
-          <a href="https://www.edx.org/course/microservices-architecture" target="_blank" class="btn-glow">Enroll
-            Free</a>
+          <div class="grid-title">Embedded Systems - Shape the World</div>
+          <p class="grid-content">EdX course from UT Austin covering microcontroller interfacing and RTOS.</p>
+          <a href="https://www.edx.org/course/embedded-systems-shape-the-world-multi-threaded-interfacing"
+            target="_blank" class="btn-glow">Enroll Free</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">Microsoft Azure Cloud Basics</div>
-          <p class="grid-content">Fundamental training for deploying and managing enterprise apps on the cloud.</p>
-          <a href="https://learn.microsoft.com/en-us/training/paths/az-900-fundamentals-conceptual-knowledge/"
-            target="_blank" class="btn-glow">Start Training</a>
+          <div class="grid-title">ESP32 & IoT Tutorial</div>
+          <p class="grid-content">A comprehensive series on connecting hardware to the cloud via Wi-Fi.</p>
+          <a href="https://randomnerdtutorials.com/getting-started-with-esp32/" target="_blank" class="btn-glow">Read
+            Series</a>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-building"></i> Premium Enterprise Mastery</h2>
+      <h2 class="section-title"><i class="fas fa-microchip"></i> Premium Firmware Mastery</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <div class="grid-title">Mastering Spring Boot 3</div>
-          <p class="grid-content">Deep dive into enterprise-grade Java development with the latest Spring features.</p>
-          <a href="https://www.udemy.com/course/spring-boot-and-spring-framework-tutorial-for-beginners/"
-            target="_blank" class="btn-glow">View Course</a>
+          <div class="grid-title">Mastering Microcontrollers</div>
+          <p class="grid-content">By Udemy. Driver development for STM32 using bare-metal programming.</p>
+          <a href="https://www.udemy.com/course/mastering-microcontroller-with-peripheral-driver-development/"
+            target="_blank" class="btn-glow">Join Course</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">Kubernetes for Developers</div>
-          <p class="grid-content">Master container orchestration and high-availability for production systems.</p>
-          <a href="https://www.udemy.com/course/certified-kubernetes-application-developer/" target="_blank"
-            class="btn-glow">Join Now</a>
+          <div class="grid-title">Real-Time Embedded Systems</div>
+          <p class="grid-content">Advanced Coursera specialization on RTOS design and timing analysis.</p>
+          <a href="https://www.coursera.org/specializations/real-time-embedded-systems" target="_blank"
+            class="btn-glow">View Specialization</a>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-book"></i> Systems Architecture E-books</h2>
+      <h2 class="section-title"><i class="fas fa-book"></i> Hardware Engineering E-books</h2>
       <ul class="glass-list">
-        <li class="glass-list-item"><strong>Enterprise Integration Patterns</strong> - By Gregor Hohpe</li>
-        <li class="glass-list-item"><strong>Clean Architecture</strong> - By Robert C. Martin</li>
-        <li class="glass-list-item"><strong>Domain-Driven Design</strong> - By Eric Evans</li>
-        <li class="glass-list-item"><strong>Building Microservices</strong> - By Sam Newman</li>
+        <li class="glass-list-item"><strong>Making Embedded Systems</strong> - By Elecia White</li>
+        <li class="glass-list-item"><strong>The Art of Designing Embedded Systems</strong> - By Jack Ganssle</li>
+        <li class="glass-list-item"><strong>Embedded C Coding Standard</strong> - Barr Group essentials</li>
+        <li class="glass-list-item"><strong>Practical Statecharts in C/C++</strong> - Event-driven programming</li>
       </ul>
     </div>
   </div>

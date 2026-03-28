@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Desktop App Development Roadmap | RMS</title>
+  <title>Enterprise App Development | RMS</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;800;900&family=Poppins:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet">
@@ -25,7 +25,6 @@
       --color-text-secondary: #94A3B8;
       --color-text-muted: #64748B;
       --color-border: rgba(148, 163, 184, 0.1);
-      --spacing-md: 1.25rem;
       --radius-lg: 1.5rem;
       --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.25);
       --transition-base: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -38,10 +37,9 @@
     }
 
     body {
-      font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+      font-family: 'Outfit', 'Inter', sans-serif;
       background: var(--color-bg-darker);
       color: var(--color-text-primary);
-      overflow-x: hidden;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -55,21 +53,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: radial-gradient(circle at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
-      animation: gradientShift 15s ease-in-out infinite;
+      background: radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.12) 0%, transparent 60%),
+        radial-gradient(circle at 70% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
+      animation: pulseBg 10s ease-in-out infinite alternate;
       z-index: -1;
     }
 
-    @keyframes gradientShift {
-
-      0%,
-      100% {
-        transform: translate(0, 0);
+    @keyframes pulseBg {
+      from {
+        opacity: 0.5;
       }
 
-      50% {
-        transform: translate(20px, -20px);
+      to {
+        opacity: 1;
       }
     }
 
@@ -104,35 +100,11 @@
       font-family: 'Poppins', sans-serif;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-    }
-
-    .nav-links a {
-      color: var(--color-text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      transition: all var(--transition-base);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-    }
-
-    .nav-links a:hover {
-      color: #FFF;
-      transform: translateY(-2px);
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-    }
-
     .terminal-header {
-      background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
+      background: radial-gradient(circle at top left, rgba(139, 92, 246, 0.1), transparent), var(--color-bg-glass);
       border: 1px solid rgba(139, 92, 246, 0.3);
       border-radius: var(--radius-lg);
-      margin: 60px auto 40px;
+      margin: 60px 0 40px;
       padding: 60px 40px;
       text-align: center;
       box-shadow: var(--shadow-glow);
@@ -145,7 +117,6 @@
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
       font-family: 'Poppins', sans-serif;
     }
 
@@ -263,7 +234,6 @@
       transition: all 0.3s;
       text-transform: uppercase;
       font-size: 0.85rem;
-      letter-spacing: 1.5px;
     }
 
     .back-link:hover {
@@ -309,7 +279,7 @@
     <div class="nav-links">
       <a href="../index.html"><i class="fas fa-home"></i> Home</a>
       <a href="../login.html"><i class="fas fa-sign-in-alt"></i> Portal</a>
-      <a href="../WEB D/web-development.html"><i class="fas fa-code"></i> Engineering</a>
+      <a href="../WEBD/web-development.html"><i class="fas fa-code"></i> Engineering</a>
       <a href="../AI_ML/ai-ml.html"><i class="fas fa-brain"></i> Intelligence</a>
     </div>
   </nav>
@@ -318,76 +288,76 @@
     <a href="app.html" class="back-link"><i class="fas fa-chevron-left"></i> BACK TO HUB</a>
 
     <header class="terminal-header">
-      <h1 class="terminal-title">Desktop App Development</h1>
-      <p>Build high-performance, OS-integrated software for Windows, macOS, and Linux.</p>
+      <h1 class="terminal-title">Enterprise Systems</h1>
+      <p>Building scalable, secure software for the world's largest organizations.</p>
     </header>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-cubes"></i> Popular Technologies</h2>
+      <h2 class="section-title"><i class="fas fa-server"></i> Core Architectures</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <h3>Electron</h3>
-          <p>The standard for cross-platform apps using web technologies. Powers VS Code and Slack.</p>
+          <h3>Microservices</h3>
+          <p>Decoupling complex systems into small, manageable services for massive scalability.</p>
         </div>
         <div class="grid-item">
-          <h3>WinUI 3 & .NET</h3>
-          <p>Native Windows development with high performance and modern Fluent Design.</p>
+          <h3>Cloud Native</h3>
+          <p>Leveraging AWS, Azure, and GCP for high-availability and global distribution.</p>
         </div>
         <div class="grid-item">
-          <h3>Qt & C++</h3>
-          <p>The gold standard for resource-intensive professional applications like Adobe suite.</p>
+          <h3>Security & Compliance</h3>
+          <p>Implementing GDPR, HIPAA, and robust encryption for sensitive organizational data.</p>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Free Technical Training</h2>
+      <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Free Enterprise Learning</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <div class="grid-title">Electron Crash Course</div>
-          <p class="grid-content">Master the basics of building cross-platform JS applications for the desktop.</p>
-          <a href="https://www.youtube.com/watch?v=kN1Czs0m1SU" target="_blank" class="btn-glow">Watch Course</a>
+          <div class="grid-title">Spring.io Guides</div>
+          <p class="grid-content">Official hands-on guides for building microservices and cloud-native Java apps.</p>
+          <a href="https://spring.io/guides" target="_blank" class="btn-glow">Explore Guides</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">Qt for Beginners</div>
-          <p class="grid-content">Learn the fundamentals of the powerful C++ framework for high-performance apps.</p>
-          <a href="https://doc.qt.io/archives/qt-4.8/gettingstartedqt.html" target="_blank" class="btn-glow">Read
-            Docs</a>
+          <div class="grid-title">Microservices Architecture</div>
+          <p class="grid-content">By edX. Learn how to architect large systems using a service-oriented approach.</p>
+          <a href="https://www.edx.org/course/microservices-architecture" target="_blank" class="btn-glow">Enroll
+            Free</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">WinUI 3 Training</div>
-          <p class="grid-content">Official Microsoft training for building modern, native Windows applications.</p>
-          <a href="https://learn.microsoft.com/en-us/windows/apps/winui/winui3/" target="_blank" class="btn-glow">Start
-            Now</a>
+          <div class="grid-title">Microsoft Azure Cloud Basics</div>
+          <p class="grid-content">Fundamental training for deploying and managing enterprise apps on the cloud.</p>
+          <a href="https://learn.microsoft.com/en-us/training/paths/az-900-fundamentals-conceptual-knowledge/"
+            target="_blank" class="btn-glow">Start Training</a>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-gem"></i> Premium Desktop Mastery</h2>
+      <h2 class="section-title"><i class="fas fa-building"></i> Premium Enterprise Mastery</h2>
       <div class="grid-container">
         <div class="grid-item">
-          <div class="grid-title">Mastering Qt 6</div>
-          <p class="grid-content">By Udemy. Go from beginner to expert in professional C++ desktop development.</p>
-          <a href="https://www.udemy.com/course/mastering-qt-6-cpp-gui-development-for-beginners/" target="_blank"
-            class="btn-glow">Enroll Now</a>
+          <div class="grid-title">Mastering Spring Boot 3</div>
+          <p class="grid-content">Deep dive into enterprise-grade Java development with the latest Spring features.</p>
+          <a href="https://www.udemy.com/course/spring-boot-and-spring-framework-tutorial-for-beginners/"
+            target="_blank" class="btn-glow">View Course</a>
         </div>
         <div class="grid-item">
-          <div class="grid-title">Electron Expert</div>
-          <p class="grid-content">A deep dive into security, performance, and distribution of Electron apps.</p>
-          <a href="https://www.pluralsight.com/courses/electron-expert" target="_blank" class="btn-glow">Join Now</a>
+          <div class="grid-title">Kubernetes for Developers</div>
+          <p class="grid-content">Master container orchestration and high-availability for production systems.</p>
+          <a href="https://www.udemy.com/course/certified-kubernetes-application-developer/" target="_blank"
+            class="btn-glow">Join Now</a>
         </div>
       </div>
     </div>
 
     <div class="matrix-section">
-      <h2 class="section-title"><i class="fas fa-book"></i> Desktop Architecture E-books</h2>
+      <h2 class="section-title"><i class="fas fa-book"></i> Systems Architecture E-books</h2>
       <ul class="glass-list">
-        <li class="glass-list-item"><strong>Electron in Action</strong> - By Steve Kinney</li>
-        <li class="glass-list-item"><strong>Foundations of Qt Development</strong> - By Johan Thelin</li>
-        <li class="glass-list-item"><strong>Visual Studio Code: The Missing Manual</strong> - Tips for developers</li>
-        <li class=" glass-list-item"><strong>Designing High-Performance Apps</strong> - Systems engineering for desktop
-        </li>
+        <li class="glass-list-item"><strong>Enterprise Integration Patterns</strong> - By Gregor Hohpe</li>
+        <li class="glass-list-item"><strong>Clean Architecture</strong> - By Robert C. Martin</li>
+        <li class="glass-list-item"><strong>Domain-Driven Design</strong> - By Eric Evans</li>
+        <li class="glass-list-item"><strong>Building Microservices</strong> - By Sam Newman</li>
       </ul>
     </div>
   </div>
